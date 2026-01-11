@@ -335,12 +335,12 @@
     // Preload Critical Resources
     // ================================
     window.addEventListener('load', () => {
-        // Preload curriculum PDF
-        const pdfLink = document.querySelector('a[href*="curriculum.pdf"]');
-        if (pdfLink) {
+        // Preload curriculum HTML
+        const curriculumLink = document.querySelector('a[href*="curriculum.html"]');
+        if (curriculumLink) {
             const link = document.createElement('link');
             link.rel = 'prefetch';
-            link.href = pdfLink.getAttribute('href');
+            link.href = curriculumLink.getAttribute('href');
             document.head.appendChild(link);
         }
     });
