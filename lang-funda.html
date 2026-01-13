@@ -1,0 +1,3088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Language Fundamentals - NamastAI.shiksha</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #0056D2;
+            --color-primary-dark: #003c94;
+            --color-primary-light: #3d7ce5;
+            --color-accent: #10b981;
+            --color-accent-light: #6ee7b7;
+            --color-success: #059669;
+            --color-error: #dc2626;
+            --color-warning: #d97706;
+            --color-certificate: #fef3c7;
+            --color-bg: #ffffff;
+            --color-bg-secondary: #f9fafb;
+            --color-bg-tertiary: #f3f4f6;
+            --color-text: #111827;
+            --color-text-secondary: #6b7280;
+            --color-text-muted: #9ca3af;
+            --color-border: #e5e7eb;
+            --gradient-primary: linear-gradient(135deg, #0056D2 0%, #7c3aed 100%);
+            --gradient-accent: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--color-bg-secondary);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header & Navigation */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--color-text);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .text-brand-blue { color: #0056D2; }
+        .text-brand-orange { color: #FF8C00; }
+        .accent {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 1rem;
+            padding: 3rem;
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-xl);
+            animation: slideInDown 0.6s ease;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 0.625rem;
+            transition: var(--transition-base);
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--color-primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Table of Contents */
+        .toc-container {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--color-border);
+        }
+
+        .toc-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--color-primary);
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .toc-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: var(--color-bg-secondary);
+            border-radius: 0.5rem;
+            text-decoration: none;
+            color: var(--color-text);
+            transition: var(--transition-base);
+            border: 1px solid transparent;
+        }
+
+        .toc-item:hover {
+            background: white;
+            border-color: var(--color-primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .toc-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        /* Theory Sections */
+        .theory-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--color-border);
+            animation: slideInUp 0.6s ease backwards;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--color-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .content-box {
+            background: var(--color-bg-secondary);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--color-primary);
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.95rem;
+        }
+
+        .keyword { color: #569cd6; }
+        .string { color: #ce9178; }
+        .number { color: #b5cea8; }
+        .comment { color: #6a9955; }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .data-table th {
+            background: var(--color-primary);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .data-table td {
+            padding: 0.875rem 1rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .data-table tr:hover {
+            background: var(--color-bg-tertiary);
+        }
+
+        .note-box {
+            background: #dbeafe;
+            border-left: 4px solid var(--color-primary);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .warning-box {
+            background: #fef3c7;
+            border-left: 4px solid var(--color-warning);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .error-box {
+            background: #fee2e2;
+            border-left: 4px solid var(--color-error);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .success-box {
+            background: #d1fae5;
+            border-left: 4px solid var(--color-success);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .theory-content {
+            margin: 1.5rem 0;
+        }
+
+        .theory-content h3 {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--color-primary-dark);
+        }
+
+        .theory-content h4 {
+            font-size: 1.25rem;
+            margin: 1.25rem 0 0.75rem;
+            color: var(--color-text);
+        }
+
+        .theory-content p {
+            margin-bottom: 1rem;
+        }
+
+        .theory-content ul, .theory-content ol {
+            padding-left: 2rem;
+            margin: 1rem 0;
+        }
+
+        .theory-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .theory-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .theory-content table th {
+            background: var(--color-bg-tertiary);
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .theory-content table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .theory-content img {
+            max-width: 100%;
+            height: auto;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .pdf-page {
+            background: var(--color-bg-tertiary);
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            margin: 1rem 0;
+            display: inline-block;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--color-text);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-brand .logo {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-tagline {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .theory-section {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.75rem;
+            }
+            
+            .toc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .welcome-section {
+                padding: 2rem 1rem;
+            }
+            
+            .welcome-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-content">
+                <a href="/" class="logo">
+                    <div class="logo-icon">
+                        <img src="assets/logo.svg" alt="NamastAI.shiksha Logo" width="40" height="40">
+                    </div>
+                    <span class="logo-text">
+                        <span class="text-brand-blue">Namast</span>
+                        <span class="text-brand-orange">Ai</span>
+                        <span class="accent">.shiksha</span>
+                    </span>
+                </a>
+                <div class="nav-actions">
+                    <a href="/" class="btn btn-primary">Back to Home</a>
+                    <a href="quiz.html" target="_blank" class="btn btn-primary" style="margin-left: 1rem;">
+                        Take Quiz 🚀
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <h1 class="welcome-title">Java Language Fundamentals</h1>
+            <p class="welcome-subtitle">Master the core concepts of Java programming with comprehensive theory extracted from SCJP/OCJP study material</p>
+            <a href="quiz.html" target="_blank" class="btn btn-primary">
+                Take Quiz Now 🚀
+            </a>
+        </section>
+
+        <!-- Table of Contents -->
+        <section class="toc-container">
+            <h2 class="toc-title">📚 Complete Course Content</h2>
+            <div class="toc-grid">
+                <a href="#introduction" class="toc-item">
+                    <span class="toc-number">1</span>
+                    <span>Introduction</span>
+                </a>
+                <a href="#identifiers" class="toc-item">
+                    <span class="toc-number">2</span>
+                    <span>Identifiers</span>
+                </a>
+                <a href="#reserved-words" class="toc-item">
+                    <span class="toc-number">3</span>
+                    <span>Reserved Words</span>
+                </a>
+                <a href="#data-types" class="toc-item">
+                    <span class="toc-number">4</span>
+                    <span>Data Types</span>
+                </a>
+                <a href="#literals" class="toc-item">
+                    <span class="toc-number">5</span>
+                    <span>Literals</span>
+                </a>
+                <a href="#arrays" class="toc-item">
+                    <span class="toc-number">6</span>
+                    <span>Arrays</span>
+                </a>
+                <a href="#variables" class="toc-item">
+                    <span class="toc-number">7</span>
+                    <span>Variables</span>
+                </a>
+                <a href="#var-arg" class="toc-item">
+                    <span class="toc-number">8</span>
+                    <span>Var-arg Methods</span>
+                </a>
+                <a href="#main-method" class="toc-item">
+                    <span class="toc-number">9</span>
+                    <span>Main Method</span>
+                </a>
+                <a href="#coding-standards" class="toc-item">
+                    <span class="toc-number">10</span>
+                    <span>Coding Standards</span>
+                </a>
+                <a href="#memory-areas" class="toc-item">
+                    <span class="toc-number">11</span>
+                    <span>JVM Memory Areas</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Theory Sections Extracted from PDF -->
+        <section id="introduction" class="theory-section">
+            <h2 class="section-title">1. Introduction</h2>
+            <div class="theory-content">
+                <div class="pdf-page">Page 1</div>
+                <p><strong>CORE JAVA With SCJP / OCJP Study Material Chapter 1: Language Fundamentals</strong></p>
+                <p>DURGA M.Tech (Sun certified & Realtime Expert) Ex. IBM Employee Trained Lakhs of Students for last 14 years across INDIA</p>
+                <p>India's No.1 Software Training Institute DURGASOFT www.durgasoft.com Ph: 9246212143, 8096969696</p>
+                
+                <div class="pdf-page">Page 2</div>
+                <h3>Topics Covered:</h3>
+                <ol>
+                    <li>Introduction</li>
+                    <li>Identifiers</li>
+                    <li>Reserved words</li>
+                    <li>Data types</li>
+                    <li>Literals</li>
+                    <li>Arrays</li>
+                    <li>Types of variables
+                        <ul>
+                            <li>Primitive variables</li>
+                            <li>Reference variables</li>
+                            <li>Instance variables</li>
+                            <li>Static variables</li>
+                            <li>Local variables</li>
+                        </ul>
+                    </li>
+                    <li>Uninitialized arrays</li>
+                    <li>Var arg method</li>
+                    <li>Single Dimensional Array Vs Var-Arg Method</li>
+                    <li>Main method</li>
+                    <li>1.7 Version Enhancements with respect to main()</li>
+                    <li>Command line arguments</li>
+                    <li>Java coding standards</li>
+                    <li>Various Memory areas present inside JVM</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="identifiers" class="theory-section">
+            <h2 class="section-title">2. Identifiers</h2>
+            <div class="theory-content">
+                <div class="pdf-page">Page 4</div>
+                <h3>Identifier Definition:</h3>
+                <p>A name in java program is called identifier. It may be class name, method name, variable name and label name.</p>
+                
+                <div class="pdf-page">Page 5</div>
+                <h3>Rules to define java identifiers:</h3>
+                
+                <div class="content-box">
+                    <h4>Rule 1: Allowed characters in java identifiers are:</h4>
+                    <ol>
+                        <li>a to z</li>
+                        <li>A to Z</li>
+                        <li>0 to 9</li>
+                        <li>_ (underscore)</li>
+                        <li>$</li>
+                    </ol>
+                    <p><strong>Example:</strong></p>
+                    <p>1) total_number - valid</p>
+                    <p>2) Total# - invalid (contains # which is not allowed)</p>
+                </div>
+
+                <div class="content-box">
+                    <h4>Rule 2: Identifiers are not allowed to start with digit</h4>
+                    <p><strong>Example:</strong></p>
+                    <p>1) ABC123 - valid</p>
+                    <p>2) 123ABC - invalid</p>
+                </div>
+
+                <div class="content-box">
+                    <h4>Rule 3: Java identifiers are case sensitive</h4>
+                    <p><strong>Example:</strong></p>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">int</span> number = <span class="number">10</span>;<br>
+&nbsp;&nbsp;<span class="keyword">int</span> Number = <span class="number">20</span>;<br>
+&nbsp;&nbsp;<span class="keyword">int</span> NUMBER = <span class="number">30</span>;<br>
+&nbsp;&nbsp;<span class="keyword">int</span> NumBer = <span class="number">40</span>;<br>
+}
+                    </div>
+                    <p>All these are different identifiers due to case sensitivity.</p>
+                </div>
+
+                <div class="content-box">
+                    <h4>Rule 4: No length limit for java identifiers</h4>
+                    <p>But it is not recommended to take more than 15 characters for better readability.</p>
+                </div>
+
+                <div class="content-box">
+                    <h4>Rule 5: Cannot use reserved words as identifiers</h4>
+                    <p><strong>Example:</strong> int if = 10; // invalid</p>
+                </div>
+
+                <div class="content-box">
+                    <h4>Rule 6: All predefined java class names and interface names can be used as identifiers</h4>
+                    <p><strong>Example 1:</strong></p>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span> String = <span class="number">10</span>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(String);<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<span class="comment">// Output: 10</span>
+                    </div>
+                    
+                    <p><strong>Example 2:</strong></p>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span> Runnable = <span class="number">10</span>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(Runnable);<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<span class="comment">// Output: 10</span>
+                    </div>
+                    
+                    <div class="note-box">
+                        💡 <strong>Note:</strong> Even though it is legal to use class names and interface names as identifiers, it is not a good programming practice as it reduces code readability.
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 6</div>
+                <h3>Which of the following are valid java identifiers?</h3>
+                <ol>
+                    <li>_$_ (valid)</li>
+                    <li>Ca$h (valid)</li>
+                    <li>Java2share (valid)</li>
+                    <li>all@hands (invalid) - contains @</li>
+                    <li>123abc (invalid) - starts with digit</li>
+                    <li>Total# (invalid) - contains #</li>
+                    <li>Int (valid)</li>
+                    <li>Integer (valid)</li>
+                    <li>int (invalid) - reserved word</li>
+                    <li>tot123 (valid)</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="reserved-words" class="theory-section">
+            <h2 class="section-title">3. Reserved Words</h2>
+            <div class="theory-content">
+                <div class="pdf-page">Page 7</div>
+                <p>In java some identifiers are reserved to associate some functionality or meaning such type of reserved identifiers are called reserved words.</p>
+                
+                <div class="pdf-page">Page 8</div>
+                <h3>Reserved words for data types: (8)</h3>
+                <ol>
+                    <li>byte</li>
+                    <li>short</li>
+                    <li>int</li>
+                    <li>long</li>
+                    <li>float</li>
+                    <li>double</li>
+                    <li>char</li>
+                    <li>boolean</li>
+                </ol>
+
+                <h3>Reserved words for flow control: (11)</h3>
+                <ol>
+                    <li>if</li>
+                    <li>else</li>
+                    <li>switch</li>
+                    <li>case</li>
+                    <li>default</li>
+                    <li>for</li>
+                    <li>do</li>
+                    <li>while</li>
+                    <li>break</li>
+                    <li>continue</li>
+                    <li>return</li>
+                </ol>
+
+                <h3>Keywords for modifiers: (11)</h3>
+                <ol>
+                    <li>public</li>
+                    <li>private</li>
+                    <li>protected</li>
+                    <li>static</li>
+                    <li>final</li>
+                    <li>abstract</li>
+                    <li>synchronized</li>
+                    <li>native</li>
+                    <li>strictfp (1.2 version)</li>
+                    <li>transient</li>
+                    <li>volatile</li>
+                </ol>
+
+                <div class="pdf-page">Page 9</div>
+                <h3>Keywords for exception handling: (6)</h3>
+                <ol>
+                    <li>try</li>
+                    <li>catch</li>
+                    <li>finally</li>
+                    <li>throw</li>
+                    <li>throws</li>
+                    <li>assert (1.4 version)</li>
+                </ol>
+
+                <h3>Class related keywords: (6)</h3>
+                <ol>
+                    <li>class</li>
+                    <li>package</li>
+                    <li>import</li>
+                    <li>extends</li>
+                    <li>implements</li>
+                    <li>interface</li>
+                </ol>
+
+                <h3>Object related keywords: (4)</h3>
+                <ol>
+                    <li>new</li>
+                    <li>instanceof</li>
+                    <li>super</li>
+                    <li>this</li>
+                </ol>
+
+                <h3>Void return type keyword:</h3>
+                <p>If a method won't return anything compulsory that method should be declared with the void return type in java but it is optional in C++.</p>
+
+                <h3>Unused keywords:</h3>
+                <ul>
+                    <li><strong>goto:</strong> Created several problems in old languages and hence it is banned in java.</li>
+                    <li><strong>const:</strong> Use final instead of this.</li>
+                </ul>
+                <p>By mistake if we are using these keywords in our program we will get compile time error.</p>
+
+                <h3>Reserved literals:</h3>
+                <ol>
+                    <li>true - values for boolean data type</li>
+                    <li>false - values for boolean data type</li>
+                    <li>null - default value for object reference</li>
+                </ol>
+
+                <div class="pdf-page">Page 10</div>
+                <h3>Enum:</h3>
+                <p>This keyword introduced in 1.5v to define a group of named constants.</p>
+                <p><strong>Example:</strong> enum Beer { KP, RC, KO, FO; }</p>
+
+                <h3>Conclusions about Reserved Words:</h3>
+                <ol>
+                    <li>All reserved words in java contain only lowercase alphabet symbols.</li>
+                    <li>New keywords in java are:
+                        <ul>
+                            <li>strictfp - 1.2v</li>
+                            <li>assert - 1.4v</li>
+                            <li>enum - 1.5v</li>
+                        </ul>
+                    </li>
+                    <li>In java we have only new keyword but not delete because destruction of useless objects is the responsibility of Garbage Collection.</li>
+                    <li>instanceof but not instanceOf</li>
+                    <li>strictfp but not strictFp</li>
+                    <li>const but not Constant</li>
+                    <li>synchronized but not synchronize</li>
+                    <li>extends but not extend</li>
+                    <li>implements but not implement</li>
+                    <li>import but not imports</li>
+                    <li>int but not Int</li>
+                </ol>
+
+                <div class="content-box">
+                    <h4>Which of the following list contains only java reserved words?</h4>
+                    <ol>
+                        <li>final, finally, finalize (invalid) // finalize is a method in Object class</li>
+                        <li>throw, throws, thrown (invalid) // thrown is not available in java</li>
+                        <li>break, continue, return, exit (invalid) // exit is not reserved keyword</li>
+                        <li>goto, constant (invalid) // constant is not reserved keyword</li>
+                        <li>byte, short, Integer, long (invalid) // Integer is a wrapper class</li>
+                        <li>extends, implements, imports (invalid) // imports keyword is not available</li>
+                        <li>finalize, synchronized (invalid) // finalize is a method in Object class</li>
+                        <li>instanceof, sizeOf (invalid) // sizeOf is not reserved keyword</li>
+                        <li>new, delete (invalid) // delete is not a keyword</li>
+                        <li>None of the above (valid)</li>
+                    </ol>
+                </div>
+
+                <div class="pdf-page">Page 11</div>
+                <div class="content-box">
+                    <h4>Which of the following are valid java keywords?</h4>
+                    <ol>
+                        <li>public (valid)</li>
+                        <li>static (valid)</li>
+                        <li>void (valid)</li>
+                        <li>main (invalid) - not a keyword, it's a method name</li>
+                        <li>String (invalid) - class name, not a keyword</li>
+                        <li>args (invalid) - variable name, not a keyword</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <section id="data-types" class="theory-section">
+            <h2 class="section-title">4. Data Types</h2>
+            <div class="theory-content">
+                <div class="pdf-page">Page 11</div>
+                <p>Every variable has a type, every expression has a type and all types are strictly defined. Moreover every assignment should be checked by the compiler for type compatibility. Hence java language is considered as strongly typed programming language.</p>
+                
+                <h3>Java is pure object oriented programming or not?</h3>
+                <div class="warning-box">
+                    ⚠️ <strong>Java is not considered as pure object oriented programming language</strong> because:
+                    <ul>
+                        <li>Several OOPs features (like multiple inheritance, operator overloading) are not supported by java</li>
+                        <li>We are depending on primitive data types which are non-objects</li>
+                    </ul>
+                </div>
+
+                <div class="pdf-page">Page 12</div>
+                <h3>Primitive Data Types (8):</h3>
+                <p>Except Boolean and char all remaining data types are considered as signed data types because we can represent both "+ve" and "-ve" numbers.</p>
+
+                <h3>Integral Data Types:</h3>
+                
+                <div class="content-box">
+                    <h4>Byte:</h4>
+                    <ul>
+                        <li><strong>Size:</strong> 1 byte (8 bits)</li>
+                        <li><strong>Max value:</strong> +127</li>
+                        <li><strong>Min value:</strong> -128</li>
+                        <li><strong>Range:</strong> -128 to 127 [-2⁷ to 2⁷-1]</li>
+                    </ul>
+                    <p>The most significant bit acts as sign bit. "0" means "+ve" number and "1" means "-ve" number.</p>
+                    <p>"+ve" numbers will be represented directly in the memory whereas "-ve" numbers will be represented in 2's complement form.</p>
+                    
+                    <div class="code-block">
+<span class="keyword">byte</span> b = <span class="number">10</span>; <span class="comment">// valid</span><br>
+<span class="keyword">byte</span> b2 = <span class="number">130</span>; <span class="comment">// C.E: possible loss of precision found: int required: byte</span><br>
+<span class="keyword">byte</span> b3 = <span class="number">10.5</span>; <span class="comment">// C.E: possible loss of precision</span><br>
+<span class="keyword">byte</span> b4 = <span class="keyword">true</span>; <span class="comment">// C.E: incompatible types</span><br>
+<span class="keyword">byte</span> b5 = <span class="string">"ashok"</span>; <span class="comment">// C.E: incompatible types found: java.lang.String required: byte</span>
+                    </div>
+                    <p>Byte data type is best suitable if we are handling data in terms of streams either from the file or from the network.</p>
+                </div>
+
+                <div class="content-box">
+                    <h4>Short:</h4>
+                    <p>The most rarely used data type in java is short.</p>
+                    <ul>
+                        <li><strong>Size:</strong> 2 bytes</li>
+                        <li><strong>Range:</strong> -32768 to 32767 [-2¹⁵ to 2¹⁵-1]</li>
+                    </ul>
+                    <div class="code-block">
+<span class="keyword">short</span> s = <span class="number">130</span>; <span class="comment">// valid</span><br>
+<span class="keyword">short</span> s2 = <span class="number">32768</span>; <span class="comment">// C.E: possible loss of precision</span><br>
+<span class="keyword">short</span> s3 = <span class="keyword">true</span>; <span class="comment">// C.E: incompatible types</span>
+                    </div>
+                    <p>Short data type is best suitable for 16 bit processors like 8086 but these processors are completely outdated and hence the corresponding short data type is also outdated.</p>
+                </div>
+
+                <div class="pdf-page">Page 13</div>
+                <div class="content-box">
+                    <h4>Int:</h4>
+                    <p>This is the most commonly used data type in java.</p>
+                    <ul>
+                        <li><strong>Size:</strong> 4 bytes</li>
+                        <li><strong>Range:</strong> -2147483648 to 2147483647 [-2³¹ to 2³¹-1]</li>
+                    </ul>
+                    <div class="code-block">
+<span class="keyword">int</span> i = <span class="number">130</span>; <span class="comment">// valid</span><br>
+<span class="keyword">int</span> i2 = <span class="number">10.5</span>; <span class="comment">// C.E: possible loss of precision</span><br>
+<span class="keyword">int</span> i3 = <span class="keyword">true</span>; <span class="comment">// C.E: incompatible types</span>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>Long:</h4>
+                    <p>Whenever int is not enough to hold big values then we should go for long data type.</p>
+                    <p><strong>Example:</strong> To hold the no. of characters present in a big file, int may not be enough hence the return type of length() method is long.</p>
+                    <div class="code-block">
+<span class="keyword">long</span> l = f.length(); <span class="comment">// f is a file</span>
+                    </div>
+                    <ul>
+                        <li><strong>Size:</strong> 8 bytes</li>
+                        <li><strong>Range:</strong> -2⁶³ to 2⁶³-1</li>
+                    </ul>
+                    <p><strong>Note:</strong> All the above data types (byte, short, int and long) can be used to represent whole numbers. If we want to represent real numbers then we should go for floating point data types.</p>
+                </div>
+
+                <div class="content-box">
+                    <h4>Floating Point Data Types:</h4>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Float</th>
+                                <th>Double</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>When to use</td>
+                                <td>If we want 5 to 6 decimal places of accuracy</td>
+                                <td>If we want 14 to 15 decimal places of accuracy</td>
+                            </tr>
+                            <tr>
+                                <td>Size</td>
+                                <td>4 bytes</td>
+                                <td>8 bytes</td>
+                            </tr>
+                            <tr>
+                                <td>Range</td>
+                                <td>-3.4e38 to 3.4e38</td>
+                                <td>-1.7e308 to 1.7e308</td>
+                            </tr>
+                            <tr>
+                                <td>Precision</td>
+                                <td>Single precision</td>
+                                <td>Double precision</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pdf-page">Page 14</div>
+                <div class="content-box">
+                    <h4>Boolean Data Type:</h4>
+                    <ul>
+                        <li><strong>Size:</strong> Not applicable (virtual machine dependent)</li>
+                        <li><strong>Range:</strong> Not applicable but allowed values are true or false</li>
+                    </ul>
+                    
+                    <h5>Which of the following boolean declarations are valid?</h5>
+                    <div class="code-block">
+<span class="keyword">boolean</span> b = <span class="keyword">true</span>; <span class="comment">// valid</span><br>
+<span class="keyword">boolean</span> b2 = True; <span class="comment">// C.E: cannot find symbol</span><br>
+<span class="keyword">boolean</span> b3 = <span class="string">"True"</span>; <span class="comment">// C.E: incompatible types</span><br>
+<span class="keyword">boolean</span> b4 = <span class="number">0</span>; <span class="comment">// C.E: incompatible types</span>
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 15</div>
+                <div class="content-box">
+                    <h4>Char Data Type:</h4>
+                    <p>In old languages like C & C++ are ASCII code based. The no. of ASCII code characters are &lt; 256. To represent these 256 characters 8-bits enough hence char size in old languages 1 byte.</p>
+                    <p>In java we are allowed to use any worldwide alphabets character and java is Unicode based and no. of unicode characters are &gt;256 and &lt;= 65536. To represent all these characters one byte is not enough compulsory we should go for 2 bytes.</p>
+                    <ul>
+                        <li><strong>Size:</strong> 2 bytes</li>
+                        <li><strong>Range:</strong> 0 to 65535</li>
+                    </ul>
+                    <div class="code-block">
+<span class="keyword">char</span> ch1 = <span class="number">97</span>; <span class="comment">// valid</span><br>
+<span class="keyword">char</span> ch2 = <span class="number">65536</span>; <span class="comment">// C.E: possible loss of precision</span>
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 16</div>
+                <h3>Summary of Java Primitive Data Types:</h3>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Data Type</th>
+                                <th>Size</th>
+                                <th>Range</th>
+                                <th>Wrapper Class</th>
+                                <th>Default Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>byte</code></td>
+                                <td>1 byte</td>
+                                <td>-2⁷ to 2⁷-1 (-128 to 127)</td>
+                                <td>Byte</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td><code>short</code></td>
+                                <td>2 bytes</td>
+                                <td>-2¹⁵ to 2¹⁵-1 (-32768 to 32767)</td>
+                                <td>Short</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td><code>int</code></td>
+                                <td>4 bytes</td>
+                                <td>-2³¹ to 2³¹-1 (-2147483648 to 2147483647)</td>
+                                <td>Integer</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td><code>long</code></td>
+                                <td>8 bytes</td>
+                                <td>-2⁶³ to 2⁶³-1</td>
+                                <td>Long</td>
+                                <td>0L</td>
+                            </tr>
+                            <tr>
+                                <td><code>float</code></td>
+                                <td>4 bytes</td>
+                                <td>-3.4e38 to 3.4e38</td>
+                                <td>Float</td>
+                                <td>0.0f</td>
+                            </tr>
+                            <tr>
+                                <td><code>double</code></td>
+                                <td>8 bytes</td>
+                                <td>-1.7e308 to 1.7e308</td>
+                                <td>Double</td>
+                                <td>0.0d</td>
+                            </tr>
+                            <tr>
+                                <td><code>boolean</code></td>
+                                <td>Not applicable</td>
+                                <td>true or false</td>
+                                <td>Boolean</td>
+                                <td>false</td>
+                            </tr>
+                            <tr>
+                                <td><code>char</code></td>
+                                <td>2 bytes</td>
+                                <td>0 to 65535</td>
+                                <td>Character</td>
+                                <td>'\u0000' (blank space)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p><strong>Note:</strong> The default value for the object references is "null".</p>
+            </div>
+        </section>
+
+        <section id="literals" class="theory-section">
+            <h2 class="section-title">5. Literals</h2>
+            <div class="theory-content">
+                <div class="pdf-page">Page 16</div>
+                <p><strong>Definition:</strong> Any constant value which can be assigned to the variable is called literal.</p>
+                
+                <div class="pdf-page">Page 17</div>
+                <h3>Integral Literals:</h3>
+                <p>For the integral data types (byte, short, int and long) we can specify literal value in the following ways:</p>
+                
+                <div class="content-box">
+                    <h4>1) Decimal literals:</h4>
+                    <p>Allowed digits are 0 to 9.</p>
+                    <p><strong>Example:</strong> int x = 10;</p>
+                </div>
+
+                <div class="content-box">
+                    <h4>2) Octal literals:</h4>
+                    <p>Allowed digits are 0 to 7. Literal value should be prefixed with zero.</p>
+                    <p><strong>Example:</strong> int x = 010; // octal 10 = decimal 8</p>
+                </div>
+
+                <div class="content-box">
+                    <h4>3) Hexadecimal literals:</h4>
+                    <p>The allowed digits are 0 to 9, A to Z. For the extra digits we can use both upper case and lower case characters. This is one of very few areas where java is not case sensitive. Literal value should be prefixed with 0x or 0X.</p>
+                    <p><strong>Example:</strong> int x = 0x10; // hex 10 = decimal 16</p>
+                </div>
+
+                <div class="content-box">
+                    <h4>Which of the following are valid declarations?</h4>
+                    <ol>
+                        <li>int x = 0777; // valid (octal)</li>
+                        <li>int x = 0786; // C.E: integer number too large: 0786 (invalid)</li>
+                        <li>int x = 0xFACE; // valid (hex)</li>
+                        <li>int x = 0xbeef; // valid (hex)</li>
+                        <li>int x = 0xBeer; // C.E: ';' expected (invalid)</li>
+                        <li>int x = 0xabb2cd; // valid (hex)</li>
+                    </ol>
+                </div>
+
+                <div class="pdf-page">Page 18</div>
+                <div class="content-box">
+                    <p>By default every integral literal is int type but we can specify explicitly as long type by suffixing with small "l" or capital "L".</p>
+                    <div class="code-block">
+<span class="keyword">int</span> x = <span class="number">10</span>; <span class="comment">// valid</span><br>
+<span class="keyword">long</span> l = <span class="number">10L</span>; <span class="comment">// valid</span><br>
+<span class="keyword">long</span> l2 = <span class="number">10</span>; <span class="comment">// valid</span><br>
+<span class="keyword">int</span> x2 = <span class="number">10L</span>; <span class="comment">// C.E: possible loss of precision found: long required: int</span>
+                    </div>
+                    <p>There is no direct way to specify byte and short literals explicitly. But whenever we are assigning integral literal to the byte variables and its value within the range of byte compiler automatically treats as byte literal. Similarly short literal also.</p>
+                    <div class="code-block">
+<span class="keyword">byte</span> b = <span class="number">127</span>; <span class="comment">// valid</span><br>
+<span class="keyword">byte</span> b2 = <span class="number">130</span>; <span class="comment">// C.E: possible loss of precision</span><br>
+<span class="keyword">short</span> s = <span class="number">32767</span>; <span class="comment">// valid</span><br>
+<span class="keyword">short</span> s2 = <span class="number">32768</span>; <span class="comment">// C.E: possible loss of precision</span>
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 19</div>
+                <h3>Floating Point Literals:</h3>
+                <p>Floating point literal is by default double type but we can specify explicitly as float type by suffixing with f or F.</p>
+                
+                <div class="code-block">
+<span class="keyword">float</span> f = <span class="number">123.456</span>; <span class="comment">// C.E: possible loss of precision (invalid)</span><br>
+<span class="keyword">float</span> f2 = <span class="number">123.456f</span>; <span class="comment">// valid</span><br>
+<span class="keyword">double</span> d = <span class="number">123.456</span>; <span class="comment">// valid</span><br>
+<span class="keyword">double</span> d2 = <span class="number">123.456D</span>; <span class="comment">// valid (explicit double)</span>
+                </div>
+
+                <p>We can specify floating point literal only in decimal form and we can't specify in octal and hexadecimal forms.</p>
+                
+                <div class="content-box">
+                    <h4>Which of the following floating point declarations are valid?</h4>
+                    <ol>
+                        <li>float f = 123.456; // C.E: possible loss of precision (invalid)</li>
+                        <li>float f = 123.456D; // C.E: possible loss of precision (invalid)</li>
+                        <li>double d = 0x123.456; // C.E: malformed floating point literal (invalid)</li>
+                        <li>double d = 0xFace; // valid (integral literal assigned to double)</li>
+                        <li>double d = 0xBeef; // valid (integral literal assigned to double)</li>
+                    </ol>
+                </div>
+
+                <div class="pdf-page">Page 20</div>
+                <div class="content-box">
+                    <p>We can assign integral literal directly to the floating point data types and that integral literal can be specified in decimal, octal and hexadecimal form also.</p>
+                    <div class="code-block">
+<span class="keyword">double</span> d = <span class="number">0xBeef</span>; <span class="comment">// valid</span><br>
+System.out.println(d); <span class="comment">// 48879.0</span>
+                    </div>
+                    <p>But we can't assign floating point literal directly to the integral types.</p>
+                    <div class="code-block">
+<span class="keyword">int</span> x = <span class="number">10.0</span>; <span class="comment">// C.E: possible loss of precision</span>
+                    </div>
+                    <p>We can specify floating point literal even in exponential form also (scientific notation).</p>
+                    <div class="code-block">
+<span class="keyword">double</span> d = <span class="number">10e2</span>; <span class="comment">// == 10*10² (valid)</span><br>
+System.out.println(d); <span class="comment">// 1000.0</span><br>
+<span class="keyword">float</span> f = <span class="number">10e2</span>; <span class="comment">// C.E: possible loss of precision (invalid)</span><br>
+<span class="keyword">float</span> f2 = <span class="number">10e2F</span>; <span class="comment">// valid</span>
+                    </div>
+                </div>
+
+                <h3>Boolean Literals:</h3>
+                <p>The only allowed values for the boolean type are true or false where case is important (must be lowercase).</p>
+                <div class="code-block">
+<span class="keyword">boolean</span> b = <span class="keyword">true</span>; <span class="comment">// valid</span><br>
+<span class="keyword">boolean</span> b2 = <span class="number">0</span>; <span class="comment">// C.E: incompatible types (invalid)</span><br>
+<span class="keyword">boolean</span> b3 = True; <span class="comment">// C.E: cannot find symbol (invalid)</span><br>
+<span class="keyword">boolean</span> b4 = <span class="string">"true"</span>; <span class="comment">// C.E: incompatible types (invalid)</span>
+                </div>
+
+                <div class="pdf-page">Page 21</div>
+                <h3>Character Literals:</h3>
+                <div class="content-box">
+                    <h4>1) A char literal can be represented as single character within single quotes</h4>
+                    <div class="code-block">
+<span class="keyword">char</span> ch = <span class="string">'a'</span>; <span class="comment">// valid</span><br>
+<span class="keyword">char</span> ch2 = a; <span class="comment">// C.E: cannot find symbol (invalid)</span><br>
+<span class="keyword">char</span> ch3 = <span class="string">"a"</span>; <span class="comment">// C.E: incompatible types (invalid)</span><br>
+<span class="keyword">char</span> ch4 = <span class="string">'ab'</span>; <span class="comment">// C.E: unclosed character literal (invalid)</span>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>2) We can specify a char literal as integral literal which represents Unicode of that character</h4>
+                    <p>We can specify that integral literal either in decimal or octal or hexadecimal form but allowed values range is 0 to 65535.</p>
+                    <div class="code-block">
+<span class="keyword">char</span> ch = <span class="number">97</span>; <span class="comment">// valid (decimal)</span><br>
+<span class="keyword">char</span> ch2 = <span class="number">0xFace</span>; <span class="comment">// valid (hex)</span><br>
+System.out.println(ch2); <span class="comment">// ? (depends on Unicode)</span><br>
+<span class="keyword">char</span> ch3 = <span class="number">65536</span>; <span class="comment">// C.E: possible loss of precision (invalid)</span>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>3) We can represent a char literal by Unicode representation which is nothing but '\uxxxx' (4 digit hexadecimal number)</h4>
+                    <div class="code-block">
+<span class="keyword">char</span> ch = <span class="string">'\ubeef'</span>; <span class="comment">// valid</span><br>
+<span class="keyword">char</span> ch1 = <span class="string">'\u0061'</span>; <span class="comment">// valid (Unicode for 'a')</span><br>
+System.out.println(ch1); <span class="comment">// a</span><br>
+<span class="keyword">char</span> ch2 = \u0062; <span class="comment">// C.E: cannot find symbol (invalid)</span><br>
+<span class="keyword">char</span> ch3 = <span class="string">'iface'</span>; <span class="comment">// C.E: illegal escape character (invalid)</span>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>4) Every escape character in java acts as a char literal</h4>
+                    <div class="code-block">
+<span class="keyword">char</span> ch = <span class="string">'\n'</span>; <span class="comment">// valid (new line)</span><br>
+<span class="keyword">char</span> ch2 = <span class="string">'\l'</span>; <span class="comment">// C.E: illegal escape character (invalid)</span>
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 22</div>
+                <div class="content-box">
+                    <h4>Escape Characters in Java:</h4>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Escape Character</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>\n</td>
+                                <td>New line</td>
+                            </tr>
+                            <tr>
+                                <td>\t</td>
+                                <td>Horizontal tab</td>
+                            </tr>
+                            <tr>
+                                <td>\r</td>
+                                <td>Carriage return</td>
+                            </tr>
+                            <tr>
+                                <td>\f</td>
+                                <td>Form feed</td>
+                            </tr>
+                            <tr>
+                                <td>\b</td>
+                                <td>Backspace</td>
+                            </tr>
+                            <tr>
+                                <td>\\</td>
+                                <td>Backslash</td>
+                            </tr>
+                            <tr>
+                                <td>\'</td>
+                                <td>Single quote</td>
+                            </tr>
+                            <tr>
+                                <td>\"</td>
+                                <td>Double quote</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pdf-page">Page 23</div>
+                <div class="content-box">
+                    <h4>Which of the following char declarations are valid?</h4>
+                    <ol>
+                        <li>char ch = a; // C.E: cannot find symbol (invalid)</li>
+                        <li>char ch = 'ab'; // C.E: unclosed character literal (invalid)</li>
+                        <li>char ch = 65536; // C.E: possible loss of precision (invalid)</li>
+                        <li>char ch = uface; // C.E: illegal character: 64206 (invalid)</li>
+                        <li>char ch = '/n'; // C.E: unclosed character literal (invalid)</li>
+                        <li>none of the above (valid)</li>
+                    </ol>
+                </div>
+
+                <h3>String Literals:</h3>
+                <p>Any sequence of characters within double quotes is treated as String literal.</p>
+                <div class="code-block">
+String s = <span class="string">"Ashok"</span>; <span class="comment">// valid</span>
+                </div>
+
+                <div class="pdf-page">Page 23</div>
+                <h3>1.7 Version Enhancements with respect to Literals:</h3>
+                
+                <div class="content-box">
+                    <h4>1) Binary Literals:</h4>
+                    <p>For the integral data types until 1.6v we could specify literal value in:
+                    <ul>
+                        <li>Decimal</li>
+                        <li>Octal</li>
+                        <li>Hexadecimal</li>
+                    </ul>
+                    But from 1.7v onwards we can specify literal value in binary form also.</p>
+                    <p>The allowed digits are 0 to 1. Literal value should be prefixed with 0b or 0B.</p>
+                    <div class="code-block">
+<span class="keyword">int</span> x = <span class="number">0b111</span>; <span class="comment">// binary 111 = decimal 7</span><br>
+System.out.println(x); <span class="comment">// 7</span>
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 24</div>
+                <div class="content-box">
+                    <h4>2) Usage of _ (underscore) symbol in numeric literals:</h4>
+                    <p>From 1.7v onwards we can use underscore(_) symbol in numeric literals to improve readability.</p>
+                    <div class="code-block">
+<span class="keyword">double</span> d = <span class="number">123456.789</span>; <span class="comment">// valid</span><br>
+<span class="keyword">double</span> d2 = <span class="number">1_23_456.7_8_9</span>; <span class="comment">// valid</span><br>
+<span class="keyword">double</span> d3 = <span class="number">123_456.7_8_9</span>; <span class="comment">// valid</span>
+                    </div>
+                    <p>The main advantage of this approach is readability of the code will be improved. At the time of compilation '_' symbols will be removed automatically, hence after compilation the above lines will become double d = 123456.789</p>
+                    <p>We can use more than one underscore symbol also between the digits.</p>
+                    <p><strong>Example:</strong> double d = 1_23_456.789;</p>
+                    <p>We should use underscore symbol only between the digits:</p>
+                    <div class="code-block">
+<span class="keyword">double</span> d = <span class="number">_123456.789</span>; <span class="comment">// invalid (cannot start with _)</span><br>
+<span class="keyword">double</span> d2 = <span class="number">123456.789_</span>; <span class="comment">// invalid (cannot end with _)</span><br>
+<span class="keyword">double</span> d3 = <span class="number">123_456_.789</span>; <span class="comment">// invalid (cannot have _ before .)</span><br>
+<span class="keyword">double</span> d4 = <span class="number">123._456</span>; <span class="comment">// invalid (cannot have _ after .)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="arrays" class="theory-section">
+            <h2 class="section-title">6. Arrays</h2>
+            <div class="theory-content">
+                <div class="pdf-page">Page 24-25</div>
+                <h3>Topics Covered:</h3>
+                <ol>
+                    <li>Introduction</li>
+                    <li>Array declaration</li>
+                    <li>Array construction</li>
+                    <li>Array initialization</li>
+                    <li>Array declaration, construction, initialization in a single line</li>
+                    <li>length Vs length() method</li>
+                    <li>Anonymous arrays</li>
+                    <li>Array element assignments</li>
+                    <li>Array variable assignments</li>
+                </ol>
+
+                <h3>Introduction:</h3>
+                <p>An array is an indexed collection of fixed number of homogeneous data elements.</p>
+                
+                <div class="content-box">
+                    <h4>Advantages of Arrays:</h4>
+                    <ul>
+                        <li>We can represent multiple values with the same name so that readability of the code will be improved</li>
+                        <li>Better performance for fixed-size collections</li>
+                    </ul>
+                    
+                    <h4>Disadvantages of Arrays:</h4>
+                    <ul>
+                        <li>Fixed in size - once we create an array there is no chance of increasing or decreasing the size based on our requirement</li>
+                        <li>Homogeneous elements only</li>
+                        <li>Memory wastage if size overestimated</li>
+                    </ul>
+                    <p><strong>Note:</strong> We can resolve the fixed size problem by using collections.</p>
+                </div>
+
+                <h3>Array Declarations:</h3>
+                
+                <div class="content-box">
+                    <h4>Single dimensional array declaration:</h4>
+                    <div class="code-block">
+<span class="keyword">int</span>[] a; <span class="comment">// recommended to use because name is clearly separated from the type</span><br>
+<span class="keyword">int</span> []a; <span class="comment">// valid but less readable</span><br>
+<span class="keyword">int</span> a[]; <span class="comment">// valid</span>
+                    </div>
+                    <p><strong>Important:</strong> At the time of declaration we can't specify the size otherwise we will get compile time error.</p>
+                    <div class="code-block">
+<span class="keyword">int</span>[] a; <span class="comment">// valid</span><br>
+<span class="keyword">int</span>[5] a; <span class="comment">// invalid</span>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>Two dimensional array declaration:</h4>
+                    <div class="code-block">
+<span class="keyword">int</span>[][] a; <span class="comment">// valid</span><br>
+<span class="keyword">int</span> [][]a; <span class="comment">// valid</span><br>
+<span class="keyword">int</span> a[][]; <span class="comment">// valid</span><br>
+<span class="keyword">int</span>[] []a; <span class="comment">// valid</span><br>
+<span class="keyword">int</span>[] a[]; <span class="comment">// valid</span><br>
+<span class="keyword">int</span> []a[]; <span class="comment">// valid</span>
+                    </div>
+                    <p>All are valid (6 ways).</p>
+                </div>
+
+                <div class="pdf-page">Page 26</div>
+                <div class="content-box">
+                    <h4>Three dimensional array declaration:</h4>
+                    <p>All the following are valid (10 ways):</p>
+                    <div class="code-block">
+<span class="keyword">int</span>[][][] a;<br>
+<span class="keyword">int</span> [][][]a;<br>
+<span class="keyword">int</span> a[][][];<br>
+<span class="keyword">int</span>[] [][]a;<br>
+<span class="keyword">int</span>[][] a[];<br>
+<span class="keyword">int</span>[][] []a;<br>
+<span class="keyword">int</span>[] a[][];<br>
+<span class="keyword">int</span> []a[][];<br>
+<span class="keyword">int</span> [][]a[];<br>
+<span class="keyword">int</span> [] []a[];
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>Which of the following declarations are valid?</h4>
+                    <ol>
+                        <li>int[] a1, b1; // a-1, b-1 (valid)</li>
+                        <li>int[] a2[], b2; // a-2, b-1 (valid)</li>
+                        <li>int[] []a3, b3; // a-2, b-2 (valid)</li>
+                        <li>int[] a, []b; // C.E: ']' expected (invalid)</li>
+                    </ol>
+                    <div class="note-box">
+                        💡 <strong>Note:</strong> If we want to specify the dimension before the variable that rule is applicable only for the 1st variable. Second variable onwards we can't apply in the same declaration.
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 27</div>
+                <h3>Array Construction:</h3>
+                <p>Every array in java is an object hence we can create by using new operator.</p>
+                <div class="code-block">
+<span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];
+                </div>
+                
+                <p>For every array type corresponding classes are available but these classes are part of java language and not available to the programmer level.</p>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Array Type</th>
+                            <th>Corresponding class name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>int[]</td>
+                            <td>[I</td>
+                        </tr>
+                        <tr>
+                            <td>int[][]</td>
+                            <td>[[I</td>
+                        </tr>
+                        <tr>
+                            <td>double[]</td>
+                            <td>[D</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="content-box">
+                    <h4>Rules for Array Construction:</h4>
+                    <ol>
+                        <li><strong>Rule 1:</strong> At the time of array creation compulsory we should specify the size otherwise we will get compile time error.
+                            <div class="code-block">
+<span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>]; <span class="comment">// valid</span><br>
+<span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[]; <span class="comment">// C.E: array dimension missing</span>
+                            </div>
+                        </li>
+                        <li><strong>Rule 2:</strong> It is legal to have an array with size zero in java.
+                            <div class="code-block">
+<span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">0</span>]; <span class="comment">// valid</span><br>
+System.out.println(a.length); <span class="comment">// 0</span>
+                            </div>
+                        </li>
+                        <li><strong>Rule 3:</strong> If we are taking array size with -ve int value then we will get runtime exception saying NegativeArraySizeException.
+                            <div class="code-block">
+<span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[-<span class="number">3</span>]; <span class="comment">// R.E: NegativeArraySizeException</span>
+                            </div>
+                        </li>
+                        <li><strong>Rule 4:</strong> The allowed data types to specify array size are byte, short, char, int. By mistake if we are using any other type we will get compile time error.
+                            <div class="code-block">
+<span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>['a']; <span class="comment">// valid (char is allowed)</span><br>
+<span class="keyword">byte</span> b = <span class="number">10</span>;<br>
+<span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[b]; <span class="comment">// valid</span><br>
+<span class="keyword">short</span> s = <span class="number">20</span>;<br>
+<span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[s]; <span class="comment">// valid</span><br>
+<span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[10L]; <span class="comment">// C.E: possible loss of precision (invalid)</span><br>
+<span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10.5</span>]; <span class="comment">// C.E: possible loss of precision (invalid)</span>
+                            </div>
+                        </li>
+                        <li><strong>Rule 5:</strong> The maximum allowed array size in java is maximum value of int size [2147483647].
+                            <div class="code-block">
+<span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2147483647</span>]; <span class="comment">// valid</span><br>
+<span class="keyword">int</span>[] a2 = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2147483648</span>]; <span class="comment">// C.E: integer number too large: 2147483648</span>
+                            </div>
+                            <p>In the first case we may get RE: OutOfMemoryError.</p>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="pdf-page">Page 28</div>
+                <h3>Multi-dimensional Array Creation:</h3>
+                <p>In java multidimensional arrays are implemented as array of arrays approach but not matrix form. The main advantage of this approach is to improve memory utilization.</p>
+                
+                <div class="content-box">
+                    <h4>Example 1:</h4>
+                    <div class="code-block">
+<span class="keyword">int</span>[][] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>][];<br>
+a[<span class="number">0</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];<br>
+a[<span class="number">1</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 29</div>
+                <div class="content-box">
+                    <h4>Example 2:</h4>
+                    <div class="code-block">
+<span class="keyword">int</span>[][][] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>][][];<br>
+a[<span class="number">0</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>][];<br>
+a[<span class="number">0</span>][<span class="number">0</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">1</span>];<br>
+a[<span class="number">0</span>][<span class="number">1</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];<br>
+a[<span class="number">0</span>][<span class="number">2</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];<br>
+a[<span class="number">1</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>][<span class="number">2</span>];
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>Which of the following declarations are valid?</h4>
+                    <ol>
+                        <li>int[] a = new int[][]; // C.E: array dimension missing (invalid)</li>
+                        <li>int[][] a = new int[3][4]; // valid</li>
+                        <li>int[][][] a = new int[3][4][]; // valid</li>
+                        <li>int[][] a = new int[][4]; // C.E: ']' expected (invalid)</li>
+                        <li>int[][][] a = new int[3][4][5]; // valid</li>
+                        <li>int[][][] a = new int[3][4][]; // valid</li>
+                        <li>int[][][] a = new int[3][][5]; // C.E: ']' expected (invalid)</li>
+                    </ol>
+                </div>
+
+                <div class="pdf-page">Page 30</div>
+                <h3>Array Initialization:</h3>
+                <p>Whenever we are creating an array every element is initialized with default value automatically.</p>
+                
+                <div class="content-box">
+                    <h4>Example 1:</h4>
+                    <div class="code-block">
+<span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];<br>
+System.out.println(a); <span class="comment">// [I@3e25a5 (hashcode representation)</span><br>
+System.out.println(a[<span class="number">0</span>]); <span class="comment">// 0 (default value for int)</span>
+                    </div>
+                    <div class="note-box">
+                        💡 <strong>Note:</strong> Whenever we are trying to print any object reference internally toString() method will be executed which is implemented by default to return: classname@hexadecimalstringrepresentationofhashcode.
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>Example 2:</h4>
+                    <div class="code-block">
+<span class="keyword">int</span>[][] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>][<span class="number">3</span>];<br>
+System.out.println(a); <span class="comment">// [[I@3e25a5</span><br>
+System.out.println(a[<span class="number">0</span>]); <span class="comment">// [I@19821f</span><br>
+System.out.println(a[<span class="number">0</span>][<span class="number">0</span>]); <span class="comment">// 0</span>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>Example 3:</h4>
+                    <div class="code-block">
+<span class="keyword">int</span>[][] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>][];<br>
+System.out.println(a); <span class="comment">// [[I@3e25a5</span><br>
+System.out.println(a[<span class="number">0</span>]); <span class="comment">// null</span><br>
+System.out.println(a[<span class="number">0</span>][<span class="number">0</span>]); <span class="comment">// R.E: NullPointerException</span>
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 31</div>
+                <div class="content-box">
+                    <p>Once we created an array all its elements by default initialized with default values. If we are not satisfied with those default values then we can replace with our customized values.</p>
+                    <div class="code-block">
+<span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">4</span>];<br>
+a[<span class="number">0</span>] = <span class="number">10</span>;<br>
+a[<span class="number">1</span>] = <span class="number">20</span>;<br>
+a[<span class="number">2</span>] = <span class="number">30</span>;<br>
+a[<span class="number">3</span>] = <span class="number">40</span>;<br>
+a[<span class="number">4</span>] = <span class="number">50</span>; <span class="comment">// R.E: ArrayIndexOutOfBoundsException: 4</span><br>
+a[-<span class="number">4</span>] = <span class="number">60</span>; <span class="comment">// R.E: ArrayIndexOutOfBoundsException: -4</span>
+                    </div>
+                    <div class="warning-box">
+                        ⚠️ <strong>Important:</strong> If we are trying to access array element with out of range index we will get Runtime Exception saying ArrayIndexOutOfBoundsException.
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 32-33</div>
+                <h3>Declaration, Construction and Initialization in a Single Line:</h3>
+                <p>We can perform declaration, construction and initialization of an array in a single line.</p>
+                
+                <div class="content-box">
+                    <h4>Example 1:</h4>
+                    <div class="code-block">
+<span class="keyword">char</span>[] ch = {<span class="string">'a'</span>, <span class="string">'e'</span>, <span class="string">'i'</span>, <span class="string">'o'</span>, <span class="string">'u'</span>}; <span class="comment">// valid</span><br>
+String[] s = {<span class="string">"balayya"</span>, <span class="string">"venki"</span>, <span class="string">"nag"</span>, <span class="string">"chiru"</span>}; <span class="comment">// valid</span>
+                    </div>
+                    <p>We can extend this shortcut even for multi dimensional arrays also.</p>
+                </div>
+
+                <div class="content-box">
+                    <h4>Example 2:</h4>
+                    <div class="code-block">
+<span class="keyword">int</span>[][] a = {{<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>}, {<span class="number">40</span>, <span class="number">50</span>}};
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 34</div>
+                <div class="content-box">
+                    <h4>Example 3:</h4>
+                    <div class="code-block">
+<span class="keyword">int</span>[][][] a = {<br>
+&nbsp;&nbsp;{{<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>}, {<span class="number">40</span>, <span class="number">50</span>}},<br>
+&nbsp;&nbsp;{{<span class="number">60</span>}, {<span class="number">70</span>, <span class="number">80</span>}, {<span class="number">90</span>, <span class="number">100</span>, <span class="number">110</span>}}<br>
+};<br><br>
+System.out.println(a[<span class="number">0</span>][<span class="number">1</span>][<span class="number">1</span>]); <span class="comment">// 50 (valid)</span><br>
+System.out.println(a[<span class="number">1</span>][<span class="number">0</span>][<span class="number">2</span>]); <span class="comment">// R.E: ArrayIndexOutOfBoundsException: 2 (invalid)</span><br>
+System.out.println(a[<span class="number">1</span>][<span class="number">2</span>][<span class="number">1</span>]); <span class="comment">// 100 (valid)</span><br>
+System.out.println(a[<span class="number">1</span>][<span class="number">2</span>][<span class="number">2</span>]); <span class="comment">// 110 (valid)</span><br>
+System.out.println(a[<span class="number">2</span>][<span class="number">1</span>][<span class="number">0</span>]); <span class="comment">// R.E: ArrayIndexOutOfBoundsException: 2 (invalid)</span><br>
+System.out.println(a[<span class="number">1</span>][<span class="number">1</span>][<span class="number">1</span>]); <span class="comment">// 80 (valid)</span>
+                    </div>
+                    <div class="note-box">
+                        💡 <strong>Note:</strong> If we want to use this shortcut, compulsory we should perform declaration, construction and initialization in a single line. If we are trying to divide into multiple lines then we will get compile time error.
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 34-35</div>
+                <h3>length Vs length():</h3>
+                
+                <div class="content-box">
+                    <h4>length (variable for arrays):</h4>
+                    <ol>
+                        <li>It is the final variable applicable only for arrays</li>
+                        <li>It represents the size of the array</li>
+                    </ol>
+                    <div class="code-block">
+<span class="keyword">int</span>[] x = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];<br>
+System.out.println(x.length()); <span class="comment">// C.E: cannot find symbol</span><br>
+System.out.println(x.length); <span class="comment">// 3</span>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>length() (method for Strings):</h4>
+                    <ol>
+                        <li>It is a final method applicable for String objects</li>
+                        <li>It returns the no of characters present in the String</li>
+                    </ol>
+                    <div class="code-block">
+String s = <span class="string">"bhaskar"</span>;<br>
+System.out.println(s.length); <span class="comment">// C.E: cannot find symbol</span><br>
+System.out.println(s.length()); <span class="comment">// 7</span>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>Important Note:</h4>
+                    <p>In multidimensional arrays length variable represents only base size but not total size.</p>
+                    <div class="code-block">
+<span class="keyword">int</span>[][] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">6</span>][<span class="number">3</span>];<br>
+System.out.println(a.length); <span class="comment">// 6 (base size)</span><br>
+System.out.println(a[<span class="number">0</span>].length); <span class="comment">// 3 (size of first row)</span>
+                    </div>
+                    <p>length variable applicable only for arrays where as length() method is applicable for String objects.</p>
+                    <p>There is no direct way to find total size of multi dimensional array but indirectly we can find as follows: x[0].length + x[1].length + x[2].length + ...</p>
+                </div>
+
+                <div class="pdf-page">Page 35</div>
+                <h3>Anonymous Arrays:</h3>
+                <ul>
+                    <li>Sometimes we can create an array without name such type of nameless arrays are called anonymous arrays</li>
+                    <li>The main objective of anonymous arrays is "just for instant use"</li>
+                    <li>We can create anonymous array as follows:
+                        <div class="code-block">
+<span class="keyword">new</span> <span class="keyword">int</span>[]{<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>}; <span class="comment">// valid</span><br>
+<span class="keyword">new</span> <span class="keyword">int</span>[][]{{<span class="number">10</span>, <span class="number">20</span>}, {<span class="number">30</span>, <span class="number">40</span>}}; <span class="comment">// valid</span>
+                        </div>
+                    </li>
+                    <li>At the time of anonymous array creation we can't specify the size otherwise we will get compile time error
+                        <div class="code-block">
+<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>]{<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>}; <span class="comment">// C.E: ']' expected (invalid)</span><br>
+<span class="keyword">new</span> <span class="keyword">int</span>[]{<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>}; <span class="comment">// valid</span>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="content-box">
+                    <h4>Example of Anonymous Array:</h4>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(sum(<span class="keyword">new</span> <span class="keyword">int</span>[]{<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>})); <span class="comment">// 100</span><br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;<span class="keyword">public static int</span> sum(<span class="keyword">int</span>[] x) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span> total = <span class="number">0</span>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(<span class="keyword">int</span> x1 : x) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total = total + x1;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> total;<br>
+&nbsp;&nbsp;}<br>
+}
+                    </div>
+                    <p>In the above program just to call sum(), we required an array but after completing sum() call we are not using that array any more, anonymous array is best suitable.</p>
+                </div>
+
+                <div class="pdf-page">Page 36</div>
+                <h3>Array Element Assignments:</h3>
+                
+                <div class="content-box">
+                    <h4>Case 1: Primitive Arrays</h4>
+                    <p>In the case of primitive array as array element any type is allowed which can be promoted to declared type.</p>
+                    <p><strong>Example 1:</strong> For the int type arrays the allowed array element types are byte, short, char, int.</p>
+                    <div class="code-block">
+<span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];<br>
+a[<span class="number">0</span>] = <span class="number">97</span>; <span class="comment">// valid</span><br>
+a[<span class="number">1</span>] = <span class="string">'a'</span>; <span class="comment">// valid (char promoted to int)</span><br>
+<span class="keyword">byte</span> b = <span class="number">10</span>;<br>
+a[<span class="number">2</span>] = b; <span class="comment">// valid (byte promoted to int)</span><br>
+<span class="keyword">short</span> s = <span class="number">20</span>;<br>
+a[<span class="number">3</span>] = s; <span class="comment">// valid (short promoted to int)</span><br>
+a[<span class="number">4</span>] = 10L; <span class="comment">// C.E: possible loss of precision (long to int)</span>
+                    </div>
+                    
+                    <p><strong>Example 2:</strong> For float type arrays the allowed element types are byte, short, char, int, long, float.</p>
+                </div>
+
+                <div class="pdf-page">Page 37</div>
+                <div class="content-box">
+                    <h4>Case 2: Object Type Arrays</h4>
+                    <p>In the case of Object type arrays as array elements we can provide either declared type objects or its child class objects.</p>
+                    <p><strong>Example 1:</strong></p>
+                    <div class="code-block">
+Object[] a = <span class="keyword">new</span> Object[<span class="number">10</span>];<br>
+a[<span class="number">0</span>] = <span class="keyword">new</span> Integer(<span class="number">10</span>); <span class="comment">// valid (Integer is child of Object)</span><br>
+a[<span class="number">1</span>] = <span class="keyword">new</span> Object(); <span class="comment">// valid</span><br>
+a[<span class="number">2</span>] = <span class="keyword">new</span> String(<span class="string">"bhaskar"</span>); <span class="comment">// valid (String is child of Object)</span>
+                    </div>
+                    
+                    <p><strong>Example 2:</strong></p>
+                    <div class="code-block">
+Number[] n = <span class="keyword">new</span> Number[<span class="number">10</span>];<br>
+n[<span class="number">0</span>] = <span class="keyword">new</span> Integer(<span class="number">10</span>); <span class="comment">// valid (Integer is child of Number)</span><br>
+n[<span class="number">1</span>] = <span class="keyword">new</span> Double(<span class="number">10.5</span>); <span class="comment">// valid (Double is child of Number)</span><br>
+n[<span class="number">2</span>] = <span class="keyword">new</span> String(<span class="string">"bhaskar"</span>); <span class="comment">// C.E: incompatible types (invalid)</span>
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 38</div>
+                <div class="content-box">
+                    <h4>Case 3: Interface Type Arrays</h4>
+                    <p>In the case of interface type arrays as array elements we can provide its implemented class objects.</p>
+                    <div class="code-block">
+Runnable[] r = <span class="keyword">new</span> Runnable[<span class="number">10</span>];<br>
+r[<span class="number">0</span>] = <span class="keyword">new</span> Thread(); <span class="comment">// valid (Thread implements Runnable)</span><br>
+r[<span class="number">1</span>] = <span class="keyword">new</span> String(<span class="string">"bhaskar"</span>); <span class="comment">// C.E: incompatible types (invalid)</span>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>Summary of Array Element Assignments:</h4>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Array Type</th>
+                                <th>Allowed Element Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Primitive arrays</td>
+                                <td>Any type which can be promoted to declared type</td>
+                            </tr>
+                            <tr>
+                                <td>Object type arrays</td>
+                                <td>Either declared type or its child class objects allowed</td>
+                            </tr>
+                            <tr>
+                                <td>Interface type arrays</td>
+                                <td>Its implemented class objects allowed</td>
+                            </tr>
+                            <tr>
+                                <td>Abstract class type arrays</td>
+                                <td>Its child class objects are allowed</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pdf-page">Page 38</div>
+                <h3>Array Variable Assignments:</h3>
+                
+                <div class="content-box">
+                    <h4>Case 1:</h4>
+                    <p>Element level promotions are not applicable at array object level.</p>
+                    <p><strong>Example:</strong> A char value can be promoted to int type but char array cannot be promoted to int array.</p>
+                    <div class="code-block">
+<span class="keyword">int</span>[] a = {<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>};<br>
+<span class="keyword">char</span>[] ch = {<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>};<br>
+<span class="keyword">int</span>[] b = a; <span class="comment">// valid</span><br>
+<span class="keyword">int</span>[] c = ch; <span class="comment">// C.E: incompatible types (invalid)</span>
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 39</div>
+                <div class="content-box">
+                    <h4>Which of the following promotions are valid?</h4>
+                    <ol>
+                        <li>char → int (valid)</li>
+                        <li>char[] → int[] (invalid)</li>
+                        <li>int → long (valid)</li>
+                        <li>int[] → long[] (invalid)</li>
+                        <li>double → float (invalid)</li>
+                        <li>double[] → float[] (invalid)</li>
+                        <li>String → Object (valid)</li>
+                        <li>String[] → Object[] (valid)</li>
+                    </ol>
+                    <div class="note-box">
+                        💡 <strong>Note:</strong> In the case of object type arrays child type array can be assigned to parent type array variable.
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>Case 2:</h4>
+                    <p>Whenever we are assigning one array to another array internal elements won't be copied just reference variables will be reassigned hence sizes are not important but types must be matched.</p>
+                    <div class="code-block">
+<span class="keyword">int</span>[] a = {<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>, <span class="number">70</span>};<br>
+<span class="keyword">int</span>[] b = {<span class="number">80</span>, <span class="number">90</span>};<br>
+a = b; <span class="comment">// valid</span><br>
+b = a; <span class="comment">// valid</span>
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 40</div>
+                <div class="content-box">
+                    <h4>Case 3:</h4>
+                    <p>Whenever we are assigning one array to another array dimensions must be matched that is in the place of one dimensional array we should provide the same type only otherwise we will get compile time error.</p>
+                    <div class="code-block">
+<span class="keyword">int</span>[][] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>][];<br>
+a[<span class="number">0</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">4</span>][<span class="number">5</span>]; <span class="comment">// C.E: incompatible types (invalid)</span><br>
+a[<span class="number">0</span>] = <span class="number">10</span>; <span class="comment">// C.E: incompatible types (invalid)</span><br>
+a[<span class="number">0</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">4</span>]; <span class="comment">// valid</span>
+                    </div>
+                    <div class="note-box">
+                        💡 <strong>Note:</strong> Whenever we are performing array assignments the types and dimensions must be matched but sizes are not important.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="variables" class="theory-section">
+            <h2 class="section-title">7. Variables in Java</h2>
+            <div class="theory-content">
+                <div class="pdf-page">Page 43</div>
+                <h3>Types of Variables:</h3>
+                
+                <div class="content-box">
+                    <h4>Division 1: Based on Type of Value</h4>
+                    <ol>
+                        <li><strong>Primitive variables:</strong> Can be used to represent primitive values.
+                            <div class="code-block">
+<span class="keyword">int</span> x = <span class="number">10</span>;
+                            </div>
+                        </li>
+                        <li><strong>Reference variables:</strong> Can be used to refer objects.
+                            <div class="code-block">
+Student s = <span class="keyword">new</span> Student();
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="content-box">
+                    <h4>Division 2: Based on Behavior and Position of Declaration</h4>
+                    <ol>
+                        <li><strong>Instance variables</strong></li>
+                        <li><strong>Static variables</strong></li>
+                        <li><strong>Local variables</strong></li>
+                    </ol>
+                </div>
+
+                <h3>Instance Variables:</h3>
+                <ul>
+                    <li>If the value of a variable is varied from object to object such type of variables are called instance variables</li>
+                    <li>For every object a separate copy of instance variables will be created</li>
+                    <li>Instance variables will be created at the time of object creation and destroyed at the time of object destruction hence the scope of instance variables is exactly same as scope of objects</li>
+                    <li>Instance variables will be stored on the heap as the part of object</li>
+                </ul>
+
+                <div class="pdf-page">Page 44</div>
+                <div class="content-box">
+                    <h4>Important Points about Instance Variables:</h4>
+                    <ol>
+                        <li>Instance variables should be declared within the class directly but outside of any method or block or constructor</li>
+                        <li>Instance variables can be accessed directly from Instance area. But cannot be accessed directly from static area</li>
+                        <li>But by using object reference we can access instance variables from static area</li>
+                        <li>For the instance variables it is not required to perform initialization - JVM will always provide default values</li>
+                    </ol>
+                    
+                    <h4>Example:</h4>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">int</span> i = <span class="number">10</span>;<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// System.out.println(i); // C.E: non-static variable i cannot be referenced from a static context</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;Test t = <span class="keyword">new</span> Test();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(t.i); <span class="comment">// 10 (valid)</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;t.methodOne();<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;<span class="keyword">public void</span> methodOne() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(i); <span class="comment">// 10 (valid)</span><br>
+&nbsp;&nbsp;}<br>
+}
+                    </div>
+                    
+                    <h4>Default Values Example:</h4>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">boolean</span> b;<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Test t = <span class="keyword">new</span> Test();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(t.b); <span class="comment">// false (default value)</span><br>
+&nbsp;&nbsp;}<br>
+}
+                    </div>
+                    <p>Instance variables also known as object level variables or attributes.</p>
+                </div>
+
+                <h3>Static Variables:</h3>
+                <ul>
+                    <li>If the value of a variable is not varied from object to object such type of variables is not recommended to declare as instance variables. We have to declare such type of variables at class level by using static modifier</li>
+                    <li>In the case of instance variables for every object a separate copy will be created but in the case of static variables for entire class only one copy will be created and shared by every object of that class</li>
+                    <li>Static variables will be created at the time of class loading and destroyed at the time of class unloading hence the scope of the static variable is exactly same as the scope of the .class file</li>
+                    <li>Static variables will be stored in method area</li>
+                </ul>
+
+                <div class="pdf-page">Page 45</div>
+                <div class="content-box">
+                    <h4>Important Points about Static Variables:</h4>
+                    <ol>
+                        <li>Static variables should be declared within the class directly but outside of any method or block or constructor</li>
+                        <li>Static variables can be accessed from both instance and static areas directly</li>
+                        <li>We can access static variables either by class name or by object reference but usage of class name is recommended</li>
+                        <li>But within the same class it is not required to use class name we can access directly</li>
+                        <li>For the static variables it is not required to perform initialization explicitly, JVM will always provide default values</li>
+                    </ol>
+                    
+                    <h4>Example 1:</h4>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">static int</span> i = <span class="number">10</span>;<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Test t = <span class="keyword">new</span> Test();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(t.i); <span class="comment">// 10</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(Test.i); <span class="comment">// 10</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(i); <span class="comment">// 10</span><br>
+&nbsp;&nbsp;}<br>
+}
+                    </div>
+                    
+                    <h4>Example 2 (Default Values):</h4>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">static</span> String s;<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(s); <span class="comment">// null (default value)</span><br>
+&nbsp;&nbsp;}<br>
+}
+                    </div>
+                    
+                    <h4>Example 3:</h4>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">int</span> x = <span class="number">10</span>;<br>
+&nbsp;&nbsp;<span class="keyword">static int</span> y = <span class="number">20</span>;<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Test t1 = <span class="keyword">new</span> Test();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;t1.x = <span class="number">888</span>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;t1.y = <span class="number">999</span>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Test t2 = <span class="keyword">new</span> Test();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(t2.x + <span class="string">"---"</span> + t2.y); <span class="comment">// 10---999</span><br>
+&nbsp;&nbsp;}<br>
+}
+                    </div>
+                    <p>Static variables also known as class level variables or fields.</p>
+                </div>
+
+                <div class="pdf-page">Page 47</div>
+                <h3>Local Variables:</h3>
+                <ul>
+                    <li>Sometimes to meet temporary requirements of the programmer we can declare variables inside a method or block or constructors such type of variables are called local variables or automatic variables or temporary variables or stack variables</li>
+                    <li>Local variables will be stored inside stack</li>
+                    <li>The local variables will be created as part of the block execution in which it is declared and destroyed once that block execution completes. Hence the scope of the local variables is exactly same as scope of the block in which we declared</li>
+                </ul>
+
+                <div class="content-box">
+                    <h4>Example 1:</h4>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span> i = <span class="number">0</span>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; j++) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i = i + j;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(i + <span class="string">"---"</span> + j); <span class="comment">// C.E: cannot find symbol (j is out of scope)</span><br>
+&nbsp;&nbsp;}<br>
+}
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 48</div>
+                <div class="content-box">
+                    <h4>Example 2:</h4>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">try</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span> i = Integer.parseInt(<span class="string">"ten"</span>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">catch</span>(NullPointerException e) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(i); <span class="comment">// C.E: cannot find symbol (i is out of scope)</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>Important Points about Local Variables:</h4>
+                    <ol>
+                        <li>The local variables will be stored on the stack</li>
+                        <li>For the local variables JVM won't provide any default values - compulsory we should perform initialization explicitly before using that variable</li>
+                    </ol>
+                    
+                    <h4>Example 1:</h4>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span> x;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"hello"</span>); <span class="comment">// hello (valid - x not used)</span><br>
+&nbsp;&nbsp;}<br>
+}
+                    </div>
+                    
+                    <h4>Example 2:</h4>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span> x;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(x); <span class="comment">// C.E: variable x might not have been initialized</span><br>
+&nbsp;&nbsp;}<br>
+}
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 49</div>
+                <div class="content-box">
+                    <h4>Example 3:</h4>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span> x;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(args.length &gt; <span class="number">0</span>) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x = <span class="number">10</span>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(x); <span class="comment">// C.E: variable x might not have been initialized</span><br>
+&nbsp;&nbsp;}<br>
+}
+                    </div>
+                    
+                    <h4>Example 4:</h4>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span> x;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(args.length &gt; <span class="number">0</span>) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x = <span class="number">10</span>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x = <span class="number">20</span>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(x); <span class="comment">// valid - x initialized in all paths</span><br>
+&nbsp;&nbsp;}<br>
+}
+                    </div>
+                    <p><strong>Output:</strong></p>
+                    <div class="code-block">
+java Test x   <span class="comment">// 10</span><br>
+java Test x y <span class="comment">// 10</span><br>
+java Test     <span class="comment">// 20</span>
+                    </div>
+                    <div class="note-box">
+                        💡 <strong>Note:</strong> 
+                        <ul>
+                            <li>It is never recommended to perform initialization for the local variables inside logical blocks because there is no guarantee of executing that block always at runtime</li>
+                            <li>It is highly recommended to perform initialization for the local variables at the time of declaration at least with default values</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>Modifiers for Local Variables:</h4>
+                    <p>The only applicable modifier for local variables is final. If we are using any other modifier we will get compile time error.</p>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public int</span> x = <span class="number">10</span>; <span class="comment">// C.E: illegal start of expression (invalid)</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private int</span> x = <span class="number">10</span>; <span class="comment">// C.E: illegal start of expression (invalid)</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected int</span> x = <span class="number">10</span>; <span class="comment">// C.E: illegal start of expression (invalid)</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">static int</span> x = <span class="number">10</span>; <span class="comment">// C.E: illegal start of expression (invalid)</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">volatile int</span> x = <span class="number">10</span>; <span class="comment">// C.E: illegal start of expression (invalid)</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">transient int</span> x = <span class="number">10</span>; <span class="comment">// C.E: illegal start of expression (invalid)</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">final int</span> x = <span class="number">10</span>; <span class="comment">// valid</span><br>
+&nbsp;&nbsp;}<br>
+}
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 50</div>
+                <h3>Conclusions about Variables:</h3>
+                <ol>
+                    <li>For the static and instance variables it is not required to perform initialization explicitly - JVM will provide default values. But for the local variables JVM won't provide any default values - compulsory we should perform initialization explicitly before using that variable.</li>
+                    <li>For every object a separate copy of instance variable will be created whereas for entire class a single copy of static variable will be created. For every Thread a separate copy of local variable will be created.</li>
+                    <li>Instance and static variables can be accessed by multiple Threads simultaneously and hence these are not Thread safe but local variables can be accessed by only one Thread at a time and hence local variables are Thread safe.</li>
+                    <li>If we are not declaring any modifier explicitly then it means default modifier but this rule is applicable only for static and instance variables but not local variable.</li>
+                </ol>
+
+                <div class="content-box">
+                    <h4>Summary Table:</h4>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Declaration</th>
+                                <th>Storage</th>
+                                <th>Default Value</th>
+                                <th>Scope</th>
+                                <th>Thread Safety</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Instance Variables</strong></td>
+                                <td>Inside class, outside methods</td>
+                                <td>Heap</td>
+                                <td>Yes (JVM provides)</td>
+                                <td>Object lifetime</td>
+                                <td>❌ Not Thread safe</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Static Variables</strong></td>
+                                <td>With static modifier</td>
+                                <td>Method Area</td>
+                                <td>Yes (JVM provides)</td>
+                                <td>Class lifetime</td>
+                                <td>❌ Not Thread safe</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Local Variables</strong></td>
+                                <td>Inside methods/blocks</td>
+                                <td>Stack</td>
+                                <td>No (must initialize)</td>
+                                <td>Block lifetime</td>
+                                <td>✅ Thread safe</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Uninitialized Arrays:</h3>
+                
+                <div class="content-box">
+                    <h4>Instance Level:</h4>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">int</span>[] a;<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Test t1 = <span class="keyword">new</span> Test();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(t1.a); <span class="comment">// null</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(t1.a[<span class="number">0</span>]); <span class="comment">// R.E: NullPointerException</span><br>
+&nbsp;&nbsp;}<br>
+}
+                    </div>
+                    
+                    <p><strong>Example 1:</strong> int[] a; // instance variable - gets default value null</p>
+                    <p><strong>Example 2:</strong> int[] a = new int[3]; // instance variable - gets array with default values</p>
+                </div>
+
+                <div class="pdf-page">Page 51</div>
+                <div class="content-box">
+                    <h4>Static Level:</h4>
+                    <p><strong>Example 1:</strong> static int[] a; // static variable - gets default value null</p>
+                    <p><strong>Example 2:</strong> static int[] a = new int[3]; // static variable - gets array with default values</p>
+                </div>
+
+                <div class="content-box">
+                    <h4>Local Level:</h4>
+                    <p><strong>Example 1:</strong></p>
+                    <div class="code-block">
+<span class="keyword">int</span>[] a; <span class="comment">// local variable</span><br>
+System.out.println(a); <span class="comment">// C.E: variable a might not have been initialized</span><br>
+System.out.println(a[<span class="number">0</span>]); <span class="comment">// C.E: variable a might not have been initialized</span>
+                    </div>
+                    
+                    <p><strong>Example 2:</strong></p>
+                    <div class="code-block">
+<span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>]; <span class="comment">// local variable initialized</span><br>
+System.out.println(a); <span class="comment">// [I@3e25a5</span><br>
+System.out.println(a[<span class="number">0</span>]); <span class="comment">// 0</span>
+                    </div>
+                    <div class="note-box">
+                        💡 <strong>Important:</strong> Once we created an array every element is always initialized with default values irrespective of whether it is static or instance or local array.
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 52</div>
+                <div class="content-box">
+                    <h4>Variable Combinations:</h4>
+                    <p>Every variable in java should be either instance or static or local.</p>
+                    <p>Every variable in java should be either primitive or reference.</p>
+                    <p>Hence the following are the various possible combinations for variables:</p>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>]; <span class="comment">// instance-reference</span><br>
+&nbsp;&nbsp;<span class="keyword">static int</span> x = <span class="number">20</span>; <span class="comment">// static-primitive</span><br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;String s = <span class="string">"xyz"</span>; <span class="comment">// local-reference</span><br>
+&nbsp;&nbsp;}<br>
+}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="var-arg" class="theory-section">
+            <h2 class="section-title">8. Var-arg Methods (Java 1.5+)</h2>
+            <div class="theory-content">
+                <div class="pdf-page">Page 52</div>
+                <p>Var-arg methods (variable no of argument methods) introduced in Java 1.5.</p>
+                <p>Until 1.4v we can't declare a method with variable no. of arguments. If there is a change in no of arguments compulsory we have to define a new method. This approach increases length of the code and reduces readability.</p>
+                <p>But from 1.5 version onwards we can declare a method with variable no. of arguments such type of methods are called var-arg methods.</p>
+
+                <div class="pdf-page">Page 53</div>
+                <div class="content-box">
+                    <h4>Var-arg Method Declaration:</h4>
+                    <div class="code-block">
+<span class="keyword">public static void</span> methodOne(<span class="keyword">int</span>... x) {<br>
+&nbsp;&nbsp;System.out.println(<span class="string">"var-arg method"</span>);<br>
+}
+                    </div>
+                    <p>We can call or invoke this method by passing any no. of int values including zero number also.</p>
+                    
+                    <h4>Example:</h4>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> methodOne(<span class="keyword">int</span>... x) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"var-arg method"</span>);<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;methodOne(); <span class="comment">// var-arg method</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;methodOne(10); <span class="comment">// var-arg method</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;methodOne(10, 20, 30); <span class="comment">// var-arg method</span><br>
+&nbsp;&nbsp;}<br>
+}
+                    </div>
+                    <p><strong>Output:</strong></p>
+                    <div class="code-block">
+var-arg method<br>
+var-arg method<br>
+var-arg method
+                    </div>
+                    <div class="note-box">
+                        💡 <strong>Note:</strong> Internally var-arg parameter implemented by using single dimensional array hence within the var-arg method we can differentiate arguments by using index.
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>Example with Array Access:</h4>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> sum(<span class="keyword">int</span>... x) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span> total = <span class="number">0</span>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; x.length; i++) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total = total + x[i];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"The sum :"</span> + total);<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sum(); <span class="comment">// The sum: 0</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;sum(10); <span class="comment">// The sum: 10</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;sum(10, 20); <span class="comment">// The sum: 30</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;sum(10, 20, 30, 40); <span class="comment">// The sum: 100</span><br>
+&nbsp;&nbsp;}<br>
+}
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 54</div>
+                <div class="content-box">
+                    <h4>Example with Enhanced for loop:</h4>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> sum(<span class="keyword">int</span>... x) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span> total = <span class="number">0</span>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(<span class="keyword">int</span> x1 : x) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total = total + x1;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"The sum :"</span> + total);<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sum(); <span class="comment">// The sum: 0</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;sum(10); <span class="comment">// The sum: 10</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;sum(10, 20); <span class="comment">// The sum: 30</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;sum(10, 20, 30, 40); <span class="comment">// The sum: 100</span><br>
+&nbsp;&nbsp;}<br>
+}
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 55</div>
+                <h3>Rules for Var-arg Methods:</h3>
+                
+                <div class="content-box">
+                    <h4>Case 1: Valid Var-arg Declarations</h4>
+                    <ol>
+                        <li>methodOne(int... x) (valid)</li>
+                        <li>methodOne(int ...x) (valid)</li>
+                        <li>methodOne(int...x) (valid)</li>
+                        <li>methodOne(int x...) (invalid)</li>
+                        <li>methodOne(int... x) (invalid)</li>
+                        <li>methodOne(int x...) (invalid)</li>
+                    </ol>
+                </div>
+
+                <div class="content-box">
+                    <h4>Case 2: Mixing Var-arg with General Parameters</h4>
+                    <p>We can mix var-arg parameter with general parameters also.</p>
+                    <div class="code-block">
+methodOne(<span class="keyword">int</span> a, <span class="keyword">int</span>... b) <span class="comment">// valid</span><br>
+methodOne(String s, <span class="keyword">int</span>... x) <span class="comment">// valid</span>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>Case 3: Var-arg Must Be Last Parameter</h4>
+                    <p>If we mix var-arg parameter with general parameter then var-arg parameter should be the last parameter.</p>
+                    <div class="code-block">
+methodOne(<span class="keyword">int</span> a, <span class="keyword">int</span>... b) <span class="comment">// valid</span><br>
+methodOne(<span class="keyword">int</span>... a, <span class="keyword">int</span> b) <span class="comment">// invalid</span>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>Case 4: Only One Var-arg Parameter</h4>
+                    <p>Within the var-arg method we can take only one var-arg parameter. i.e., if we are trying to have more than one var-arg parameter we will get CE.</p>
+                    <div class="code-block">
+methodOne(<span class="keyword">int</span>... a, <span class="keyword">int</span>... b) <span class="comment">// invalid</span>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>Case 5: Var-arg Method Overloading</h4>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> methodOne(<span class="keyword">int</span> i) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"general method"</span>);<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> methodOne(<span class="keyword">int</span>... i) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"var-arg method"</span>);<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;methodOne(); <span class="comment">// var-arg method</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;methodOne(10, 20); <span class="comment">// var-arg method</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;methodOne(10); <span class="comment">// general method</span><br>
+&nbsp;&nbsp;}<br>
+}
+                    </div>
+                    <div class="note-box">
+                        💡 <strong>Note:</strong> In general var-arg method will get least priority that is if no other method matched then only var-arg method will get the chance this is exactly same as default case inside a switch.
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 56</div>
+                <div class="content-box">
+                    <h4>Case 6: Array as Argument to Var-arg</h4>
+                    <p>For the var-arg methods we can provide the corresponding type array as argument.</p>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> methodOne(<span class="keyword">int</span>... i) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(<span class="keyword">int</span> x : i) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(x);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span>[] a = {<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>};<br>
+&nbsp;&nbsp;&nbsp;&nbsp;methodOne(a); <span class="comment">// 10 20 30</span><br>
+&nbsp;&nbsp;}<br>
+}
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>Case 7: Cannot Overload with Array Parameter</h4>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">public void</span> methodOne(<span class="keyword">int</span>[] i) { }<br>
+&nbsp;&nbsp;<span class="keyword">public void</span> methodOne(<span class="keyword">int</span>... i) { }<br>
+}<br>
+<span class="comment">// Output: Compile time error. Cannot declare both methodOne(int...) and methodOne(int[]) in Test</span>
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 56-57</div>
+                <h3>Single Dimensional Array Vs Var-Arg Method:</h3>
+                
+                <div class="content-box">
+                    <h4>Case 1: Array can be replaced with Var-arg</h4>
+                    <p>Wherever single dimensional array present we can replace with var-arg parameter.</p>
+                    <div class="code-block">
+methodOne(<span class="keyword">int</span>[] i) <span class="comment">// can be replaced with</span><br>
+methodOne(<span class="keyword">int</span>... i) <span class="comment">// valid</span>
+                    </div>
+                    <p><strong>Example:</strong></p>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String... args) { <span class="comment">// valid - var-arg main method</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"var-arg main method"</span>);<br>
+&nbsp;&nbsp;}<br>
+}
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>Case 2: Var-arg cannot be replaced with Array</h4>
+                    <p>Wherever var-arg parameter present we can't replace with single dimensional array.</p>
+                    <div class="code-block">
+methodOne(<span class="keyword">int</span>... i) <span class="comment">// cannot be replaced with</span><br>
+methodOne(<span class="keyword">int</span>[] i) <span class="comment">// invalid</span>
+                    </div>
+                    <div class="note-box">
+                        💡 <strong>Reason:</strong>
+                        <ol>
+                            <li>methodOne(int... x) we can call this method by passing a group of int values and x will become 1D array (i.e., int[] x)</li>
+                            <li>methodOne(int[]... x) we can call this method by passing a group of 1D int[] and x will become 2D array (i.e., int[][] x)</li>
+                        </ol>
+                        Due to these reasons Case 2 is invalid.
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 57-58</div>
+                <div class="content-box">
+                    <h4>Example of 2D Var-arg:</h4>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> methodOne(<span class="keyword">int</span>[]... x) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(<span class="keyword">int</span>[] a : x) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(a[<span class="number">0</span>]);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span>[] l = {<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>};<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span>[] m = {<span class="number">40</span>, <span class="number">50</span>};<br>
+&nbsp;&nbsp;&nbsp;&nbsp;methodOne(l, m);<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<span class="comment">// Output: 10 40</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="main-method" class="theory-section">
+            <h2 class="section-title">9. Main Method</h2>
+            <div class="theory-content">
+                <div class="pdf-page">Page 58-59</div>
+                <p>Whether the class contains main() method or not, and whether it is properly declared or not, these checking's are not responsibilities of the compiler, at runtime JVM is responsible.</p>
+                
+                <div class="content-box">
+                    <h4>Standard Main Method Signature:</h4>
+                    <div class="code-block">
+<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;<span class="comment">// Program execution starts here</span><br>
+}
+                    </div>
+                    <p>If JVM unable to find the required main() method then we will get runtime exception saying NoSuchMethodError: main.</p>
+                    
+                    <div class="code-block">
+<span class="keyword">class</span> Test { }<br>
+<span class="comment">// Output:</span><br>
+javac Test.java <span class="comment">// compiles successfully</span><br>
+java Test <span class="comment">// R.E: NoSuchMethodError: main</span>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>Acceptable Variations of Main Method:</h4>
+                    <p>Even though the main method syntax is very strict, the following changes are acceptable:</p>
+                    <ol>
+                        <li>The order of modifiers is not important that is instead of public static we can take static public.
+                            <div class="code-block">
+<span class="keyword">static public void</span> main(String[] args) { } <span class="comment">// valid</span>
+                            </div>
+                        </li>
+                        <li>We can declare string[] in any acceptable form:
+                            <div class="code-block">
+main(String[] args) <span class="comment">// valid</span><br>
+main(String []args) <span class="comment">// valid</span><br>
+main(String args[]) <span class="comment">// valid</span>
+                            </div>
+                        </li>
+                        <li>Instead of args we can use any valid java identifier:
+                            <div class="code-block">
+main(String[] arguments) <span class="comment">// valid</span><br>
+main(String[] xyz) <span class="comment">// valid</span>
+                            </div>
+                        </li>
+                        <li>We can replace string[] with var-arg parameter:
+                            <div class="code-block">
+main(String... args) <span class="comment">// valid</span>
+                            </div>
+                        </li>
+                        <li>main() method can be declared with the following modifiers: final, synchronized, strictfp.
+                            <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">static final synchronized strictfp public void</span> main(String... ask) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"valid main method"</span>);<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<span class="comment">// Output: valid main method</span>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="pdf-page">Page 59-60</div>
+                <div class="content-box">
+                    <h4>Which of the following main() method declarations are valid?</h4>
+                    <ol>
+                        <li>public static void main(String args) (invalid) - missing []</li>
+                        <li>public synchronized final strictfp void main(String[] args)() (invalid) - extra ()</li>
+                        <li>public static void Main(String... args) (invalid) - Main with capital M</li>
+                        <li>public static int main(String[] args) (invalid) - int return type</li>
+                        <li>public static synchronized final strictfp void main(String... args) (valid)</li>
+                        <li>public static void main(String... args) (valid)</li>
+                        <li>public void main(String[] args) (invalid) - missing static</li>
+                    </ol>
+                    <p><strong>Note:</strong> In all the invalid cases we will get runtime exception (not compile time error).</p>
+                </div>
+
+                <div class="content-box">
+                    <h4>Case 1: Overloading of main() Method</h4>
+                    <p>Overloading of the main() method is possible but JVM always calls string[] argument main() method only.</p>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"String[] array main method"</span>);<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(<span class="keyword">int</span>[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"int[] array main method"</span>);<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<span class="comment">// Output: String[] array main method</span>
+                    </div>
+                    <p>The other overloaded method we have to call explicitly then only it will be executed.</p>
+                </div>
+
+                <div class="pdf-page">Page 61</div>
+                <div class="content-box">
+                    <h4>Case 2: Inheritance with main() Method</h4>
+                    <p>Inheritance concept is applicable for static methods including main() method hence while executing child class if the child class doesn't contain main() method then the parent class main() method will be executed.</p>
+                    
+                    <h5>Example 1:</h5>
+                    <div class="code-block">
+<span class="keyword">class</span> Parent {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"parent main"</span>);<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<span class="keyword">class</span> Child <span class="keyword">extends</span> Parent { }<br><br>
+<span class="comment">// Execution:</span><br>
+javac Parent.java <span class="comment">// creates Parent.class</span><br>
+java Parent <span class="comment">// output: parent main</span><br>
+java Child <span class="comment">// output: parent main (inherited from Parent)</span>
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 62</div>
+                <div class="content-box">
+                    <h5>Example 2:</h5>
+                    <div class="code-block">
+<span class="keyword">class</span> Parent {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"parent main"</span>);<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<span class="keyword">class</span> Child <span class="keyword">extends</span> Parent {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"Child main"</span>);<br>
+&nbsp;&nbsp;}<br>
+}<br><br>
+<span class="comment">// Execution:</span><br>
+javac Parent.java <span class="comment">// creates Parent.class and Child.class</span><br>
+java Parent <span class="comment">// output: parent main</span><br>
+java Child <span class="comment">// output: Child main (child's main method executed)</span>
+                    </div>
+                    <div class="note-box">
+                        💡 <strong>Note:</strong> It seems to be overriding concept is applicable for static methods but it is not overriding - it is method hiding.
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 63-65</div>
+                <h3>1.7 Version Enhancements with respect to main():</h3>
+                
+                <div class="content-box">
+                    <h4>Case 1: Better Error Messages</h4>
+                    <p>Until 1.6v if our class doesn't contain main() method then at runtime we will get Runtime Exception saying NoSuchMethodError:main</p>
+                    <p>But from 1.7 version onwards instead of NoSuchMethodError we will get more meaningful description.</p>
+                    
+                    <div class="code-block">
+<span class="keyword">class</span> Test { }<br><br>
+<span class="comment">// 1.6 version:</span><br>
+javac Test.java<br>
+java Test<br>
+<span class="comment">// RE: NoSuchMethodError:main</span><br><br>
+<span class="comment">// 1.7 version:</span><br>
+javac Test.java<br>
+java Test<br>
+<span class="comment">// Error: main method not found in class Test, please define the main method as:</span><br>
+<span class="comment">// public static void main(String[] args)</span>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>Case 2: Static Block without main() method</h4>
+                    <p>From 1.7 version onwards to start program execution compulsory main method should be required, hence even though the class contains static block if main method not available then won't be executed.</p>
+                    
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">static</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"static block"</span>);<br>
+&nbsp;&nbsp;}<br>
+}<br><br>
+<span class="comment">// 1.6 version:</span><br>
+javac Test.java<br>
+java Test<br>
+<span class="comment">// output: static block</span><br>
+<span class="comment">// RE: NoSuchMethodError:main</span><br><br>
+<span class="comment">// 1.7 version:</span><br>
+javac Test.java<br>
+java Test<br>
+<span class="comment">// Error: main method not found in class Test, please define the main method as:</span><br>
+<span class="comment">// public static void main(String[] args)</span>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>Case 3: Static Block with System.exit(0)</h4>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">static</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"static block"</span>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.exit(<span class="number">0</span>);<br>
+&nbsp;&nbsp;}<br>
+}<br><br>
+<span class="comment">// 1.6 version:</span><br>
+javac Test.java<br>
+java Test<br>
+<span class="comment">// output: static block (program terminates)</span><br><br>
+<span class="comment">// 1.7 version:</span><br>
+javac Test.java<br>
+java Test<br>
+<span class="comment">// Error: main method not found in class Test</span>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>Case 4: With main() method</h4>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">static</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"static block"</span>);<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"main method"</span>);<br>
+&nbsp;&nbsp;}<br>
+}<br><br>
+<span class="comment">// Both 1.6 and 1.7 versions:</span><br>
+javac Test.java<br>
+java Test<br>
+<span class="comment">// output: static block</span><br>
+<span class="comment">//         main method</span>
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 66</div>
+                <h3>Command Line Arguments:</h3>
+                <p>The arguments which are passing from command prompt are called command line arguments. The main objective of command line arguments are we can customize the behavior of the main() method.</p>
+
+                <div class="pdf-page">Page 67</div>
+                <div class="content-box">
+                    <h4>Example 1:</h4>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= args.length; i++) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(args[i]);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}<br><br>
+<span class="comment">// Output:</span><br>
+java Test x y z<br>
+<span class="comment">// ArrayIndexOutOfBoundsException: 3</span><br>
+<span class="comment">// Replace i <= args.length with i < args.length then it will run successfully</span>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>Example 2:</h4>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;String[] argh = {<span class="string">"x"</span>, <span class="string">"y"</span>, <span class="string">"z"</span>};<br>
+&nbsp;&nbsp;&nbsp;&nbsp;args = argh;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(String s : args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(s);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}<br><br>
+<span class="comment">// Output:</span><br>
+java Test A B C <span class="comment">// x y z</span><br>
+java Test A B   <span class="comment">// x y z</span><br>
+java Test       <span class="comment">// x y z</span>
+                    </div>
+                </div>
+
+                <div class="pdf-page">Page 68</div>
+                <div class="content-box">
+                    <h4>Example 3: String Concatenation</h4>
+                    <p>Within the main() method command line arguments are available in the form of String hence "+" operator acts as string concatenation but not arithmetic addition.</p>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(args[<span class="number">0</span>] + args[<span class="number">1</span>]);<br>
+&nbsp;&nbsp;}<br>
+}<br><br>
+<span class="comment">// Output:</span><br>
+E:\SCJP>javac Test.java<br>
+E:\SCJP>java Test <span class="number">10</span> <span class="number">20</span><br>
+<span class="comment">// 1020 (string concatenation, not addition)</span>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h4>Example 4: Arguments with Spaces</h4>
+                    <p>Space is the separator between 2 command line arguments and if our command line argument itself contains space then we should enclose within double quotes.</p>
+                    <div class="code-block">
+<span class="keyword">class</span> Test {<br>
+&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(args[<span class="number">0</span>]);<br>
+&nbsp;&nbsp;}<br>
+}<br><br>
+<span class="comment">// Output:</span><br>
+E:\SCJP>javac Test.java<br>
+E:\SCJP>java Test <span class="string">"Sai Charan"</span><br>
+<span class="comment">// Sai Charan</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="coding-standards" class="theory-section">
+            <h2 class="section-title">10. Java Coding Standards</h2>
+            <div class="theory-content">
+                <div class="pdf-page">Page 69</div>
+                <p>Whenever we are writing java code, it is highly recommended to follow coding standards, which improves the readability and understandability of the code.</p>
+                <p>Whenever we are writing any component (i.e., class or method or variable) the name of the component should reflect the purpose or functionality.</p>
+
+                <div class="content-box">
+                    <h4>Example (Bad vs Good):</h4>
+                    <div class="code-block">
+<span class="comment">// Bad Practice:</span><br>
+<span class="keyword">class</span> A {<br>
+&nbsp;&nbsp;<span class="keyword">public int</span> methodOne(<span class="keyword">int</span> x, <span class="keyword">int</span> y) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> x + y;<br>
+&nbsp;&nbsp;}<br>
+}<br><br>
+<span class="comment">// Good Practice:</span><br>
+<span class="keyword">package</span> com.durgasoft.scjpdemo;<br>
+<span class="keyword">class</span> Calc {<br>
+&nbsp;&nbsp;<span class="keyword">public static int</span> add(<span class="keyword">int</span> number1, <span class="keyword">int</span> number2) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> number1 + number2;<br>
+&nbsp;&nbsp;}<br>
+}
+                    </div>
+                </div>
+
+                <h3>Coding Standards for Classes:</h3>
+                <ul>
+                    <li>Usually class names are nouns</li>
+                    <li>Should starts with uppercase letter and if it contains multiple words every inner word should starts with upper case letter (PascalCase)</li>
+                </ul>
+                <p><strong>Example:</strong> String, Customer, Object, Student, StringBuffer</p>
+
+                <div class="pdf-page">Page 70</div>
+                <h3>Coding Standards for Interfaces:</h3>
+                <ul>
+                    <li>Usually interface names are adjectives</li>
+                    <li>Should starts with upper case letter and if it contains multiple words every inner word should starts with upper case letter (PascalCase)</li>
+                </ul>
+                <p><strong>Example:</strong> Serializable, Runnable, Cloneable (these are adjectives)</p>
+
+                <h3>Coding Standards for Methods:</h3>
+                <ul>
+                    <li>Usually method names are either verbs or verb-noun combination</li>
+                    <li>Should starts with lowercase character and if it contains multiple words every inner word should starts with upper case letter (camelCase convention)</li>
+                </ul>
+                <p><strong>Example:</strong> print(), toString(), getStudentName(), calculateSalary()</p>
+
+                <h3>Coding Standards for Variables:</h3>
+                <ul>
+                    <li>Usually variable names are nouns</li>
+                    <li>Should starts with lowercase alphabet symbol and if it contains multiple words every inner word should starts with upper case character (camelCase convention)</li>
+                </ul>
+                <p><strong>Example:</strong> length, name, salary, age, mobileNumber</p>
+
+                <div class="pdf-page">Page 71</div>
+                <h3>Coding Standards for Constants:</h3>
+                <ul>
+                    <li>Usually constants are nouns</li>
+                    <li>Should contain only uppercase characters and if it contains multiple words then these words are separated with underscore symbol (SNAKE_CASE)</li>
+                    <li>Usually we can declare constants by using public static final modifiers</li>
+                </ul>
+                <p><strong>Example:</strong> MAX_VALUE, MIN_VALUE, NORM_PRIORITY</p>
+
+                <h3>Java Bean Coding Standards:</h3>
+                <p>A java bean is a simple java class with private properties and public getter and setter methods.</p>
+
+                <div class="pdf-page">Page 72</div>
+                <div class="content-box">
+                    <h4>Syntax for Setter Method:</h4>
+                    <ol>
+                        <li>Method name should be prefixed with "set"</li>
+                        <li>It should be public</li>
+                        <li>Return type should be void</li>
+                        <li>Compulsory it should take some argument</li>
+                    </ol>
+                    
+                    <h4>Syntax for Getter Method:</h4>
+                    <ol>
+                        <li>The method name should be prefixed with "get"</li>
+                        <li>It should be public</li>
+                        <li>Return type should not be void</li>
+                        <li>It is always no argument method</li>
+                    </ol>
+                </div>
+
+                <div class="pdf-page">Page 73</div>
+                <div class="content-box">
+                    <h4>Special Case for Boolean Properties:</h4>
+                    <p>For the boolean properties the getter method can be prefixed with either "get" or "is". But recommended to use "is".</p>
+                    <div class="code-block">
+<span class="keyword">private boolean</span> empty;<br><br>
+<span class="comment">// Option 1:</span><br>
+<span class="keyword">public boolean</span> getEmpty() {<br>
+&nbsp;&nbsp;<span class="keyword">return</span> empty;<br>
+} <span class="comment">// valid</span><br><br>
+<span class="comment">// Option 2 (Recommended):</span><br>
+<span class="keyword">public boolean</span> isEmpty() {<br>
+&nbsp;&nbsp;<span class="keyword">return</span> empty;<br>
+} <span class="comment">// valid</span>
+                    </div>
+                </div>
+
+                <h3>Coding Standards for Listeners:</h3>
+                
+                <div class="content-box">
+                    <h4>To Register a Listener:</h4>
+                    <p>Method name should be prefixed with "add".</p>
+                    <ol>
+                        <li>public void addMyActionListener(MyActionListener l) (valid)</li>
+                        <li>public void registerMyActionListener(MyActionListener l) (invalid)</li>
+                        <li>public void addMyActionListener(ActionListener l) (invalid - wrong parameter type)</li>
+                    </ol>
+                </div>
+
+                <div class="pdf-page">Page 74</div>
+                <div class="content-box">
+                    <h4>To Unregister a Listener:</h4>
+                    <p>The method name should be prefixed with "remove".</p>
+                    <ol>
+                        <li>public void removeMyActionListener(MyActionListener l) (valid)</li>
+                        <li>public void unregisterMyActionListener(MyActionListener l) (invalid)</li>
+                        <li>public void removeMyActionListener(ActionListener l) (invalid - wrong parameter type)</li>
+                        <li>public void deleteMyActionListener(MyActionListener l) (invalid)</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <section id="memory-areas" class="theory-section">
+            <h2 class="section-title">11. Various Memory Areas Present Inside JVM</h2>
+            <div class="theory-content">
+                <div class="pdf-page">Page 74</div>
+                <p>The JVM (Java Virtual Machine) contains several memory areas to manage program execution and data storage efficiently.</p>
+                
+                <div class="content-box">
+                    <h4>Memory Areas in JVM:</h4>
+                    <ol>
+                        <li><strong>Method Area:</strong> Class level binary data including static variables will be stored in method area.</li>
+                        <li><strong>Heap Area:</strong> Objects and corresponding instance variables will be stored in Heap area.</li>
+                        <li><strong>Stack Area:</strong> For every method the JVM will create a Runtime stack. All method calls performed by that Thread and corresponding local variables will be stored in that stack. Every entry in stack is called Stack Frame or Action Record.</li>
+                        <li><strong>PC Registers:</strong> The instruction which has to execute next will be stored in the corresponding PC Registers.</li>
+                    </ol>
+                </div>
+
+                <div class="pdf-page">Page 76</div>
+                <div class="content-box">
+                    <h4>Additional Memory Area:</h4>
+                    <p><strong>Native Method Stacks:</strong> Native method invocations will be stored in native method stacks.</p>
+                </div>
+
+                <div class="content-box">
+                    <h4>Summary of Memory Areas:</h4>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Memory Area</th>
+                                <th>Stores</th>
+                                <th>Thread Sharing</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Method Area</td>
+                                <td>Class data, static variables, constants</td>
+                                <td>Shared by all threads</td>
+                            </tr>
+                            <tr>
+                                <td>Heap Area</td>
+                                <td>Objects, instance variables</td>
+                                <td>Shared by all threads</td>
+                            </tr>
+                            <tr>
+                                <td>Stack Area</td>
+                                <td>Method calls, local variables</td>
+                                <td>One per thread</td>
+                            </tr>
+                            <tr>
+                                <td>PC Registers</td>
+                                <td>Next instruction to execute</td>
+                                <td>One per thread</td>
+                            </tr>
+                            <tr>
+                                <td>Native Method Stacks</td>
+                                <td>Native method calls</td>
+                                <td>One per thread</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <img src="assets/logo.svg" alt="NamastAI.shiksha Logo" width="40" height="40">
+                        </div>
+                        <span class="logo-text">
+                            <span class="text-brand-blue">Namast</span>
+                            <span class="text-brand-orange">Ai</span>
+                            <span class="accent">.shiksha</span>
+                        </span>
+                    </div>
+                    <p class="footer-tagline">Empowering the next generation of software developers with industry-ready skills.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <a href="/" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; display: block; margin-top: 0.5rem;">Home</a>
+                    <a href="/curriculum.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; display: block; margin-top: 0.5rem;">Curriculum</a>
+                    <a href="/enroll.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; display: block; margin-top: 0.5rem;">Enroll Now</a>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <p style="color: rgba(255, 255, 255, 0.7); margin-top: 0.5rem;">📧 info@namastai.shiksha</p>
+                    <p style="color: rgba(255, 255, 255, 0.7); margin-top: 0.5rem;">📞 +91 9246212143, 8096969696</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 NamastAI.shiksha. All rights reserved.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.875rem;">Study Material Source: DURGASOFT CORE JAVA With SCJP/OCJP</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for TOC links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Highlight current section in TOC
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.theory-section');
+            const navLinks = document.querySelectorAll('.toc-item');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('selected');
+                if (link.getAttribute('href') === '#' + currentSection) {
+                    link.classList.add('selected');
+                    link.style.background = 'white';
+                    link.style.borderColor = 'var(--color-primary-light)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
