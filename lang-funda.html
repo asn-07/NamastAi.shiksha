@@ -1,0 +1,2212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Language Fundamentals - NamastAI.shiksha</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #0056D2;
+            --color-primary-dark: #003c94;
+            --color-primary-light: #3d7ce5;
+            --color-accent: #10b981;
+            --color-accent-light: #6ee7b7;
+            --color-success: #059669;
+            --color-error: #dc2626;
+            --color-warning: #d97706;
+            --color-certificate: #fef3c7;
+            --color-bg: #ffffff;
+            --color-bg-secondary: #f9fafb;
+            --color-bg-tertiary: #f3f4f6;
+            --color-text: #111827;
+            --color-text-secondary: #6b7280;
+            --color-text-muted: #9ca3af;
+            --color-border: #e5e7eb;
+            --gradient-primary: linear-gradient(135deg, #0056D2 0%, #7c3aed 100%);
+            --gradient-accent: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--color-bg-secondary);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header & Navigation */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--color-text);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .text-brand-blue { color: #0056D2; }
+        .text-brand-orange { color: #FF8C00; }
+        .accent {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Student Registration */
+        .registration-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 3rem;
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--color-border);
+            animation: slideInUp 0.6s ease;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .registration-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+
+        .registration-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--color-border);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition-base);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Table of Contents */
+        .toc-container {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--color-border);
+        }
+
+        .toc-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--color-primary);
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .toc-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: var(--color-bg-secondary);
+            border-radius: 0.5rem;
+            text-decoration: none;
+            color: var(--color-text);
+            transition: var(--transition-base);
+            border: 1px solid transparent;
+        }
+
+        .toc-item:hover {
+            background: white;
+            border-color: var(--color-primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .toc-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        /* Theory Sections */
+        .theory-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--color-border);
+            animation: slideInUp 0.6s ease backwards;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--color-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .content-box {
+            background: var(--color-bg-secondary);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--color-primary);
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.95rem;
+        }
+
+        .keyword { color: #569cd6; }
+        .string { color: #ce9178; }
+        .number { color: #b5cea8; }
+        .comment { color: #6a9955; }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .data-table th {
+            background: var(--color-primary);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .data-table td {
+            padding: 0.875rem 1rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .data-table tr:hover {
+            background: var(--color-bg-tertiary);
+        }
+
+        .note-box {
+            background: #dbeafe;
+            border-left: 4px solid var(--color-primary);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .warning-box {
+            background: #fef3c7;
+            border-left: 4px solid var(--color-warning);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--color-border);
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .quiz-subtitle {
+            color: var(--color-text-secondary);
+            font-size: 1.125rem;
+        }
+
+        .student-info {
+            background: var(--color-bg-secondary);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .student-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+
+        .quiz-progress {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: var(--color-bg-secondary);
+            border-radius: 0.75rem;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 8px;
+            background: var(--color-border);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-accent);
+            width: 0%;
+            transition: width 0.6s ease;
+        }
+
+        .question-card {
+            background: var(--color-bg-secondary);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--color-border);
+            animation: scaleIn 0.4s ease;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .question-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: var(--color-primary);
+            color: white;
+            border-radius: 50%;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .question-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+
+        @media (min-width: 768px) {
+            .options-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            background: white;
+            border: 2px solid var(--color-border);
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition-base);
+        }
+
+        .option-label:hover {
+            border-color: var(--color-primary-light);
+            background: var(--color-bg-tertiary);
+        }
+
+        .option-label.selected {
+            border-color: var(--color-primary);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .option-label.correct {
+            border-color: var(--color-success);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .option-label.incorrect {
+            border-color: var(--color-error);
+            background: rgba(220, 38, 38, 0.1);
+        }
+
+        .option-input {
+            display: none;
+        }
+
+        .option-text {
+            font-size: 1rem;
+            color: var(--color-text);
+        }
+
+        .quiz-controls {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 0.625rem;
+            transition: var(--transition-base);
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--color-bg-secondary);
+            color: var(--color-text);
+            border: 1px solid var(--color-border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-bg-tertiary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-accent {
+            background: var(--gradient-accent);
+            color: white;
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* Result Animation */
+        .result-container {
+            display: none;
+            text-align: center;
+            padding: 3rem;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .result-icon {
+            font-size: 6rem;
+            margin-bottom: 1.5rem;
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .result-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .result-pass {
+            color: var(--color-success);
+        }
+
+        .result-fail {
+            color: var(--color-error);
+        }
+
+        .result-score {
+            font-size: 4rem;
+            font-weight: 900;
+            margin: 1rem 0;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .result-message {
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Certificate Styles */
+        .certificate-container {
+            display: none;
+            background: var(--color-certificate);
+            border: 20px solid #d4af37;
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem auto;
+            max-width: 800px;
+            position: relative;
+            box-shadow: var(--shadow-xl);
+            animation: certificateAppear 1s ease;
+        }
+
+        @keyframes certificateAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.8) rotate(-5deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0);
+            }
+        }
+
+        .certificate-border {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px solid #d4af37;
+            border-radius: 10px;
+            pointer-events: none;
+        }
+
+        .certificate-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .certificate-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .certificate-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #d4af37;
+            margin-bottom: 0.5rem;
+        }
+
+        .certificate-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .certificate-body {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .certificate-text {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: var(--color-text);
+        }
+
+        .student-name {
+            font-size: 3rem;
+            font-family: 'Dancing Script', cursive;
+            color: var(--color-primary);
+            margin: 1.5rem 0;
+            padding: 1rem;
+            border-bottom: 2px solid #d4af37;
+            border-top: 2px solid #d4af37;
+        }
+
+        .certificate-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .certificate-date, .certificate-score {
+            text-align: center;
+        }
+
+        .certificate-date h4, .certificate-score h4 {
+            margin-bottom: 0.5rem;
+            color: var(--color-text-secondary);
+        }
+
+        .certificate-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            background: var(--gradient-primary);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--color-text);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-brand .logo {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-tagline {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .theory-section,
+            .quiz-section {
+                padding: 1.5rem;
+            }
+            
+            .certificate-container {
+                padding: 2rem;
+                margin: 2rem 1rem;
+            }
+            
+            .certificate-title {
+                font-size: 2.5rem;
+            }
+            
+            .student-name {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.75rem;
+            }
+            
+            .quiz-title {
+                font-size: 1.75rem;
+            }
+            
+            .result-title {
+                font-size: 2rem;
+            }
+            
+            .quiz-controls {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .certificate-details {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .certificate-title {
+                font-size: 2rem;
+            }
+            
+            .student-name {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .toc-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .registration-section {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-content">
+                <a href="/" class="logo">
+                    <div class="logo-icon">🤖</div>
+                    <span class="logo-text">
+                        <span class="text-brand-blue">Namast</span>
+                        <span class="text-brand-orange">Ai</span>
+                        <span class="accent">.shiksha</span>
+                    </span>
+                </a>
+                <div class="nav-actions">
+                    <a href="/" class="btn btn-secondary">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Student Registration -->
+    <div class="container">
+        <div id="registration-section" class="registration-section">
+            <h2 class="registration-title">🎯 Java Fundamentals Quiz</h2>
+            <p class="section-subtitle">Enter your details to begin the quiz and earn your certificate!</p>
+            
+            <div class="registration-form">
+                <div class="form-group">
+                    <label for="student-name">Full Name</label>
+                    <input type="text" id="student-name" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="student-email">Email Address</label>
+                    <input type="email" id="student-email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="student-id">Student ID (Optional)</label>
+                    <input type="text" id="student-id" placeholder="Enter student ID if any">
+                </div>
+                <button id="start-quiz-btn" class="btn btn-primary" style="width: 100%;">
+                    Start Quiz 🚀
+                </button>
+            </div>
+        </div>
+
+        <!-- Table of Contents -->
+        <div id="toc-section" class="toc-container" style="display: none;">
+            <h2 class="toc-title">📚 Java Language Fundamentals</h2>
+            <div class="toc-grid">
+                <a href="#identifiers" class="toc-item">
+                    <span class="toc-number">1</span>
+                    <span>Identifiers</span>
+                </a>
+                <a href="#reserved-words" class="toc-item">
+                    <span class="toc-number">2</span>
+                    <span>Reserved Words</span>
+                </a>
+                <a href="#data-types" class="toc-item">
+                    <span class="toc-number">3</span>
+                    <span>Data Types</span>
+                </a>
+                <a href="#literals" class="toc-item">
+                    <span class="toc-number">4</span>
+                    <span>Literals</span>
+                </a>
+                <a href="#arrays" class="toc-item">
+                    <span class="toc-number">5</span>
+                    <span>Arrays</span>
+                </a>
+                <a href="#variables" class="toc-item">
+                    <span class="toc-number">6</span>
+                    <span>Variables</span>
+                </a>
+                <a href="#var-arg" class="toc-item">
+                    <span class="toc-number">7</span>
+                    <span>Var-arg Methods</span>
+                </a>
+                <a href="#main-method" class="toc-item">
+                    <span class="toc-number">8</span>
+                    <span>Main Method</span>
+                </a>
+                <a href="#coding-standards" class="toc-item">
+                    <span class="toc-number">9</span>
+                    <span>Coding Standards</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Theory Sections -->
+        <section id="identifiers" class="theory-section" style="display: none;">
+            <h2 class="section-title">1. Identifiers</h2>
+            <p class="section-subtitle">A name in Java program is called identifier. It may be class name, method name, variable name, or label name.</p>
+            
+            <div class="content-box">
+                <h3>Rules for Java Identifiers:</h3>
+                <ol style="padding-left: 1.5rem; margin: 1rem 0;">
+                    <li><strong>Allowed characters:</strong> a-z, A-Z, 0-9, underscore (_), dollar ($)</li>
+                    <li><strong>Cannot start with digit:</strong> ABC123 (valid) but 123ABC (invalid)</li>
+                    <li><strong>Case sensitive:</strong> number, Number, and NUMBER are different identifiers</li>
+                    <li><strong>No length limit:</strong> But recommended to keep under 15 characters</li>
+                    <li><strong>Cannot use reserved words:</strong> int if = 10; (invalid)</li>
+                    <li><strong>Can use predefined class names:</strong> int String = 10; (valid but not recommended)</li>
+                </ol>
+            </div>
+
+            <div class="code-block">
+                <span class="keyword">public class</span> <span style="color: #4ec9b0;">Test</span> {<br>
+                &nbsp;&nbsp;<span class="keyword">public static void</span> <span style="color: #dcdcaa;">main</span>(String[] args) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span> <span style="color: #9cdcfe;">total_number</span> = <span class="number">100</span>; <span class="comment">// valid</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span> <span style="color: #9cdcfe;">Total#</span> = <span class="number">50</span>; <span class="comment">// invalid - contains #</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span> <span style="color: #9cdcfe;">123abc</span> = <span class="number">25</span>; <span class="comment">// invalid - starts with digit</span><br>
+                &nbsp;&nbsp;}<br>
+                }
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz" class="quiz-section" style="display: none;">
+            <div class="quiz-header">
+                <h2 class="quiz-title">🧠 Java Fundamentals Quiz</h2>
+                <p class="quiz-subtitle">Test your knowledge with this comprehensive quiz. Get 50% or more to earn your certificate!</p>
+            </div>
+
+            <div id="student-info" class="student-info" style="display: none;">
+                <div class="student-avatar" id="student-avatar">JS</div>
+                <div>
+                    <h4 id="display-student-name">John Smith</h4>
+                    <p id="display-student-email" style="color: var(--color-text-secondary); font-size: 0.875rem;">john@example.com</p>
+                </div>
+            </div>
+
+            <div class="quiz-progress">
+                <span id="current-question">Question 1</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <span id="score">Score: 0/0</span>
+            </div>
+
+            <div id="question-container">
+                <!-- Questions will be loaded here dynamically -->
+            </div>
+
+            <div class="quiz-controls">
+                <button id="prev-btn" class="btn btn-secondary" disabled>
+                    ← Previous
+                </button>
+                <button id="next-btn" class="btn btn-primary">
+                    Next Question →
+                </button>
+                <button id="submit-btn" class="btn btn-accent" style="display: none;">
+                    Submit Quiz 🚀
+                </button>
+            </div>
+
+            <div id="result-container" class="result-container">
+                <!-- Result will be shown here -->
+            </div>
+
+            <div id="certificate-container" class="certificate-container">
+                <!-- Certificate will be shown here -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="logo-icon">🤖</div>
+                        <span class="logo-text">
+                            <span class="text-brand-blue">Namast</span>
+                            <span class="text-brand-orange">Ai</span>
+                            <span class="accent">.shiksha</span>
+                        </span>
+                    </div>
+                    <p class="footer-tagline">Empowering the next generation of software developers with industry-ready skills.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <a href="/" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; display: block; margin-top: 0.5rem;">Home</a>
+                    <a href="/curriculum.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; display: block; margin-top: 0.5rem;">Curriculum</a>
+                    <a href="/enroll.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; display: block; margin-top: 0.5rem;">Enroll Now</a>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <p style="color: rgba(255, 255, 255, 0.7); margin-top: 0.5rem;">📧 info@namastai.shiksha</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 NamastAI.shiksha. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Extract ALL questions from the PDF content
+        const quizQuestions = [
+            // Identifiers Questions
+            {
+                category: "Identifiers",
+                question: "Which of the following is a valid Java identifier?",
+                options: [
+                    "total_number",
+                    "123abc",
+                    "total#",
+                    "int",
+                    "_class"
+                ],
+                correct: 0, // total_number
+                explanation: "Valid identifiers: start with letter/underscore/$, contain only letters/digits/_/$, not reserved words. '123abc' starts with digit, 'total#' contains #, 'int' is reserved word."
+            },
+            {
+                category: "Identifiers",
+                question: "Which of the following are invalid Java identifiers?",
+                options: [
+                    "Ca$h",
+                    "Java2share",
+                    "all@hands",
+                    "123abc",
+                    "Total#"
+                ],
+                correct: 2, // all@hands
+                explanation: "'all@hands' contains @ which is not allowed. '@' is not a valid character in Java identifiers."
+            },
+            {
+                category: "Identifiers",
+                question: "Can we use 'String' as an identifier in Java?",
+                options: [
+                    "No, it's a reserved word",
+                    "No, it's a class name",
+                    "Yes, it's valid but not recommended",
+                    "Yes, but only in lowercase",
+                    "No, it contains uppercase letters"
+                ],
+                correct: 2, // Yes, it's valid but not recommended
+                explanation: "Predefined class names can be used as identifiers but it's not good programming practice as it reduces code readability."
+            },
+            {
+                category: "Identifiers",
+                question: "Which rule about Java identifiers is CORRECT?",
+                options: [
+                    "Identifiers can start with underscore only",
+                    "There is a maximum length of 255 characters",
+                    "Identifiers are case-insensitive",
+                    "We can use reserved words as identifiers",
+                    "Dollar sign ($) is allowed in identifiers"
+                ],
+                correct: 4, // Dollar sign ($) is allowed in identifiers
+                explanation: "$ is allowed in Java identifiers. Other statements are false: identifiers can start with letter/_/$, no max length, case-sensitive, can't use reserved words."
+            },
+            {
+                category: "Identifiers",
+                question: "What is the output of: int String = 10; System.out.println(String);",
+                options: [
+                    "Compile error",
+                    "Runtime error",
+                    "10",
+                    "null",
+                    "String"
+                ],
+                correct: 2, // 10
+                explanation: "Using 'String' as variable name is allowed. The code compiles and prints 10, though it's not recommended."
+            },
+
+            // Reserved Words Questions
+            {
+                category: "Reserved Words",
+                question: "Which keyword is introduced in Java 1.5 version?",
+                options: [
+                    "strictfp",
+                    "assert",
+                    "enum",
+                    "transient",
+                    "volatile"
+                ],
+                correct: 2, // enum
+                explanation: "enum keyword was introduced in Java 1.5 to define a group of named constants. strictfp (1.2), assert (1.4)."
+            },
+            {
+                category: "Reserved Words",
+                question: "Which list contains only Java reserved words?",
+                options: [
+                    "final, finally, finalize",
+                    "throw, throws, thrown",
+                    "break, continue, return, exit",
+                    "goto, constant",
+                    "None of the above"
+                ],
+                correct: 4, // None of the above
+                explanation: "finalize is method, thrown not in Java, exit not reserved, constant not reserved."
+            },
+            {
+                category: "Reserved Words",
+                question: "Which is NOT a Java reserved word?",
+                options: [
+                    "sizeof",
+                    "goto",
+                    "const",
+                    "strictfp",
+                    "assert"
+                ],
+                correct: 0, // sizeof
+                explanation: "sizeof is from C/C++, not Java. goto and const are reserved but unused. strictfp and assert are valid Java keywords."
+            },
+            {
+                category: "Reserved Words",
+                question: "What are the reserved literals in Java?",
+                options: [
+                    "true, false, null",
+                    "TRUE, FALSE, NULL",
+                    "0, 1, -1",
+                    "yes, no, maybe",
+                    "void, null, this"
+                ],
+                correct: 0, // true, false, null
+                explanation: "true, false, and null are reserved literals in Java. They must be in lowercase."
+            },
+            {
+                category: "Reserved Words",
+                question: "Which keyword is used for method that doesn't return anything?",
+                options: [
+                    "null",
+                    "void",
+                    "empty",
+                    "none",
+                    "returnless"
+                ],
+                correct: 1, // void
+                explanation: "void keyword indicates a method returns nothing. It's mandatory in Java but optional in C++."
+            },
+
+            // Data Types Questions
+            {
+                category: "Data Types",
+                question: "What is the size of 'byte' data type in Java?",
+                options: [
+                    "1 byte",
+                    "2 bytes",
+                    "4 bytes",
+                    "8 bytes",
+                    "Depends on JVM"
+                ],
+                correct: 0, // 1 byte
+                explanation: "byte uses 1 byte (8 bits) with range -128 to 127. It's fixed in Java specification."
+            },
+            {
+                category: "Data Types",
+                question: "What is the range of 'char' data type?",
+                options: [
+                    "0 to 255",
+                    "-128 to 127",
+                    "0 to 65535",
+                    "-32768 to 32767",
+                    "0 to 2147483647"
+                ],
+                correct: 2, // 0 to 65535
+                explanation: "char uses 2 bytes (16 bits) representing Unicode characters, range 0 to 65535."
+            },
+            {
+                category: "Data Types",
+                question: "Which data type would you use for a true/false value?",
+                options: [
+                    "int",
+                    "boolean",
+                    "char",
+                    "byte",
+                    "short"
+                ],
+                correct: 1, // boolean
+                explanation: "boolean stores true/false values. Other types would require explicit conversion."
+            },
+            {
+                category: "Data Types",
+                question: "What is the default value of 'double'?",
+                options: [
+                    "0",
+                    "0.0",
+                    "0.0d",
+                    "0.0f",
+                    "null"
+                ],
+                correct: 2, // 0.0d
+                explanation: "double default is 0.0d. float is 0.0f, int is 0, boolean is false, references are null."
+            },
+            {
+                category: "Data Types",
+                question: "Which is NOT a primitive data type?",
+                options: [
+                    "String",
+                    "int",
+                    "float",
+                    "boolean",
+                    "char"
+                ],
+                correct: 0, // String
+                explanation: "String is a class in Java, not a primitive type. The 8 primitives are: byte, short, int, long, float, double, char, boolean."
+            },
+            {
+                category: "Data Types",
+                question: "What happens: byte b = 130;",
+                options: [
+                    "Compiles fine",
+                    "Compile error: possible loss of precision",
+                    "Runtime error",
+                    "b becomes -126",
+                    "b becomes 130"
+                ],
+                correct: 1, // Compile error: possible loss of precision
+                explanation: "130 is outside byte range (-128 to 127). Compiler detects this and gives compile-time error."
+            },
+            {
+                category: "Data Types",
+                question: "Why is Java not considered pure OOP?",
+                options: [
+                    "No multiple inheritance",
+                    "No operator overloading",
+                    "Has primitive data types",
+                    "All of the above",
+                    "None of the above"
+                ],
+                correct: 3, // All of the above
+                explanation: "Java has primitives (non-objects), lacks some OOP features like multiple inheritance and operator overloading."
+            },
+
+            // Literals Questions
+            {
+                category: "Literals",
+                question: "Which literal represents octal number 10?",
+                options: [
+                    "10",
+                    "010",
+                    "0x10",
+                    "0b10",
+                    "10o"
+                ],
+                correct: 1, // 010
+                explanation: "Octal literals start with 0. Decimal: 10, Hex: 0x10, Binary: 0b10 (Java 1.7+)."
+            },
+            {
+                category: "Literals",
+                question: "What is: float f = 123.456;",
+                options: [
+                    "Valid declaration",
+                    "Compile error: possible loss of precision",
+                    "Runtime error",
+                    "Needs 'f' suffix",
+                    "Needs 'd' suffix"
+                ],
+                correct: 3, // Needs 'f' suffix
+                explanation: "Floating literals are double by default. Need 'f' suffix: float f = 123.456f;"
+            },
+            {
+                category: "Literals",
+                question: "Which char literal is valid?",
+                options: [
+                    "'ab'",
+                    "'\\n'",
+                    "a",
+                    "\"a\"",
+                    "65536"
+                ],
+                correct: 1, // '\n'
+                explanation: "Single character in single quotes, escape sequences allowed. 'ab' has 2 chars, a no quotes, \"a\" is string, 65536 out of range."
+            },
+            {
+                category: "Literals",
+                question: "What does '0xFace' represent?",
+                options: [
+                    "Decimal 64206",
+                    "Octal number",
+                    "Binary number",
+                    "Invalid literal",
+                    "Floating point"
+                ],
+                correct: 0, // Decimal 64206
+                explanation: "0x indicates hexadecimal. 0xFace = 15*16³ + 10*16² + 12*16 + 14 = 64206"
+            },
+            {
+                category: "Literals",
+                question: "Which is valid with Java 1.7 binary literals?",
+                options: [
+                    "0b111",
+                    "b111",
+                    "111b",
+                    "&111",
+                    "#111"
+                ],
+                correct: 0, // 0b111
+                explanation: "Java 1.7 introduced binary literals prefixed with 0b or 0B. 0b111 = decimal 7."
+            },
+
+            // Arrays Questions
+            {
+                category: "Arrays",
+                question: "How to declare a single dimensional array?",
+                options: [
+                    "int[] a;",
+                    "int a[];",
+                    "int[5] a;",
+                    "Both A and B",
+                    "All of the above"
+                ],
+                correct: 3, // Both A and B
+                explanation: "int[] a; and int a[]; are both valid. int[5] a; is invalid - can't specify size at declaration."
+            },
+            {
+                category: "Arrays",
+                question: "What is the output: int[] a = new int[0]; System.out.println(a.length);",
+                options: [
+                    "0",
+                    "1",
+                    "Compile error",
+                    "Runtime error",
+                    "null"
+                ],
+                correct: 0, // 0
+                explanation: "Arrays with size 0 are legal in Java. Useful for returning empty arrays from methods."
+            },
+            {
+                category: "Arrays",
+                question: "What happens: int[] a = new int[-3];",
+                options: [
+                    "Creates array of size 0",
+                    "Compile error",
+                    "Runtime: NegativeArraySizeException",
+                    "Creates array of size 3",
+                    "Array with negative indices"
+                ],
+                correct: 2, // Runtime: NegativeArraySizeException
+                explanation: "Negative array size causes NegativeArraySizeException at runtime, not compile time."
+            },
+            {
+                category: "Arrays",
+                question: "What does 'length' represent in arrays?",
+                options: [
+                    "Method to get size",
+                    "Variable representing size",
+                    "Total memory allocated",
+                    "Number of dimensions",
+                    "Maximum possible size"
+                ],
+                correct: 1, // Variable representing size
+                explanation: "Arrays have 'length' variable (not method). String has length() method."
+            },
+            {
+                category: "Arrays",
+                question: "What is anonymous array?",
+                options: [
+                    "Array without reference",
+                    "Array without name",
+                    "Array created with new operator",
+                    "Array with unknown size",
+                    "Multi-dimensional array"
+                ],
+                correct: 1, // Array without name
+                explanation: "new int[]{10,20,30} creates anonymous array for instant use without variable name."
+            },
+
+            // Variables Questions
+            {
+                category: "Variables",
+                question: "Where are instance variables stored?",
+                options: [
+                    "Stack",
+                    "Heap",
+                    "Method area",
+                    "PC Register",
+                    "Native stack"
+                ],
+                correct: 1, // Heap
+                explanation: "Instance variables stored in heap as part of object. Local variables in stack, static in method area."
+            },
+            {
+                category: "Variables",
+                question: "What is default value of local variable?",
+                options: [
+                    "0",
+                    "null",
+                    "No default, must initialize",
+                    "Depends on type",
+                    "false"
+                ],
+                correct: 2, // No default, must initialize
+                explanation: "Local variables have no default values. Must be initialized before use, unlike instance/static variables."
+            },
+            {
+                category: "Variables",
+                question: "Which modifier can be used for local variables?",
+                options: [
+                    "public",
+                    "private",
+                    "static",
+                    "final",
+                    "protected"
+                ],
+                correct: 3, // final
+                explanation: "Only 'final' modifier can be used with local variables. Others cause compile errors."
+            },
+            {
+                category: "Variables",
+                question: "What are Thread safe variables?",
+                options: [
+                    "Instance variables",
+                    "Static variables",
+                    "Local variables",
+                    "All variables",
+                    "No variables in Java"
+                ],
+                correct: 2, // Local variables
+                explanation: "Local variables are Thread safe as each Thread gets its own copy. Instance/static shared across Threads."
+            },
+            {
+                category: "Variables",
+                question: "When are static variables destroyed?",
+                options: [
+                    "Object destruction",
+                    "End of method",
+                    "Class unloading",
+                    "Program termination",
+                    "Garbage collection"
+                ],
+                correct: 2, // Class unloading
+                explanation: "Static variables created at class loading, destroyed at class unloading. Instance at object creation/destruction."
+            },
+
+            // Var-arg Methods Questions
+            {
+                category: "Var-arg Methods",
+                question: "Correct syntax for var-arg method?",
+                options: [
+                    "method(int... x)",
+                    "method(int ...x)",
+                    "method(int...x)",
+                    "method(int x...)",
+                    "Both A, B, and C"
+                ],
+                correct: 4, // Both A, B, and C
+                explanation: "int... x, int ...x, int...x are all valid. int x... is invalid."
+            },
+            {
+                category: "Var-arg Methods",
+                question: "Where should var-arg parameter be placed?",
+                options: [
+                    "First parameter",
+                    "Last parameter",
+                    "Anywhere",
+                    "Middle",
+                    "Cannot mix with other parameters"
+                ],
+                correct: 1, // Last parameter
+                explanation: "Var-arg must be last parameter: method(int a, int... b) valid, method(int... a, int b) invalid."
+            },
+            {
+                category: "Var-arg Methods",
+                question: "How many var-arg parameters allowed?",
+                options: [
+                    "Only one",
+                    "Maximum two",
+                    "Maximum three",
+                    "Any number",
+                    "Depends on method"
+                ],
+                correct: 0, // Only one
+                explanation: "Only one var-arg parameter per method: method(int... a, String... b) causes compile error."
+            },
+            {
+                category: "Var-arg Methods",
+                question: "What is internally used for var-args?",
+                options: [
+                    "ArrayList",
+                    "LinkedList",
+                    "Single dimensional array",
+                    "Multi-dimensional array",
+                    "Vector"
+                ],
+                correct: 2, // Single dimensional array
+                explanation: "Var-args implemented using single dimensional array internally."
+            },
+            {
+                category: "Var-arg Methods",
+                question: "Can we overload var-arg method with array method?",
+                options: [
+                    "Yes, always",
+                    "No, never",
+                    "Sometimes",
+                    "Only in same class",
+                    "Only with different names"
+                ],
+                correct: 1, // No, never
+                explanation: "method(int... i) and method(int[] i) cause compile error as they are essentially same."
+            },
+
+            // Main Method Questions
+            {
+                category: "Main Method",
+                question: "Valid main method signature?",
+                options: [
+                    "public static void main()",
+                    "static public void main(String[] args)",
+                    "public void main(String[] args)",
+                    "public static int main(String[] args)",
+                    "private static void main(String[] args)"
+                ],
+                correct: 1, // static public void main(String[] args)
+                explanation: "Order of modifiers doesn't matter. Must be public static void with String[] or String... parameter."
+            },
+            {
+                category: "Main Method",
+                question: "What happens without main method in Java 1.7?",
+                options: [
+                    "Compile error",
+                    "Runtime: NoSuchMethodError",
+                    "Detailed error message",
+                    "Program runs anyway",
+                    "Static block executes"
+                ],
+                correct: 2, // Detailed error message
+                explanation: "Java 1.7+ gives meaningful error: 'Error: main method not found in class...'"
+            },
+            {
+                category: "Main Method",
+                question: "Can main method be overloaded?",
+                options: [
+                    "No, never",
+                    "Yes, but JVM calls only standard one",
+                    "Yes, JVM calls all",
+                    "Only in child classes",
+                    "Only with different parameters"
+                ],
+                correct: 1, // Yes, but JVM calls only standard one
+                explanation: "Overloading allowed, but JVM calls only main(String[] args). Others must be called explicitly."
+            },
+            {
+                category: "Main Method",
+                question: "Can main method be inherited?",
+                options: [
+                    "No",
+                    "Yes, from parent class",
+                    "Only if overridden",
+                    "Only in interfaces",
+                    "Yes, if child doesn't have main"
+                ],
+                correct: 4, // Yes, if child doesn't have main
+                explanation: "If child class has no main(), parent's main() executes due to inheritance of static methods."
+            },
+            {
+                category: "Main Method",
+                question: "What about main() in Java 1.6 vs 1.7?",
+                options: [
+                    "No difference",
+                    "1.7 requires main() for execution",
+                    "1.6 executes static block without main",
+                    "Both B and C",
+                    "Different parameter types"
+                ],
+                correct: 3, // Both B and C
+                explanation: "1.6: static block executes then NoSuchMethodError. 1.7: requires main() to start execution."
+            },
+
+            // Coding Standards Questions
+            {
+                category: "Coding Standards",
+                question: "Naming convention for classes?",
+                options: [
+                    "Start lowercase, camelCase",
+                    "Start uppercase, CamelCase",
+                    "All uppercase",
+                    "Underscore separated",
+                    "Mixed case"
+                ],
+                correct: 1, // Start uppercase, CamelCase
+                explanation: "Classes: nouns, start uppercase, CamelCase. Examples: String, Customer, Object."
+            },
+            {
+                category: "Coding Standards",
+                question: "Naming convention for interfaces?",
+                options: [
+                    "Same as classes",
+                    "Start with I",
+                    "Adjectives, uppercase start",
+                    "All lowercase",
+                    "Verb based"
+                ],
+                correct: 2, // Adjectives, uppercase start
+                explanation: "Interfaces: adjectives, start uppercase. Examples: Serializable, Runnable, Cloneable."
+            },
+            {
+                category: "Coding Standards",
+                question: "JavaBean getter for boolean 'empty'?",
+                options: [
+                    "getEmpty()",
+                    "isEmpty()",
+                    "Both are valid",
+                    "hasEmpty()",
+                    "checkEmpty()"
+                ],
+                correct: 2, // Both are valid
+                explanation: "Boolean getters can be getEmpty() or isEmpty(). Recommended: isEmpty() for readability."
+            },
+            {
+                category: "Coding Standards",
+                question: "Constants naming convention?",
+                options: [
+                    "camelCase",
+                    "UPPER_CASE",
+                    "Start uppercase",
+                    "Start lowercase",
+                    "Mixed case"
+                ],
+                correct: 1, // UPPER_CASE
+                explanation: "Constants: UPPER_CASE with underscores. Example: MAX_VALUE, MIN_PRIORITY."
+            },
+            {
+                category: "Coding Standards",
+                question: "Where are static variables stored in JVM?",
+                options: [
+                    "Heap",
+                    "Stack",
+                    "Method Area",
+                    "PC Register",
+                    "Native Stack"
+                ],
+                correct: 2, // Method Area
+                explanation: "Static variables stored in Method Area along with class binary data."
+            },
+
+            // Additional Questions from PDF
+            {
+                category: "Data Types",
+                question: "Which is most commonly used data type in Java?",
+                options: [
+                    "byte",
+                    "short",
+                    "int",
+                    "long",
+                    "float"
+                ],
+                correct: 2, // int
+                explanation: "int is most commonly used for whole numbers due to its balance of range and memory usage."
+            },
+            {
+                category: "Arrays",
+                question: "Maximum allowed array size in Java?",
+                options: [
+                    "32767",
+                    "65535",
+                    "2147483647",
+                    "Depends on memory",
+                    "No limit"
+                ],
+                correct: 2, // 2147483647
+                explanation: "Maximum array size is Integer.MAX_VALUE = 2147483647 (but may get OutOfMemoryError earlier)."
+            },
+            {
+                category: "Literals",
+                question: "Underscore in numeric literals (Java 1.7)?",
+                options: [
+                    "Compile error",
+                    "Improves readability",
+                    "Changes value",
+                    "Only in binary",
+                    "Not allowed"
+                ],
+                correct: 1, // Improves readability
+                explanation: "Java 1.7 allows _ in numeric literals for readability: 1_000_000. Removed at compile time."
+            },
+            {
+                category: "Variables",
+                question: "When are instance variables created?",
+                options: [
+                    "Class loading",
+                    "Object creation",
+                    "Method invocation",
+                    "Program start",
+                    "Static block execution"
+                ],
+                correct: 1, // Object creation
+                explanation: "Instance variables created when object is created (new), destroyed when object garbage collected."
+            },
+            {
+                category: "Main Method",
+                question: "Can main() be declared final?",
+                options: [
+                    "No",
+                    "Yes",
+                    "Only in abstract class",
+                    "Only with synchronized",
+                    "Only if private"
+                ],
+                correct: 1, // Yes
+                explanation: "main() can be final, synchronized, strictfp along with public static."
+            }
+        ];
+
+        // Quiz State
+        let currentQuestion = 0;
+        let userAnswers = new Array(quizQuestions.length).fill(null);
+        let score = 0;
+        let studentName = "";
+        let studentEmail = "";
+        let studentInitials = "";
+
+        // DOM Elements
+        const registrationSection = document.getElementById('registration-section');
+        const tocSection = document.getElementById('toc-section');
+        const quizSection = document.getElementById('quiz-section');
+        const questionContainer = document.getElementById('question-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const currentQuestionSpan = document.getElementById('current-question');
+        const scoreSpan = document.getElementById('score');
+        const progressFill = document.getElementById('progress-fill');
+        const resultContainer = document.getElementById('result-container');
+        const certificateContainer = document.getElementById('certificate-container');
+        const startQuizBtn = document.getElementById('start-quiz-btn');
+        const studentInfo = document.getElementById('student-info');
+        const studentAvatar = document.getElementById('student-avatar');
+        const displayStudentName = document.getElementById('display-student-name');
+        const displayStudentEmail = document.getElementById('display-student-email');
+
+        // Theory sections
+        const theorySections = document.querySelectorAll('.theory-section');
+
+        // Get initials from name
+        function getInitials(name) {
+            return name.split(' ').map(word => word[0]).join('').toUpperCase();
+        }
+
+        // Start Quiz
+        startQuizBtn.addEventListener('click', () => {
+            const nameInput = document.getElementById('student-name');
+            const emailInput = document.getElementById('student-email');
+            
+            if (!nameInput.value.trim()) {
+                alert('Please enter your name');
+                return;
+            }
+            
+            if (!emailInput.value.trim()) {
+                alert('Please enter your email');
+                return;
+            }
+            
+            studentName = nameInput.value.trim();
+            studentEmail = emailInput.value.trim();
+            studentInitials = getInitials(studentName);
+            
+            // Update student info display
+            studentAvatar.textContent = studentInitials;
+            displayStudentName.textContent = studentName;
+            displayStudentEmail.textContent = studentEmail;
+            
+            // Hide registration, show TOC and quiz
+            registrationSection.style.display = 'none';
+            tocSection.style.display = 'block';
+            studentInfo.style.display = 'flex';
+            
+            // Show all theory sections
+            theorySections.forEach(section => {
+                section.style.display = 'block';
+            });
+            
+            // Start quiz
+            quizSection.style.display = 'block';
+            initializeQuiz();
+            
+            // Scroll to quiz
+            document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Shuffle array function
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Shuffle questions and options
+        let shuffledQuestions = shuffleArray([...quizQuestions]);
+        shuffledQuestions.forEach(q => {
+            q.options = shuffleArray([...q.options]);
+            // Update correct answer index after shuffling
+            const originalQuestion = quizQuestions.find(orig => 
+                orig.question === q.question && orig.category === q.category
+            );
+            if (originalQuestion) {
+                const correctValue = originalQuestion.options[originalQuestion.correct];
+                q.correct = q.options.indexOf(correctValue);
+            }
+        });
+
+        // Initialize Quiz
+        function initializeQuiz() {
+            loadQuestion(0);
+        }
+
+        // Load Question
+        function loadQuestion(index) {
+            const question = shuffledQuestions[index];
+            
+            currentQuestionSpan.textContent = `Question ${index + 1} of ${shuffledQuestions.length}`;
+            progressFill.style.width = `${((index + 1) / shuffledQuestions.length) * 100}%`;
+            
+            let optionsHtml = '';
+            question.options.forEach((option, optIndex) => {
+                let optionClass = 'option-label';
+                if (userAnswers[index] === optIndex) {
+                    optionClass += ' selected';
+                }
+                
+                optionsHtml += `
+                    <label class="${optionClass}" for="option-${optIndex}">
+                        <input type="radio" class="option-input" id="option-${optIndex}" 
+                               name="question-${question.id}" value="${optIndex}"
+                               ${userAnswers[index] === optIndex ? 'checked' : ''}>
+                        <span class="option-text">${option}</span>
+                    </label>
+                `;
+            });
+            
+            questionContainer.innerHTML = `
+                <div class="question-card">
+                    <div class="question-number">${index + 1}</div>
+                    <div style="background: #e0e7ff; color: #3730a3; padding: 0.5rem 1rem; border-radius: 2rem; display: inline-block; margin-bottom: 1rem; font-size: 0.875rem; font-weight: 600;">
+                        ${question.category}
+                    </div>
+                    <h3 class="question-text">${question.question}</h3>
+                    <div class="options-grid">
+                        ${optionsHtml}
+                    </div>
+                </div>
+            `;
+            
+            // Add event listeners to options
+            document.querySelectorAll('.option-input').forEach(input => {
+                input.addEventListener('change', (e) => {
+                    const selectedIndex = parseInt(e.target.value);
+                    userAnswers[currentQuestion] = selectedIndex;
+                    
+                    // Update UI
+                    document.querySelectorAll('.option-label').forEach(label => {
+                        label.classList.remove('selected');
+                    });
+                    e.target.closest('.option-label').classList.add('selected');
+                    
+                    updateButtons();
+                });
+            });
+            
+            updateButtons();
+        }
+
+        // Update Button States
+        function updateButtons() {
+            prevBtn.disabled = currentQuestion === 0;
+            
+            if (currentQuestion === shuffledQuestions.length - 1) {
+                nextBtn.style.display = 'none';
+                submitBtn.style.display = 'inline-flex';
+            } else {
+                nextBtn.style.display = 'inline-flex';
+                submitBtn.style.display = 'none';
+            }
+            
+            // Calculate current score
+            score = 0;
+            userAnswers.forEach((answer, index) => {
+                if (answer !== null && answer === shuffledQuestions[index].correct) {
+                    score++;
+                }
+            });
+            scoreSpan.textContent = `Score: ${score}/${shuffledQuestions.length}`;
+        }
+
+        // Navigation
+        prevBtn.addEventListener('click', () => {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion(currentQuestion);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (userAnswers[currentQuestion] === null) {
+                alert('Please select an answer before proceeding!');
+                return;
+            }
+            
+            if (currentQuestion < shuffledQuestions.length - 1) {
+                currentQuestion++;
+                loadQuestion(currentQuestion);
+            }
+        });
+
+        // Submit Quiz
+        submitBtn.addEventListener('click', () => {
+            if (userAnswers[currentQuestion] === null) {
+                alert('Please select an answer before submitting!');
+                return;
+            }
+            
+            showResults();
+        });
+
+        // Show Results with Animation
+        function showResults() {
+            const percentage = (score / shuffledQuestions.length) * 100;
+            const passed = percentage >= 50;
+            
+            let resultHtml = '';
+            
+            if (passed) {
+                resultHtml = `
+                    <div class="result-icon">🎉</div>
+                    <h2 class="result-title result-pass">Congratulations, ${studentName}!</h2>
+                    <div class="result-score">${percentage.toFixed(1)}%</div>
+                    <p class="result-message">You scored ${score} out of ${shuffledQuestions.length} questions correctly. You've earned a certificate!</p>
+                    <button onclick="showCertificate()" class="btn btn-accent" style="margin: 1rem;">
+                        View Certificate 📜
+                    </button>
+                    <button onclick="restartQuiz()" class="btn btn-primary">
+                        Try Again 🔄
+                    </button>
+                `;
+                createConfetti();
+            } else {
+                resultHtml = `
+                    <div class="result-icon">📚</div>
+                    <h2 class="result-title result-fail">Keep Learning, ${studentName}!</h2>
+                    <div class="result-score">${percentage.toFixed(1)}%</div>
+                    <p class="result-message">You scored ${score} out of ${shuffledQuestions.length}. Review the material and try again!</p>
+                    <div style="margin-top: 2rem;">
+                        <button onclick="restartQuiz()" class="btn btn-primary" style="margin-right: 1rem;">
+                            Try Again 🔄
+                        </button>
+                        <button onclick="scrollToTop()" class="btn btn-secondary">
+                            Review Theory 📖
+                        </button>
+                    </div>
+                `;
+            }
+            
+            // Show detailed answers
+            resultHtml += `
+                <div style="margin-top: 3rem; text-align: left;">
+                    <h3 style="margin-bottom: 1rem;">Review Your Answers:</h3>
+            `;
+            
+            shuffledQuestions.forEach((q, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === q.correct;
+                const correctAnswer = q.options[q.correct];
+                const userSelected = userAnswer !== null ? q.options[userAnswer] : "Not answered";
+                
+                resultHtml += `
+                    <div style="background: ${isCorrect ? '#d1fae5' : '#fee2e2'}; 
+                                padding: 1rem; margin: 0.5rem 0; border-radius: 0.5rem;">
+                        <strong>Q${index + 1} (${q.category}):</strong> ${q.question}<br>
+                        <strong>Your answer:</strong> ${userSelected}<br>
+                        <span style="color: ${isCorrect ? '#059669' : '#dc2626'}; font-weight: 600;">
+                            ${isCorrect ? '✓ Correct' : '✗ Incorrect'}
+                        </span><br>
+                        ${!isCorrect ? `<span><strong>Correct answer:</strong> ${correctAnswer}</span><br>` : ''}
+                        <small style="color: #6b7280;">${q.explanation}</small>
+                    </div>
+                `;
+            });
+            
+            resultHtml += `</div>`;
+            
+            resultContainer.innerHTML = resultHtml;
+            resultContainer.style.display = 'block';
+            questionContainer.style.display = 'none';
+            document.querySelector('.quiz-controls').style.display = 'none';
+            document.querySelector('.quiz-progress').style.display = 'none';
+            
+            // Scroll to results
+            resultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Show Certificate
+        window.showCertificate = function() {
+            const percentage = (score / shuffledQuestions.length) * 100;
+            const today = new Date();
+            const dateStr = today.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
+            certificateContainer.innerHTML = `
+                <div class="certificate-border"></div>
+                <div class="certificate-header">
+                    <div class="certificate-logo">
+                        <!-- Replace with your logo -->
+                        <div style="width: 120px; height: 120px; background: var(--gradient-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem; font-weight: bold;">
+                            NA
+                        </div>
+                    </div>
+                    <h1 class="certificate-title">Certificate of Achievement</h1>
+                    <p class="certificate-subtitle">Java Language Fundamentals</p>
+                </div>
+                
+                <div class="certificate-body">
+                    <p class="certificate-text">
+                        This certifies that
+                    </p>
+                    
+                    <div class="student-name">${studentName}</div>
+                    
+                    <p class="certificate-text">
+                        has successfully completed the Java Language Fundamentals Quiz 
+                        with a score of <strong>${percentage.toFixed(1)}%</strong> 
+                        (${score} out of ${shuffledQuestions.length} questions) 
+                        demonstrating proficiency in Java programming fundamentals.
+                    </p>
+                    
+                    <div class="certificate-details">
+                        <div class="certificate-date">
+                            <h4>Date</h4>
+                            <p>${dateStr}</p>
+                        </div>
+                        <div class="certificate-score">
+                            <h4>Score</h4>
+                            <p>${percentage.toFixed(1)}%</p>
+                        </div>
+                    </div>
+                    
+                    <div class="certificate-actions">
+                        <button onclick="downloadCertificate()" class="btn btn-accent">
+                            Download Certificate 📥
+                        </button>
+                        <button onclick="shareCertificate()" class="btn btn-secondary">
+                            Share 🚀
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            certificateContainer.style.display = 'block';
+            resultContainer.style.display = 'none';
+            
+            // Scroll to certificate
+            certificateContainer.scrollIntoView({ behavior: 'smooth' });
+        };
+
+        // Download Certificate (simplified)
+        window.downloadCertificate = function() {
+            alert('Certificate download feature would be implemented with a backend service or HTML2Canvas library to generate PDF/PNG.');
+        };
+
+        // Share Certificate
+        window.shareCertificate = function() {
+            const percentage = (score / shuffledQuestions.length) * 100;
+            const text = `I scored ${percentage.toFixed(1)}% on Java Language Fundamentals Quiz at NamastAI.shiksha! 🎯`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Java Fundamentals Certificate',
+                    text: text,
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('Certificate link copied to clipboard!');
+                });
+            }
+        };
+
+        // Confetti Animation
+        function createConfetti() {
+            const colors = ['#0056D2', '#7c3aed', '#10b981', '#ec4899', '#f59e0b'];
+            
+            for (let i = 0; i < 200; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-20px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                document.body.appendChild(confetti);
+                
+                const animation = confetti.animate([
+                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(${window.innerHeight}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                ], {
+                    duration: 1000 + Math.random() * 2000,
+                    easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
+                });
+                
+                animation.onfinish = () => confetti.remove();
+            }
+        }
+
+        // Restart Quiz
+        window.restartQuiz = function() {
+            // Reset state
+            currentQuestion = 0;
+            userAnswers = new Array(quizQuestions.length).fill(null);
+            score = 0;
+            
+            // Reshuffle questions
+            shuffledQuestions = shuffleArray([...quizQuestions]);
+            shuffledQuestions.forEach(q => {
+                q.options = shuffleArray([...q.options]);
+                const originalQuestion = quizQuestions.find(orig => 
+                    orig.question === q.question && orig.category === q.category
+                );
+                if (originalQuestion) {
+                    const correctValue = originalQuestion.options[originalQuestion.correct];
+                    q.correct = q.options.indexOf(correctValue);
+                }
+            });
+            
+            // Reset UI
+            resultContainer.style.display = 'none';
+            certificateContainer.style.display = 'none';
+            questionContainer.style.display = 'block';
+            document.querySelector('.quiz-controls').style.display = 'flex';
+            document.querySelector('.quiz-progress').style.display = 'flex';
+            
+            loadQuestion(0);
+            
+            // Scroll to quiz
+            document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+        };
+
+        // Scroll to top
+        window.scrollToTop = function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        // Smooth scroll for table of contents links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
