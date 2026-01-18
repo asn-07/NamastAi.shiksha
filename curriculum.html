@@ -323,7 +323,11 @@
             </div>
             <div class="header-info">
                 Software Development Bootcamp<br>
-                Industry-Ready Training
+                Industry-Ready Training<br>
+                <button onclick="showLoginModal()"
+                    style="margin-top: 10px; padding: 8px 16px; background: var(--primary); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: 600;">
+                    🚀 Start Learning
+                </button>
             </div>
         </header>
 
@@ -434,6 +438,175 @@
             </p>
         </footer>
     </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
+        <div
+            style="background: white; padding: 2.5rem; border-radius: 12px; max-width: 500px; width: 90%; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);">
+            <h2 style="margin-bottom: 1.5rem; color: var(--primary); font-size: 1.75rem;">🎓 Student Login</h2>
+            <p style="margin-bottom: 1.5rem; color: var(--text-light);">Enter your details to access course materials
+            </p>
+
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Full Name</label>
+                <input type="text" id="studentName" placeholder="Enter your registered name"
+                    style="width: 100%; padding: 0.75rem; border: 2px solid var(--border); border-radius: 8px; font-size: 1rem;">
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Phone Number</label>
+                <input type="tel" id="studentPhone" placeholder="Enter your registered phone"
+                    style="width: 100%; padding: 0.75rem; border: 2px solid var(--border); border-radius: 8px; font-size: 1rem;">
+            </div>
+
+            <div id="loginError"
+                style="display: none; padding: 0.75rem; background: #fee2e2; color: #dc2626; border-radius: 8px; margin-bottom: 1rem; font-size: 0.9rem;">
+            </div>
+            <div id="loginLoading"
+                style="display: none; padding: 0.75rem; background: #dbeafe; color: var(--primary); border-radius: 8px; margin-bottom: 1rem; font-size: 0.9rem;">
+                🔄 Verifying your details...</div>
+
+            <div style="display: flex; gap: 1rem;">
+                <button onclick="verifyStudent()"
+                    style="flex: 1; padding: 0.875rem; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 1rem;">
+                    Verify & Continue
+                </button>
+                <button onclick="closeLoginModal()"
+                    style="flex: 1; padding: 0.875rem; background: var(--border); color: var(--text); border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 1rem;">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Courses Display Modal -->
+    <div id="coursesModal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center; overflow-y: auto; padding: 2rem;">
+        <div
+            style="background: white; padding: 2.5rem; border-radius: 12px; max-width: 900px; width: 90%; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); margin: auto;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <h2 style="color: var(--primary); font-size: 2rem; margin: 0;">📚 Your Courses</h2>
+                <button onclick="closeCoursesModal()"
+                    style="background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--text-light);">&times;</button>
+            </div>
+            <p id="welcomeMessage" style="margin-bottom: 2rem; color: var(--text-light); font-size: 1.1rem;"></p>
+
+            <div id="coursesList"></div>
+        </div>
+    </div>
+
+    <script>
+        // Replace with your Google Apps Script Web App URL
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzTIFkOD0wgCGc29Hw8frutPiVu9rhQ81ZaI5b6TbA4Iky4n1I_sJ0uMImZlttIz-O1/exec';
+
+        function showLoginModal() {
+            document.getElementById('loginModal').style.display = 'flex';
+            document.getElementById('studentName').value = '';
+            document.getElementById('studentPhone').value = '';
+            document.getElementById('loginError').style.display = 'none';
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+
+        function closeCoursesModal() {
+            document.getElementById('coursesModal').style.display = 'none';
+        }
+
+        async function verifyStudent() {
+            const name = document.getElementById('studentName').value.trim();
+            const phone = document.getElementById('studentPhone').value.trim();
+            const errorDiv = document.getElementById('loginError');
+            const loadingDiv = document.getElementById('loginLoading');
+
+            // Validation
+            if (!name || !phone) {
+                errorDiv.textContent = '❌ Please enter both name and phone number';
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            // Show loading
+            errorDiv.style.display = 'none';
+            loadingDiv.style.display = 'block';
+
+            try {
+                const url = `${SCRIPT_URL}?action=verifyStudent&name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}`;
+                const response = await fetch(url);
+                const data = await response.json();
+
+                loadingDiv.style.display = 'none';
+
+                if (data.success && data.verified && data.enabled) {
+                    // Student verified and enabled
+                    closeLoginModal();
+                    showCourses(data);
+                } else if (data.success && !data.verified) {
+                    // Student not found - redirect to enrollment
+                    alert('⚠️ ' + data.message + '\n\nRedirecting to enrollment page...');
+                    window.location.href = 'index.html#enroll';
+                } else if (data.success && data.verified && !data.enabled) {
+                    // Student found but not enabled
+                    errorDiv.textContent = '⏳ ' + data.message;
+                    errorDiv.style.display = 'block';
+                } else {
+                    // Other errors
+                    errorDiv.textContent = '❌ ' + (data.message || 'Verification failed');
+                    errorDiv.style.display = 'block';
+                }
+            } catch (error) {
+                loadingDiv.style.display = 'none';
+                errorDiv.textContent = '❌ Network error. Please check your connection and try again.';
+                errorDiv.style.display = 'block';
+                console.error('Verification error:', error);
+            }
+        }
+
+        function showCourses(data) {
+            const modal = document.getElementById('coursesModal');
+            const welcomeMsg = document.getElementById('welcomeMessage');
+            const coursesList = document.getElementById('coursesList');
+
+            welcomeMsg.textContent = `Welcome back, ${data.studentName}! 🎉`;
+
+            if (data.courses && data.courses.length > 0) {
+                let coursesHTML = '<div style="display: grid; gap: 1.5rem;">';
+
+                data.courses.forEach((course, index) => {
+                    coursesHTML += `
+                        <div style="background: var(--bg-light); border-radius: 12px; padding: 1.5rem; border-left: 4px solid ${index % 2 === 0 ? 'var(--primary)' : 'var(--secondary)'};">
+                            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--text);">${course.title}</h3>
+                            <p style="color: var(--text-light); margin-bottom: 1rem;">${course.description}</p>
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                <a href="${course.theoryLink}" target="_blank" style="flex: 1; min-width: 150px; padding: 0.75rem 1.5rem; background: var(--primary); color: white; text-decoration: none; border-radius: 8px; text-align: center; font-weight: 600;">
+                                    📖 View Theory
+                                </a>
+                                <a href="${course.quizLink}" target="_blank" style="flex: 1; min-width: 150px; padding: 0.75rem 1.5rem; background: var(--secondary); color: white; text-decoration: none; border-radius: 8px; text-align: center; font-weight: 600;">
+                                    🎯 Take Quiz
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                coursesHTML += '</div>';
+                coursesList.innerHTML = coursesHTML;
+            } else {
+                coursesList.innerHTML = '<p style="color: var(--text-light); text-align: center; padding: 2rem;">No courses available yet.</p>';
+            }
+
+            modal.style.display = 'flex';
+        }
+
+        // Allow Enter key to verify
+        document.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter' && document.getElementById('loginModal').style.display === 'flex') {
+                verifyStudent();
+            }
+        });
+    </script>
 
 </body>
 

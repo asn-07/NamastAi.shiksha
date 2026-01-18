@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Certificate - NamastAI.shiksha</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #0056D2;
+            --color-primary-dark: #003c94;
+            --color-primary-light: #3d7ce5;
+            --color-accent: #10b981;
+            --color-accent-light: #6ee7b7;
+            --color-success: #059669;
+            --color-error: #dc2626;
+            --color-warning: #d97706;
+            --color-certificate: #fef3c7;
+            --color-bg: #ffffff;
+            --color-bg-secondary: #f9fafb;
+            --color-bg-tertiary: #f3f4f6;
+            --color-text: #111827;
+            --color-text-secondary: #6b7280;
+            --color-text-muted: #9ca3af;
+            --color-border: #e5e7eb;
+            --gradient-primary: linear-gradient(135deg, #0056D2 0%, #7c3aed 100%);
+            --gradient-accent: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--color-bg-secondary);
+            color: var(--color-text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--color-text);
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .text-brand-blue {
+            color: #0056D2;
+        }
+
+        .text-brand-orange {
+            color: #FF8C00;
+        }
+
+        .accent {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 1rem;
+            padding: 3rem;
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-xl);
+            animation: slideInDown 0.6s ease;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        /* Verification Section */
+        .verification-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--color-border);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            color: var(--color-text-secondary);
+            font-size: 1.125rem;
+        }
+
+        /* Verification Form */
+        .verification-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--color-border);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition-base);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-control:disabled {
+            background-color: var(--color-bg-secondary);
+            cursor: not-allowed;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 0.625rem;
+            transition: var(--transition-base);
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-accent {
+            background: var(--gradient-accent);
+            color: white;
+        }
+
+        .btn-accent:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* Result Display */
+        .result-container {
+            display: none;
+            margin-top: 3rem;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .result-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .result-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-success {
+            color: var(--color-success);
+        }
+
+        .result-error {
+            color: var(--color-error);
+        }
+
+        .result-message {
+            color: var(--color-text-secondary);
+            font-size: 1.125rem;
+        }
+
+        /* Certificate Details */
+        .certificate-details {
+            background: var(--color-bg-secondary);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid var(--color-border);
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .detail-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border-left: 4px solid var(--color-primary);
+        }
+
+        .detail-label {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .detail-value {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .detail-value.score {
+            font-size: 2rem;
+            color: var(--color-primary);
+        }
+
+        /* Status Badges */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .status-valid {
+            background: var(--color-accent-light);
+            color: var(--color-success);
+        }
+
+        .status-invalid {
+            background: #fee2e2;
+            color: var(--color-error);
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: var(--color-warning);
+        }
+
+        /* Loading State */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--color-bg-tertiary);
+            border-top-color: var(--color-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-text {
+            color: var(--color-text-secondary);
+            font-weight: 500;
+        }
+
+        /* Alert Messages */
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+            display: none;
+            animation: slideInRight 0.3s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .alert-success {
+            background: var(--color-accent-light);
+            border: 1px solid var(--color-accent);
+            color: var(--color-success);
+        }
+
+        .alert-error {
+            background: #fee2e2;
+            border: 1px solid #fecaca;
+            color: var(--color-error);
+        }
+
+        .alert-warning {
+            background: #fef3c7;
+            border: 1px solid #fde68a;
+            color: var(--color-warning);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--color-text);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-brand .logo {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-tagline {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* QR Code */
+        .qr-container {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            border: 1px solid var(--color-border);
+        }
+
+        .qr-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--color-text);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .verification-section {
+                padding: 1.5rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-section {
+                padding: 2rem;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero-title {
+                font-size: 1.75rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .result-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <svg width="40" height="40" viewBox="0 0 200 200" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M65 160 L65 100 C65 70 85 40 95 20 L100 20 L100 160 Z" fill="#0056D2" />
+                            <path d="M135 160 L135 100 C135 70 115 40 105 20 L100 20 L100 160 Z" fill="#FF8C00" />
+                            <circle cx="80" cy="80" r="4" fill="white" />
+                            <circle cx="80" cy="120" r="4" fill="white" />
+                            <circle cx="120" cy="60" r="4" fill="white" />
+                            <circle cx="120" cy="100" r="4" fill="white" />
+                            <line x1="80" y1="80" x2="80" y2="120" stroke="white" stroke-width="2" />
+                            <line x1="80" y1="80" x2="65" y2="70" stroke="white" stroke-width="2" />
+                            <line x1="120" y1="60" x2="120" y2="100" stroke="white" stroke-width="2" />
+                            <line x1="120" y1="100" x2="135" y2="110" stroke="white" stroke-width="2" />
+                            <line x1="100" y1="20" x2="100" y2="160" stroke="white" stroke-width="2" />
+                        </svg>
+                    </div>
+                    <span class="logo-text">
+                        <span class="text-brand-blue">Namast</span>
+                        <span class="text-brand-orange">Ai</span>
+                        <span class="accent">.shiksha</span>
+                    </span>
+                </a>
+                <div class="nav-actions">
+                    <a href="index.html" class="btn btn-primary">Home</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 class="hero-title">🔍 Verify Certificate</h1>
+            <p class="hero-subtitle">Validate the authenticity of NamastAI.shiksha certificates using Certificate ID</p>
+        </section>
+
+        <!-- Verification Section -->
+        <section class="verification-section">
+            <div class="section-header">
+                <h2 class="section-title">Certificate Verification</h2>
+                <p class="section-subtitle">Enter the Certificate ID to verify its authenticity</p>
+            </div>
+
+            <!-- Alert Messages -->
+            <div id="alert-success" class="alert alert-success">
+                Certificate verified successfully! ✅
+            </div>
+            <div id="alert-error" class="alert alert-error">
+                Certificate not found or invalid! ❌
+            </div>
+            <div id="alert-warning" class="alert alert-warning">
+                Please enter a valid Certificate ID
+            </div>
+
+            <!-- Verification Form -->
+            <div class="verification-form">
+                <div class="form-group">
+                    <label for="certificate-id">Certificate ID</label>
+                    <input type="text" id="certificate-id" class="form-control"
+                        placeholder="Enter Certificate ID (e.g., 550e8400-e29b-41d4-a716-446655440000)"
+                        autocomplete="off">
+                    <small style="color: var(--color-text-muted); display: block; margin-top: 0.5rem;">
+                        Find the Certificate ID on your certificate document
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <button id="verify-btn" class="btn btn-accent" style="width: 100%;">
+                        Verify Certificate
+                    </button>
+                </div>
+
+                <div style="text-align: center; margin-top: 1rem;">
+                    <p style="color: var(--color-text-secondary); font-size: 0.875rem;">
+                        Or verify via URL: <code>namastai.shiksha/verify.html?id=CERTIFICATE_ID</code>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loading" class="loading">
+                <div class="loading-spinner"></div>
+                <p class="loading-text">Verifying certificate...</p>
+            </div>
+
+            <!-- Result Display -->
+            <div id="result-container" class="result-container">
+                <div class="result-header">
+                    <div id="result-icon" class="result-icon">🔍</div>
+                    <h2 id="result-title" class="result-title">Certificate Verified</h2>
+                    <p id="result-message" class="result-message">This certificate has been verified as authentic</p>
+                </div>
+
+                <!-- Certificate Details -->
+                <div id="certificate-details" class="certificate-details" style="display: none;">
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <div class="detail-label">Certificate ID</div>
+                            <div id="detail-uuid" class="detail-value">-</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Student Name</div>
+                            <div id="detail-name" class="detail-value">-</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Score</div>
+                            <div id="detail-score" class="detail-value score">-</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Quiz Type</div>
+                            <div id="detail-quiz-type" class="detail-value">-</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Completion Date</div>
+                            <div id="detail-date" class="detail-value">-</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Status</div>
+                            <div id="detail-status" class="detail-value">
+                                <span class="status-badge status-valid">✓ Valid</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Email</div>
+                            <div id="detail-email" class="detail-value">-</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Total Questions</div>
+                            <div id="detail-total" class="detail-value">-</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Percentage</div>
+                            <div id="detail-percentage" class="detail-value">-</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Verification Count</div>
+                            <div id="detail-verifications" class="detail-value">-</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Certificate Downloaded</div>
+                            <div id="detail-downloaded" class="detail-value">-</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Issued On</div>
+                            <div id="detail-timestamp" class="detail-value">-</div>
+                        </div>
+                    </div>
+
+                    <!-- QR Code for Sharing -->
+                    <div class="qr-container">
+                        <div class="qr-title">Share Verification Link</div>
+                        <div id="qrcode"></div>
+                        <p style="color: var(--color-text-secondary); margin-top: 1rem; font-size: 0.875rem;">
+                            Scan to verify this certificate
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Invalid Certificate -->
+                <div id="invalid-certificate" style="display: none; text-align: center; padding: 3rem;">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">❌</div>
+                    <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--color-error);">
+                        Certificate Not Found
+                    </h3>
+                    <p style="color: var(--color-text-secondary); margin-bottom: 2rem;">
+                        The Certificate ID you entered could not be verified. Please check the ID and try again.
+                    </p>
+                    <button onclick="window.location.reload()" class="btn btn-primary">
+                        Try Another Certificate
+                    </button>
+                </div>
+            </div>
+
+            <!-- Additional Info -->
+            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--color-border);">
+                <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; color: var(--color-text);">
+                    About Certificate Verification
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                    <div style="background: var(--color-bg-tertiary); padding: 1.5rem; border-radius: 0.75rem;">
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🔒</div>
+                        <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Secure Verification</h4>
+                        <p style="color: var(--color-text-secondary); font-size: 0.875rem;">
+                            All certificates are recorded in our secure database with unique UUIDs
+                        </p>
+                    </div>
+                    <div style="background: var(--color-bg-tertiary); padding: 1.5rem; border-radius: 0.75rem;">
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📊</div>
+                        <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Real-time Validation</h4>
+                        <p style="color: var(--color-text-secondary); font-size: 0.875rem;">
+                            Each verification is recorded and tracked in real-time
+                        </p>
+                    </div>
+                    <div style="background: var(--color-bg-tertiary); padding: 1.5rem; border-radius: 0.75rem;">
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🌐</div>
+                        <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Public Verification</h4>
+                        <p style="color: var(--color-text-secondary); font-size: 0.875rem;">
+                            Anyone can verify certificate authenticity using the Certificate ID
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <svg width="40" height="40" viewBox="0 0 200 200" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M65 160 L65 100 C65 70 85 40 95 20 L100 20 L100 160 Z" fill="#0056D2" />
+                                <path d="M135 160 L135 100 C135 70 115 40 105 20 L100 20 L100 160 Z" fill="#FF8C00" />
+                                <circle cx="80" cy="80" r="4" fill="white" />
+                                <circle cx="80" cy="120" r="4" fill="white" />
+                                <circle cx="120" cy="60" r="4" fill="white" />
+                                <circle cx="120" cy="100" r="4" fill="white" />
+                                <line x1="80" y1="80" x2="80" y2="120" stroke="white" stroke-width="2" />
+                                <line x1="80" y1="80" x2="65" y2="70" stroke="white" stroke-width="2" />
+                                <line x1="120" y1="60" x2="120" y2="100" stroke="white" stroke-width="2" />
+                                <line x1="120" y1="100" x2="135" y2="110" stroke="white" stroke-width="2" />
+                                <line x1="100" y1="20" x2="100" y2="160" stroke="white" stroke-width="2" />
+                            </svg>
+                        </div>
+                        <span class="logo-text">
+                            <span class="text-brand-blue">Namast</span>
+                            <span class="text-brand-orange">Ai</span>
+                            <span class="accent">.shiksha</span>
+                        </span>
+                    </div>
+                    <p class="footer-tagline">Empowering the next generation of software developers with industry-ready
+                        skills.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <a href="index.html"
+                        style="color: rgba(255, 255, 255, 0.7); text-decoration: none; display: block; margin-top: 0.5rem;">Home
+                        Page</a>
+                    <a href="/curriculum.html"
+                        style="color: rgba(255, 255, 255, 0.7); text-decoration: none; display: block; margin-top: 0.5rem;">Curriculum</a>
+                    <a href="/verify.html"
+                        style="color: rgba(255, 255, 255, 0.7); text-decoration: none; display: block; margin-top: 0.5rem;">Verify
+                        Certificate</a>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <p style="color: rgba(255, 255, 255, 0.7); margin-top: 0.5rem;">📧 info@namastai.shiksha</p>
+                    <p style="color: rgba(255, 255, 255, 0.7); margin-top: 0.5rem;">📞 +91 9246212143, 8096969696</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 NamastAI.shiksha. All rights reserved.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.875rem;">Professional Java Learning Platform - Certificate
+                    Verification System</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+        // Configuration
+        const CONFIG = {
+            googleSheetsWebAppUrl: 'https://script.google.com/macros/s/AKfycbzTIFkOD0wgCGc29Hw8frutPiVu9rhQ81ZaI5b6TbA4Iky4n1I_sJ0uMImZlttIz-O1/exec',
+            verificationUrl: 'https://namastai.shiksha/verify.html'
+        };
+
+        // DOM Elements
+        const certificateIdInput = document.getElementById('certificate-id');
+        const verifyBtn = document.getElementById('verify-btn');
+        const loading = document.getElementById('loading');
+        const resultContainer = document.getElementById('result-container');
+        const certificateDetails = document.getElementById('certificate-details');
+        const invalidCertificate = document.getElementById('invalid-certificate');
+        const alertSuccess = document.getElementById('alert-success');
+        const alertError = document.getElementById('alert-error');
+        const alertWarning = document.getElementById('alert-warning');
+
+        // Check for certificate ID in URL
+        function getCertificateIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
+
+        // Show alert
+        function showAlert(alertElement, message = '') {
+            if (message) {
+                alertElement.textContent = message;
+            }
+            alertElement.style.display = 'block';
+            setTimeout(() => {
+                alertElement.style.display = 'none';
+            }, 5000);
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            try {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+            } catch (e) {
+                return dateString;
+            }
+        }
+
+        // Format timestamp
+        function formatTimestamp(timestamp) {
+            try {
+                const date = new Date(timestamp);
+                return date.toLocaleString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            } catch (e) {
+                return timestamp;
+            }
+        }
+
+        // Generate QR Code
+        function generateQRCode(certificateId) {
+            const qrContainer = document.getElementById('qrcode');
+            qrContainer.innerHTML = '';
+
+            const verificationUrl = `${CONFIG.verificationUrl}?id=${certificateId}`;
+            new QRCode(qrContainer, {
+                text: verificationUrl,
+                width: 200,
+                height: 200,
+                colorDark: '#0056D2',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+
+        // Verify Certificate
+        async function verifyCertificate(certificateId) {
+            if (!certificateId || certificateId.trim() === '') {
+                showAlert(alertWarning, 'Please enter a Certificate ID');
+                return;
+            }
+
+            // Show loading
+            loading.style.display = 'block';
+            verifyBtn.disabled = true;
+            certificateIdInput.disabled = true;
+
+            try {
+                // Call Google Apps Script Web App
+                const response = await fetch(`${CONFIG.googleSheetsWebAppUrl}?id=${encodeURIComponent(certificateId)}`, {
+                    method: 'GET',
+                    mode: 'cors'
+                });
+
+                const result = await response.json();
+
+                // Hide loading
+                loading.style.display = 'none';
+                verifyBtn.disabled = false;
+                certificateIdInput.disabled = false;
+
+                if (result.success && result.certificate) {
+                    // Show success
+                    showAlert(alertSuccess, 'Certificate verified successfully!');
+
+                    // Update result display
+                    document.getElementById('result-icon').textContent = '✅';
+                    document.getElementById('result-title').textContent = 'Certificate Verified';
+                    document.getElementById('result-title').className = 'result-title result-success';
+                    document.getElementById('result-message').textContent = 'This certificate has been verified as authentic and issued by NamastAI.shiksha';
+
+                    // Update certificate details
+                    const cert = result.certificate;
+                    document.getElementById('detail-uuid').textContent = cert.CertificateUUID || '-';
+                    document.getElementById('detail-name').textContent = cert.StudentName || '-';
+                    document.getElementById('detail-score').textContent = `${cert.Score || 0}/${cert.TotalQuestions || 0}`;
+                    document.getElementById('detail-quiz-type').textContent = cert.QuizType || '-';
+                    document.getElementById('detail-date').textContent = formatDate(cert.CompletionDate) || '-';
+                    document.getElementById('detail-email').textContent = cert.StudentEmail || '-';
+                    document.getElementById('detail-total').textContent = cert.TotalQuestions || 0;
+                    document.getElementById('detail-percentage').textContent = cert.Percentage ? `${cert.Percentage}%` : '-';
+                    document.getElementById('detail-verifications').textContent = cert.VerificationCount || '0';
+                    document.getElementById('detail-downloaded').textContent = cert.CertificateDownloaded === 'TRUE' ? 'Yes' : 'No';
+                    document.getElementById('detail-timestamp').textContent = formatTimestamp(cert.Timestamp) || '-';
+
+                    // Show certificate details
+                    certificateDetails.style.display = 'block';
+                    invalidCertificate.style.display = 'none';
+                    resultContainer.style.display = 'block';
+
+                    // Generate QR code
+                    generateQRCode(certificateId);
+
+                    // Scroll to results
+                    resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                } else {
+                    // Show error
+                    showAlert(alertError, result.message || 'Certificate not found');
+
+                    // Update result display for error
+                    document.getElementById('result-icon').textContent = '❌';
+                    document.getElementById('result-title').textContent = 'Certificate Not Found';
+                    document.getElementById('result-title').className = 'result-title result-error';
+                    document.getElementById('result-message').textContent = result.message || 'The certificate could not be verified';
+
+                    certificateDetails.style.display = 'none';
+                    invalidCertificate.style.display = 'block';
+                    resultContainer.style.display = 'block';
+
+                    // Scroll to results
+                    resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+
+            } catch (error) {
+                console.error('Verification error:', error);
+
+                // Hide loading
+                loading.style.display = 'none';
+                verifyBtn.disabled = false;
+                certificateIdInput.disabled = false;
+
+                // Show error
+                showAlert(alertError, 'Network error. Please try again.');
+
+                // Update result display for error
+                document.getElementById('result-icon').textContent = '⚠️';
+                document.getElementById('result-title').textContent = 'Verification Error';
+                document.getElementById('result-title').className = 'result-title result-error';
+                document.getElementById('result-message').textContent = 'Unable to connect to verification server';
+
+                certificateDetails.style.display = 'none';
+                invalidCertificate.style.display = 'block';
+                resultContainer.style.display = 'block';
+            }
+        }
+
+        // Event Listeners
+        verifyBtn.addEventListener('click', () => {
+            const certificateId = certificateIdInput.value.trim();
+            verifyCertificate(certificateId);
+        });
+
+        certificateIdInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const certificateId = certificateIdInput.value.trim();
+                verifyCertificate(certificateId);
+            }
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check for certificate ID in URL
+            const urlCertificateId = getCertificateIdFromUrl();
+            if (urlCertificateId) {
+                certificateIdInput.value = urlCertificateId;
+                verifyCertificate(urlCertificateId);
+            }
+
+            // Focus on input field
+            certificateIdInput.focus();
+
+            // Add copy to clipboard functionality for certificate ID
+            certificateIdInput.addEventListener('dblclick', () => {
+                certificateIdInput.select();
+                document.execCommand('copy');
+                showAlert(alertSuccess, 'Certificate ID copied to clipboard!');
+            });
+        });
+
+        // Share verification link
+        window.shareVerification = function () {
+            const certificateId = certificateIdInput.value.trim();
+            if (!certificateId) return;
+
+            const verificationUrl = `${CONFIG.verificationUrl}?id=${certificateId}`;
+            const shareText = `Verify my NamastAI.shiksha certificate: ${verificationUrl}`;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Verify My Certificate',
+                    text: shareText,
+                    url: verificationUrl
+                });
+            } else {
+                navigator.clipboard.writeText(verificationUrl).then(() => {
+                    showAlert(alertSuccess, 'Verification link copied to clipboard!');
+                });
+            }
+        };
+    </script>
+</body>
+
+</html>

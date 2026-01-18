@@ -1495,7 +1495,7 @@
         // Configuration: Set your Google Apps Script Web App URL here
         const GOOGLE_SHEETS_CONFIG = {
             enabled: true,
-            webAppUrl: 'https://script.google.com/macros/s/AKfycbxMbTeo2Xwo1AzOs2NVtZOqxdY5MRfxRXa1BvWFvI8UMFx5usIV0H5qLnTk99ZrH2oZ/exec', // Paste your Google Apps Script Web App URL here
+            webAppUrl: 'https://script.google.com/macros/s/AKfycbzTIFkOD0wgCGc29Hw8frutPiVu9rhQ81ZaI5b6TbA4Iky4n1I_sJ0uMImZlttIz-O1/exec', // Paste your Google Apps Script Web App URL here
         };
 
         // Send quiz completion data to Google Sheets
@@ -1509,6 +1509,7 @@
             try {
                 const dataToSend = {
                     timestamp: new Date().toISOString(),
+                    quizTopic: 'Java Language Fundamentals',
                     studentName: certData.studentName,
                     studentEmail: certData.studentEmail,
                     score: certData.score,
@@ -1754,7 +1755,7 @@
                     <div class="certificate-actions">
                         <button onclick="downloadCertificate()" class="btn btn-accent">Download PDF 📥</button>
                         <button onclick="shareCertificate()" class="btn btn-primary">Share 🚀</button>
-                        <button onclick="window.location.href='quiz.html'" class="btn btn-primary">New Quiz 🔄</button>
+                        <button onclick="window.location.href='lang-funda-quiz.html'" class="btn btn-primary">New Quiz 🔄</button>
                     </div>
                 </div>
             `;

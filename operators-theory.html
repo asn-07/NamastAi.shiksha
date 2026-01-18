@@ -1,0 +1,2066 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Operators & Assignments - NamastAI.shiksha</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #0056D2;
+            --color-primary-dark: #003c94;
+            --color-primary-light: #3d7ce5;
+            --color-accent: #10b981;
+            --color-accent-light: #6ee7b7;
+            --color-success: #059669;
+            --color-error: #dc2626;
+            --color-warning: #d97706;
+            --color-bg: #ffffff;
+            --color-bg-secondary: #f9fafb;
+            --color-bg-tertiary: #f3f4f6;
+            --color-text: #111827;
+            --color-text-secondary: #6b7280;
+            --color-text-muted: #9ca3af;
+            --color-border: #e5e7eb;
+            --color-code-bg: #1e293b;
+            --gradient-primary: linear-gradient(135deg, #0056D2 0%, #7c3aed 100%);
+            --gradient-accent: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--color-bg-secondary);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--color-text);
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .text-brand-blue {
+            color: #0056D2;
+        }
+
+        .text-brand-orange {
+            color: #FF8C00;
+        }
+
+        .accent {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 1rem;
+            padding: 3rem;
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-xl);
+            animation: slideInDown 0.6s ease;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 0.625rem;
+            transition: var(--transition-base);
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--color-primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-accent {
+            background: var(--gradient-accent);
+            color: white;
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Content Section */
+        .content-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--color-border);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            color: var(--color-text-secondary);
+            font-size: 1.125rem;
+        }
+
+        /* Topics */
+        .topics-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .topic-card {
+            background: var(--color-bg-secondary);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: 1px solid var(--color-border);
+            transition: var(--transition-base);
+            cursor: pointer;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--color-primary-light);
+        }
+
+        .topic-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+
+        .topic-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .topic-description {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Theory Content */
+        .theory-section {
+            margin-bottom: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .theory-section:last-child {
+            border-bottom: none;
+        }
+
+        .theory-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .theory-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--color-primary);
+            color: white;
+            border-radius: 50%;
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+
+        .theory-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--color-text);
+        }
+
+        .theory-subtitle {
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .theory-content {
+            margin: 1.5rem 0;
+        }
+
+        .theory-point {
+            background: var(--color-bg-secondary);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--color-primary);
+        }
+
+        .point-title {
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .point-content {
+            color: var(--color-text);
+            line-height: 1.7;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: var(--color-code-bg);
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .code-keyword {
+            color: #f472b6;
+        }
+
+        .code-string {
+            color: #34d399;
+        }
+
+        .code-number {
+            color: #60a5fa;
+        }
+
+        .code-comment {
+            color: #94a3b8;
+        }
+
+        .code-output {
+            background: #f1f5f9;
+            color: var(--color-text);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 0.5rem;
+            border-left: 4px solid var(--color-accent);
+        }
+
+        /* Tables */
+        .theory-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .theory-table th {
+            background: var(--color-primary);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .theory-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .theory-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .theory-table tr:nth-child(even) {
+            background: var(--color-bg-secondary);
+        }
+
+        /* Important Notes */
+        .note {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 1px solid #fbbf24;
+            border-left: 4px solid #d97706;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .note-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: #92400e;
+            font-weight: 600;
+        }
+
+        .warning {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border: 1px solid #f87171;
+            border-left: 4px solid #dc2626;
+        }
+
+        .warning .note-header {
+            color: #991b1b;
+        }
+
+        .success {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border: 1px solid #34d399;
+            border-left: 4px solid #059669;
+        }
+
+        .success .note-header {
+            color: #065f46;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--gradient-accent);
+            color: white;
+            border-radius: 1rem;
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            font-size: 1.125rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--color-text);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-brand .logo {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-tagline {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .content-section {
+                padding: 1.5rem;
+            }
+
+            .topics-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .theory-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <img src="assets/logo.svg" alt="NamastAI.shiksha Logo" width="40" height="40">
+                    </div>
+                    <span class="logo-text">
+                        <span class="text-brand-blue">Namast</span>
+                        <span class="text-brand-orange">Ai</span>
+                        <span class="accent">.shiksha</span>
+                    </span>
+                </a>
+                <div class="nav-actions">
+                    <a href="operators-quiz.html" class="btn btn-accent">Take Quiz</a>
+                    <a href="index.html" class="btn btn-primary" style="margin-left: 0.5rem;">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 class="hero-title">Chapter 2: Java Operators & Assignments</h1>
+            <p class="hero-subtitle">Master all Java operators - increment/decrement, arithmetic, relational, bitwise,
+                type casting, and more</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                <a href="#increment-decrement" class="btn btn-primary">Start Learning</a>
+                <a href="operators-quiz.html" class="btn btn-accent">Test Your Knowledge</a>
+            </div>
+        </section>
+
+        <!-- Topics Overview -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">🎯 Topics Covered</h2>
+                <p class="section-subtitle">Complete coverage of SCJP/OCJP Operators & Assignments chapter</p>
+            </div>
+
+            <div class="topics-container">
+                <div class="topic-card" onclick="scrollToSection('increment-decrement')">
+                    <div class="topic-icon">++ --</div>
+                    <h3 class="topic-title">Increment & Decrement</h3>
+                    <p class="topic-description">Prefix/Postfix operators, restrictions, and internal type casting</p>
+                </div>
+
+                <div class="topic-card" onclick="scrollToSection('arithmetic')">
+                    <div class="topic-icon">+ - * / %</div>
+                    <h3 class="topic-title">Arithmetic Operators</h3>
+                    <p class="topic-description">Math operations, result types, infinity, and NaN handling</p>
+                </div>
+
+                <div class="topic-card" onclick="scrollToSection('string-concat')">
+                    <div class="topic-icon">"+" Strings</div>
+                    <h3 class="topic-title">String Concatenation</h3>
+                    <p class="topic-description">Java's only overloaded operator + for strings</p>
+                </div>
+
+                <div class="topic-card" onclick="scrollToSection('relational')">
+                    <div class="topic-icon">&lt; &gt; =</div>
+                    <h3 class="topic-title">Relational Operators</h3>
+                    <p class="topic-description">Comparison operators <, <=,>, >= with primitive types</p>
+                </div>
+
+                <div class="topic-card" onclick="scrollToSection('equality')">
+                    <div class="topic-icon">== !=</div>
+                    <h3 class="topic-title">Equality Operators</h3>
+                    <p class="topic-description">== vs != for primitives and objects, null comparisons</p>
+                </div>
+
+                <div class="topic-card" onclick="scrollToSection('instanceof')">
+                    <div class="topic-icon">instanceof</div>
+                    <h3 class="topic-title">instanceof Operator</h3>
+                    <p class="topic-description">Type checking, restrictions, and inheritance rules</p>
+                </div>
+
+                <div class="topic-card" onclick="scrollToSection('bitwise')">
+                    <div class="topic-icon">& | ^ ~</div>
+                    <h3 class="topic-title">Bitwise Operators</h3>
+                    <p class="topic-description">&, |, ^, ~ for booleans and integral types</p>
+                </div>
+
+                <div class="topic-card" onclick="scrollToSection('short-circuit')">
+                    <div class="topic-icon">&& ||</div>
+                    <h3 class="topic-title">Short Circuit Operators</h3>
+                    <p class="topic-description">&& and || vs & and |, performance optimization</p>
+                </div>
+
+                <div class="topic-card" onclick="scrollToSection('typecast')">
+                    <div class="topic-icon">(type)</div>
+                    <h3 class="topic-title">Type Cast Operators</h3>
+                    <p class="topic-description">Implicit and explicit casting, widening/narrowing</p>
+                </div>
+
+                <div class="topic-card" onclick="scrollToSection('assignment')">
+                    <div class="topic-icon">= += -=</div>
+                    <h3 class="topic-title">Assignment Operators</h3>
+                    <p class="topic-description">Simple, chained, and compound assignments</p>
+                </div>
+
+                <div class="topic-card" onclick="scrollToSection('conditional')">
+                    <div class="topic-icon">? :</div>
+                    <h3 class="topic-title">Conditional Operator</h3>
+                    <p class="topic-description">Java's only ternary operator ? : for conditional expressions</p>
+                </div>
+
+                <div class="topic-card" onclick="scrollToSection('new-operator')">
+                    <div class="topic-icon">new</div>
+                    <h3 class="topic-title">new Operator</h3>
+                    <p class="topic-description">Object creation, arrays, and vs newInstance()</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Theory Content -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">📚 Detailed Theory</h2>
+                <p class="section-subtitle">Complete SCJP/OCJP study material with examples</p>
+            </div>
+
+            <!-- 1. Increment & Decrement Operators -->
+            <div id="increment-decrement" class="theory-section">
+                <div class="theory-header">
+                    <div class="theory-number">1</div>
+                    <div>
+                        <h2 class="theory-title">Increment & Decrement Operators</h2>
+                        <p class="theory-subtitle">Prefix (++x) and Postfix (x++) operators</p>
+                    </div>
+                </div>
+
+                <div class="note">
+                    <div class="note-header">📋 Key Points:</div>
+                    <p><strong>Prefix (++x):</strong> Increment first, then use value</p>
+                    <p><strong>Postfix (x++):</strong> Use value first, then increment</p>
+                </div>
+
+                <table class="theory-table">
+                    <thead>
+                        <tr>
+                            <th>Expression</th>
+                            <th>Initial value of x</th>
+                            <th>Value of y</th>
+                            <th>Final value of x</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>y = ++x</code></td>
+                            <td>10</td>
+                            <td>11</td>
+                            <td>11</td>
+                        </tr>
+                        <tr>
+                            <td><code>y = x++</code></td>
+                            <td>10</td>
+                            <td>10</td>
+                            <td>11</td>
+                        </tr>
+                        <tr>
+                            <td><code>y = --x</code></td>
+                            <td>10</td>
+                            <td>9</td>
+                            <td>9</td>
+                        </tr>
+                        <tr>
+                            <td><code>y = x--</code></td>
+                            <td>10</td>
+                            <td>10</td>
+                            <td>9</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="theory-content">
+                    <div class="theory-point">
+                        <div class="point-title">Rule 1: Only for Variables, Not Constants</div>
+                        <div class="point-content">
+                            <p>Increment/decrement operators can only be applied to variables, not constant values.</p>
+                            <div class="code-block">
+                                <span class="code-keyword">int</span> x = <span class="code-number">4</span>;<br>
+                                <span class="code-keyword">int</span> y = ++x; <span class="code-comment">// Valid: x is
+                                    variable</span><br>
+                                System.out.println(y); <span class="code-comment">// Output: 5</span><br><br>
+                                <span class="code-keyword">int</span> y = ++<span class="code-number">4</span>; <span
+                                    class="code-comment">// Compile Error!</span><br>
+                                <span class="code-comment">// C.E: unexpected type required: variable found:
+                                    value</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Rule 2: No Nesting Allowed</div>
+                        <div class="point-content">
+                            <p>You cannot nest increment/decrement operators.</p>
+                            <div class="code-block">
+                                <span class="code-keyword">int</span> x = <span class="code-number">4</span>;<br>
+                                <span class="code-keyword">int</span> y = ++(++x); <span class="code-comment">// Compile
+                                    Error!</span><br>
+                                <span class="code-comment">// C.E: unexpected type required: variable found:
+                                    value</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Rule 3: Not for final Variables</div>
+                        <div class="point-content">
+                            <p>Cannot apply increment/decrement to final variables.</p>
+                            <div class="code-block">
+                                <span class="code-keyword">final int</span> x = <span class="code-number">4</span>;<br>
+                                x++; <span class="code-comment">// Compile Error!</span><br>
+                                <span class="code-comment">// C.E: cannot assign a value to final variable x</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Rule 4: Applicable to All Primitive Types Except boolean</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-keyword">int</span> x = <span class="code-number">10</span>;<br>
+                                x++;<br>
+                                System.out.println(x); <span class="code-comment">// Output: 11</span><br><br>
+
+                                <span class="code-keyword">char</span> ch = <span class="code-string">'a'</span>;<br>
+                                ch++;<br>
+                                System.out.println(ch); <span class="code-comment">// Output: b</span><br><br>
+
+                                <span class="code-keyword">double</span> d = <span class="code-number">10.5</span>;<br>
+                                d++;<br>
+                                System.out.println(d); <span class="code-comment">// Output: 11.5</span><br><br>
+
+                                <span class="code-keyword">boolean</span> b = <span
+                                    class="code-keyword">true</span>;<br>
+                                b++; <span class="code-comment">// Compile Error!</span><br>
+                                <span class="code-comment">// C.E: operator ++ cannot be applied to boolean</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="note warning">
+                        <div class="note-header">⚠️ Important Difference:</div>
+                        <p><strong>b++ vs b = b + 1</strong></p>
+                        <p>For increment/decrement operators, internal type casting is performed automatically:</p>
+                        <p><code>b++</code> means <code>b = (type of b)(b + 1)</code></p>
+                        <p>Example: <code>byte b = 10; b++;</code> works fine, but <code>b = b + 1;</code> gives compile
+                            error.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Arithmetic Operators -->
+            <div id="arithmetic" class="theory-section">
+                <div class="theory-header">
+                    <div class="theory-number">2</div>
+                    <div>
+                        <h2 class="theory-title">Arithmetic Operators</h2>
+                        <p class="theory-subtitle">+ - * / % operators and type promotion rules</p>
+                    </div>
+                </div>
+
+                <div class="theory-content">
+                    <div class="theory-point">
+                        <div class="point-title">Rule: Result Type = max(int, type of a, type of b)</div>
+                        <div class="point-content">
+                            <p>When applying arithmetic operations between two variables a and b:</p>
+
+                            <table class="theory-table">
+                                <thead>
+                                    <tr>
+                                        <th>Operation</th>
+                                        <th>Result Type</th>
+                                        <th>Example</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>byte + byte</code></td>
+                                        <td><code>int</code></td>
+                                        <td><code>byte a=10; byte b=20; a+b → int</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>byte + short</code></td>
+                                        <td><code>int</code></td>
+                                        <td><code>byte a=10; short b=20; a+b → int</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>short + short</code></td>
+                                        <td><code>int</code></td>
+                                        <td><code>short a=10; short b=20; a+b → int</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>char + char</code></td>
+                                        <td><code>int</code></td>
+                                        <td><code>'a' + 'b' = 195</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>char + int</code></td>
+                                        <td><code>int</code></td>
+                                        <td><code>'a' + 1 = 98</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>int + double</code></td>
+                                        <td><code>double</code></td>
+                                        <td><code>10 + 5.5 = 15.5</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>float + double</code></td>
+                                        <td><code>double</code></td>
+                                        <td><code>10.5f + 5.5 = 16.0</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="code-block">
+                                System.out.println(<span class="code-string">'a'</span> + <span
+                                    class="code-string">'b'</span>); <span class="code-comment">// Output:
+                                    195</span><br>
+                                System.out.println(<span class="code-string">'a'</span> + <span
+                                    class="code-number">1</span>); <span class="code-comment">// Output: 98</span><br>
+                                System.out.println(<span class="code-string">'a'</span> + <span
+                                    class="code-number">1.2</span>); <span class="code-comment">// Output: 98.2</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Infinity and NaN Handling</div>
+                        <div class="point-content">
+                            <div class="note warning">
+                                <div class="note-header">⚠️ Critical Difference:</div>
+                                <p><strong>Integral Arithmetic (byte, short, int, long):</strong></p>
+                                <ul>
+                                    <li>No way to represent infinity → ArithmeticException</li>
+                                    <li>No way to represent undefined results → ArithmeticException</li>
+                                </ul>
+                                <p><strong>Floating Point Arithmetic (float, double):</strong></p>
+                                <ul>
+                                    <li>Can represent infinity: POSITIVE_INFINITY, NEGATIVE_INFINITY</li>
+                                    <li>Can represent undefined: NaN (Not a Number)</li>
+                                    <li>No ArithmeticException for /0 or 0/0</li>
+                                </ul>
+                            </div>
+
+                            <div class="code-block">
+                                <span class="code-comment">// Integral Arithmetic - Throws Exception</span><br>
+                                System.out.println(<span class="code-number">10</span> / <span
+                                    class="code-number">0</span>); <span class="code-comment">// ArithmeticException: /
+                                    by zero</span><br>
+                                System.out.println(<span class="code-number">0</span> / <span
+                                    class="code-number">0</span>); <span class="code-comment">// ArithmeticException: /
+                                    by zero</span><br><br>
+
+                                <span class="code-comment">// Floating Point Arithmetic - No Exception</span><br>
+                                System.out.println(<span class="code-number">10</span> / <span
+                                    class="code-number">0.0</span>); <span class="code-comment">// Output:
+                                    Infinity</span><br>
+                                System.out.println(-<span class="code-number">10</span> / <span
+                                    class="code-number">0.0</span>); <span class="code-comment">// Output:
+                                    -Infinity</span><br>
+                                System.out.println(<span class="code-number">0.0</span> / <span
+                                    class="code-number">0.0</span>); <span class="code-comment">// Output:
+                                    NaN</span><br>
+                                System.out.println(-<span class="code-number">0.0</span> / <span
+                                    class="code-number">0.0</span>); <span class="code-comment">// Output: NaN</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">NaN Properties</div>
+                        <div class="point-content">
+                            <p>For any value x (including NaN), comparisons with NaN always return false:</p>
+                            <div class="code-block">
+                                System.out.println(<span class="code-number">10</span>
+                                < Float.NaN); <span class="code-comment">// false</span><br>
+                                    System.out.println(<span class="code-number">10</span>
+                                    <= Float.NaN); <span class="code-comment">// false</span><br>
+                                        System.out.println(<span class="code-number">10</span> > Float.NaN); <span
+                                            class="code-comment">// false</span><br>
+                                        System.out.println(<span class="code-number">10</span> >= Float.NaN); <span
+                                            class="code-comment">// false</span><br>
+                                        System.out.println(<span class="code-number">10</span> == Float.NaN); <span
+                                            class="code-comment">// false</span><br>
+                                        System.out.println(Float.NaN == Float.NaN); <span class="code-comment">//
+                                            false</span><br><br>
+
+                                        System.out.println(<span class="code-number">10</span> != Float.NaN); <span
+                                            class="code-comment">// true</span><br>
+                                        System.out.println(Float.NaN != Float.NaN); <span class="code-comment">//
+                                            true</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="note">
+                        <div class="note-header">📌 ArithmeticException Summary:</div>
+                        <ol>
+                            <li>RuntimeException, not compile-time error</li>
+                            <li>Occurs only in integral arithmetic (byte, short, int, long)</li>
+                            <li>Only operations causing ArithmeticException: <code>/</code> and <code>%</code></li>
+                            <li>Does NOT occur in floating-point arithmetic</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. String Concatenation Operator -->
+            <div id="string-concat" class="theory-section">
+                <div class="theory-header">
+                    <div class="theory-number">3</div>
+                    <div>
+                        <h2 class="theory-title">String Concatenation Operator (+)</h2>
+                        <p class="theory-subtitle">Java's only overloaded operator</p>
+                    </div>
+                </div>
+
+                <div class="note">
+                    <div class="note-header">🎯 Key Rule:</div>
+                    <p>The <code>+</code> operator is the only overloaded operator in Java:</p>
+                    <ul>
+                        <li>If at least one argument is String → String concatenation</li>
+                        <li>If both arguments are numeric → Arithmetic addition</li>
+                    </ul>
+                </div>
+
+                <div class="theory-content">
+                    <div class="theory-point">
+                        <div class="point-title">Examples of String Concatenation</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-keyword">String</span> a = <span
+                                    class="code-string">"ashok"</span>;<br>
+                                <span class="code-keyword">int</span> b = <span class="code-number">10</span>, c = <span
+                                    class="code-number">20</span>, d = <span class="code-number">30</span>;<br><br>
+
+                                System.out.println(a + b + c + d); <span class="code-comment">// Output:
+                                    ashok102030</span><br>
+                                System.out.println(b + c + d + a); <span class="code-comment">// Output:
+                                    60ashok</span><br>
+                                System.out.println(b + c + a + d); <span class="code-comment">// Output:
+                                    30ashok30</span><br>
+                                System.out.println(b + a + c + d); <span class="code-comment">// Output:
+                                    10ashok2030</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Common Errors</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-keyword">String</span> a = <span
+                                    class="code-string">"ashok"</span>;<br>
+                                <span class="code-keyword">int</span> b = <span class="code-number">10</span>, c = <span
+                                    class="code-number">20</span>, d = <span class="code-number">30</span>;<br><br>
+
+                                <span class="code-comment">// COMPILE ERRORS:</span><br>
+                                a = b + c + d; <span class="code-comment">// C.E: incompatible types</span><br>
+                                <span class="code-comment">// found: int, required: java.lang.String</span><br><br>
+
+                                b = a + c + d; <span class="code-comment">// C.E: incompatible types</span><br>
+                                <span class="code-comment">// found: String, required: int</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="note warning">
+                        <div class="note-header">⚠️ Important:</div>
+                        <p><strong>Valid Operations:</strong></p>
+                        <ul>
+                            <li><code>a = a + b + c;</code> ✓ (String + int + int = String)</li>
+                            <li><code>b = b + c + d;</code> ✓ (int + int + int = int)</li>
+                        </ul>
+                        <p><strong>Invalid Operations:</strong></p>
+                        <ul>
+                            <li><code>a = b + c + d;</code> ✗ (can't assign int to String)</li>
+                            <li><code>b = a + c + d;</code> ✗ (can't assign String to int)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Relational Operators -->
+            <div id="relational" class="theory-section">
+                <div class="theory-header">
+                    <div class="theory-number">4</div>
+                    <div>
+                        <h2 class="theory-title">Relational Operators</h2>
+                        <p class="theory-subtitle">&lt;, &lt;=, &gt;, &gt;= comparison operators</p>
+                    </div>
+                </div>
+
+                <div class="theory-content">
+                    <div class="theory-point">
+                        <div class="point-title">Applicable to All Primitive Types Except boolean</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                System.out.println(<span class="code-number">10</span> > <span
+                                    class="code-number">10.5</span>); <span class="code-comment">// false</span><br>
+                                System.out.println(<span class="code-string">'a'</span> > <span
+                                    class="code-number">95.5</span>); <span class="code-comment">// true</span><br>
+                                System.out.println(<span class="code-string">'z'</span> > <span
+                                    class="code-string">'a'</span>); <span class="code-comment">// true</span><br>
+
+                                System.out.println(<span class="code-keyword">true</span> > <span
+                                    class="code-keyword">false</span>); <span class="code-comment">// Compile
+                                    Error!</span><br>
+                                <span class="code-comment">// C.E: operator > cannot be applied to boolean,
+                                    boolean</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Not Applicable to Object Types</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                System.out.println(<span class="code-string">"bhaskar"</span> > <span
+                                    class="code-string">"bhaskar"</span>); <span class="code-comment">// Compile
+                                    Error!</span><br>
+                                <span class="code-comment">// C.E: operator > cannot be applied to String, String</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">No Nesting Allowed</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                System.out.println(<span class="code-number">10</span>
+                                < <span class="code-number">20</span>
+                                    < <span class="code-number">30</span>); <span class="code-comment">// Compile
+                                            Error!</span><br>
+                                        <span class="code-comment">// C.E: operator < cannot be applied to boolean,
+                                                int</span><br>
+                                                <span class="code-comment">// (10 < 20) returns boolean, then (boolean <
+                                                        30) is invalid</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Equality Operators -->
+            <div id="equality" class="theory-section">
+                <div class="theory-header">
+                    <div class="theory-number">5</div>
+                    <div>
+                        <h2 class="theory-title">Equality Operators</h2>
+                        <p class="theory-subtitle">== and != operators for primitives and objects</p>
+                    </div>
+                </div>
+
+                <div class="theory-content">
+                    <div class="theory-point">
+                        <div class="point-title">Applicable to All Primitive Types Including boolean</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                System.out.println(<span class="code-number">10</span> == <span
+                                    class="code-number">20</span>); <span class="code-comment">// false</span><br>
+                                System.out.println(<span class="code-string">'a'</span> == <span
+                                    class="code-string">'b'</span>); <span class="code-comment">// false</span><br>
+                                System.out.println(<span class="code-string">'a'</span> == <span
+                                    class="code-number">97.0</span>); <span class="code-comment">// true</span><br>
+                                System.out.println(<span class="code-keyword">false</span> == <span
+                                    class="code-keyword">false</span>); <span class="code-comment">// true</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">For Objects: Reference/Address Comparison</div>
+                        <div class="point-content">
+                            <p><code>r1 == r2</code> returns true only if both references point to the same object.</p>
+                            <div class="code-block">
+                                <span class="code-keyword">Thread</span> t1 = <span class="code-keyword">new</span>
+                                Thread();<br>
+                                <span class="code-keyword">Thread</span> t2 = <span class="code-keyword">new</span>
+                                Thread();<br>
+                                <span class="code-keyword">Thread</span> t3 = t1;<br><br>
+
+                                System.out.println(t1 == t2); <span class="code-comment">// false</span><br>
+                                System.out.println(t1 == t3); <span class="code-comment">// true</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Must Have Type Relationship Between Objects</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-keyword">Thread</span> t = <span class="code-keyword">new</span>
+                                Thread();<br>
+                                <span class="code-keyword">Object</span> o = <span class="code-keyword">new</span>
+                                Object();<br>
+                                <span class="code-keyword">String</span> s = <span class="code-keyword">new</span>
+                                String(<span class="code-string">"durga"</span>);<br><br>
+
+                                System.out.println(t == o); <span class="code-comment">// false (valid: Thread is
+                                    subclass of Object)</span><br>
+                                System.out.println(o == s); <span class="code-comment">// false (valid: String is
+                                    subclass of Object)</span><br>
+
+                                System.out.println(s == t); <span class="code-comment">// Compile Error!</span><br>
+                                <span class="code-comment">// C.E: incompatible types: String and Thread (no
+                                    relationship)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Null Comparisons</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-keyword">String</span> s = <span class="code-keyword">new</span>
+                                String(<span class="code-string">"ashok"</span>);<br>
+                                System.out.println(s == <span class="code-keyword">null</span>); <span
+                                    class="code-comment">// false</span><br><br>
+
+                                <span class="code-keyword">String</span> r = <span class="code-keyword">null</span>;<br>
+                                System.out.println(r == <span class="code-keyword">null</span>); <span
+                                    class="code-comment">// true</span><br>
+                                System.out.println(<span class="code-keyword">null</span> == <span
+                                    class="code-keyword">null</span>); <span class="code-comment">// true</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="note">
+                        <div class="note-header">📌 == vs .equals()</div>
+                        <p><strong>== operator:</strong> Reference comparison (address comparison)</p>
+                        <p><strong>.equals() method:</strong> Content comparison (overridden in String, wrapper classes)
+                        </p>
+                        <div class="code-block">
+                            <span class="code-keyword">String</span> s1 = <span class="code-keyword">new</span>
+                            String(<span class="code-string">"ashok"</span>);<br>
+                            <span class="code-keyword">String</span> s2 = <span class="code-keyword">new</span>
+                            String(<span class="code-string">"ashok"</span>);<br><br>
+
+                            System.out.println(s1 == s2); <span class="code-comment">// false (different
+                                objects)</span><br>
+                            System.out.println(s1.equals(s2)); <span class="code-comment">// true (same content)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. instanceof Operator -->
+            <div id="instanceof" class="theory-section">
+                <div class="theory-header">
+                    <div class="theory-number">6</div>
+                    <div>
+                        <h2 class="theory-title">instanceof Operator</h2>
+                        <p class="theory-subtitle">Type checking at runtime</p>
+                    </div>
+                </div>
+
+                <div class="theory-content">
+                    <div class="theory-point">
+                        <div class="point-title">Basic Usage</div>
+                        <div class="point-content">
+                            <p>Syntax: <code>objectReference instanceof ClassName/InterfaceName</code></p>
+                            <div class="code-block">
+                                <span class="code-keyword">Thread</span> t = <span class="code-keyword">new</span>
+                                Thread();<br>
+                                System.out.println(t <span class="code-keyword">instanceof</span> Thread); <span
+                                    class="code-comment">// true</span><br>
+                                System.out.println(t <span class="code-keyword">instanceof</span> Object); <span
+                                    class="code-comment">// true</span><br>
+                                System.out.println(t <span class="code-keyword">instanceof</span> Runnable); <span
+                                    class="code-comment">// true (Thread implements Runnable)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Must Have Type Relationship</div>
+                        <div class="point-content">
+                            <p>Compile-time requirement: There must be some relationship between the types
+                                (child-parent, parent-child, or same type).</p>
+                            <div class="code-block">
+                                <span class="code-keyword">String</span> s = <span class="code-keyword">new</span>
+                                String(<span class="code-string">"bhaskar"</span>);<br>
+                                System.out.println(s <span class="code-keyword">instanceof</span> Thread); <span
+                                    class="code-comment">// Compile Error!</span><br>
+                                <span class="code-comment">// C.E: inconvertible types found: String, required:
+                                    Thread</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Parent Object is Child Type → false</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-keyword">Object</span> o1 = <span class="code-keyword">new</span>
+                                Object();<br>
+                                System.out.println(o1 <span class="code-keyword">instanceof</span> String); <span
+                                    class="code-comment">// false</span><br><br>
+
+                                <span class="code-keyword">Object</span> o2 = <span class="code-keyword">new</span>
+                                String(<span class="code-string">"ashok"</span>);<br>
+                                System.out.println(o2 <span class="code-keyword">instanceof</span> String); <span
+                                    class="code-comment">// true</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">null instanceof X → Always false</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                System.out.println(<span class="code-keyword">null</span> <span
+                                    class="code-keyword">instanceof</span> String); <span class="code-comment">//
+                                    false</span><br>
+                                System.out.println(<span class="code-keyword">null</span> <span
+                                    class="code-keyword">instanceof</span> Object); <span class="code-comment">//
+                                    false</span><br>
+                                System.out.println(<span class="code-keyword">null</span> <span
+                                    class="code-keyword">instanceof</span> Runnable); <span class="code-comment">//
+                                    false</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. Bitwise Operators -->
+            <div id="bitwise" class="theory-section">
+                <div class="theory-header">
+                    <div class="theory-number">7</div>
+                    <div>
+                        <h2 class="theory-title">Bitwise Operators</h2>
+                        <p class="theory-subtitle">&, |, ^, ~ operators for booleans and integrals</p>
+                    </div>
+                </div>
+
+                <div class="theory-content">
+                    <div class="theory-point">
+                        <div class="point-title">Boolean Bitwise Operators</div>
+                        <div class="point-content">
+                            <p><strong>& (AND):</strong> true only if both operands are true</p>
+                            <p><strong>| (OR):</strong> true if at least one operand is true</p>
+                            <p><strong>^ (XOR):</strong> true if operands are different</p>
+
+                            <div class="code-block">
+                                System.out.println(<span class="code-keyword">true</span> & <span
+                                    class="code-keyword">false</span>); <span class="code-comment">// false</span><br>
+                                System.out.println(<span class="code-keyword">true</span> | <span
+                                    class="code-keyword">false</span>); <span class="code-comment">// true</span><br>
+                                System.out.println(<span class="code-keyword">true</span> ^ <span
+                                    class="code-keyword">false</span>); <span class="code-comment">// true</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Integral Bitwise Operators</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                System.out.println(<span class="code-number">4</span> & <span
+                                    class="code-number">5</span>); <span class="code-comment">// 4</span><br>
+                                System.out.println(<span class="code-number">4</span> | <span
+                                    class="code-number">5</span>); <span class="code-comment">// 5</span><br>
+                                System.out.println(<span class="code-number">4</span> ^ <span
+                                    class="code-number">5</span>); <span class="code-comment">// 1</span><br><br>
+
+                                <span class="code-comment">// Binary representation:</span><br>
+                                <span class="code-comment">// 4 = 100, 5 = 101</span><br>
+                                <span class="code-comment">// 4 & 5 = 100 & 101 = 100 = 4</span><br>
+                                <span class="code-comment">// 4 | 5 = 100 | 101 = 101 = 5</span><br>
+                                <span class="code-comment">// 4 ^ 5 = 100 ^ 101 = 001 = 1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Bitwise Complement (~) Operator</div>
+                        <div class="point-content">
+                            <p>Applicable only for integral types, NOT for boolean.</p>
+                            <div class="code-block">
+                                System.out.println(~<span class="code-number">4</span>); <span class="code-comment">//
+                                    -5</span><br>
+                                System.out.println(~<span class="code-keyword">true</span>); <span
+                                    class="code-comment">// Compile Error!</span><br>
+                                <span class="code-comment">// C.E: operator ~ cannot be applied to boolean</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Boolean Complement (!) Operator</div>
+                        <div class="point-content">
+                            <p>Applicable only for boolean types, NOT for integral types.</p>
+                            <div class="code-block">
+                                System.out.println(!<span class="code-keyword">true</span>); <span
+                                    class="code-comment">// false</span><br>
+                                System.out.println(!<span class="code-keyword">false</span>); <span
+                                    class="code-comment">// true</span><br>
+                                System.out.println(!<span class="code-number">4</span>); <span class="code-comment">//
+                                    Compile Error!</span><br>
+                                <span class="code-comment">// C.E: operator ! cannot be applied to int</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="note">
+                        <div class="note-header">📋 Summary:</div>
+                        <table class="theory-table">
+                            <thead>
+                                <tr>
+                                    <th>Operator</th>
+                                    <th>Applicable For</th>
+                                    <th>Not Applicable For</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>&, |, ^</strong></td>
+                                    <td>Both boolean and integral types</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>~</strong></td>
+                                    <td>Integral types only</td>
+                                    <td>boolean</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>!</strong></td>
+                                    <td>boolean types only</td>
+                                    <td>integral types</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. Short Circuit Operators -->
+            <div id="short-circuit" class="theory-section">
+                <div class="theory-header">
+                    <div class="theory-number">8</div>
+                    <div>
+                        <h2 class="theory-title">Short Circuit Operators</h2>
+                        <p class="theory-subtitle">&& and || vs & and |</p>
+                    </div>
+                </div>
+
+                <div class="theory-content">
+                    <div class="theory-point">
+                        <div class="point-title">Differences Between &,| and &&,||</div>
+                        <div class="point-content">
+                            <table class="theory-table">
+                                <thead>
+                                    <tr>
+                                        <th>Aspect</th>
+                                        <th>& , |</th>
+                                        <th>&& , ||</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Argument Evaluation</strong></td>
+                                        <td>Both arguments evaluated always</td>
+                                        <td>Second argument evaluation is optional</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Performance</strong></td>
+                                        <td>Relatively low</td>
+                                        <td>Relatively high</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Applicable Types</strong></td>
+                                        <td>Both integral and boolean types</td>
+                                        <td>Only boolean types</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Evaluation Rules</div>
+                        <div class="point-content">
+                            <p><strong>&& (AND):</strong> y evaluated ONLY if x is true</p>
+                            <p><strong>|| (OR):</strong> y evaluated ONLY if x is false</p>
+
+                            <div class="code-block">
+                                <span class="code-keyword">int</span> x = <span class="code-number">10</span>, y = <span
+                                    class="code-number">15</span>;<br>
+                                <span class="code-keyword">if</span> (++x < <span class="code-number">10</span> && ++y >
+                                    <span class="code-number">15</span>) {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;x++;<br>
+                                    } <span class="code-keyword">else</span> {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;y++;<br>
+                                    }<br>
+                                    System.out.println(<span class="code-string">"x="</span> + x + <span
+                                        class="code-string">" y="</span> + y);<br>
+                                    <span class="code-comment">// Output with &&: x=11 y=16 (y++ executed, ++y NOT
+                                        evaluated)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Avoiding Exceptions with Short Circuit</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-keyword">int</span> x = <span class="code-number">10</span>;<br>
+                                <span class="code-keyword">if</span> (++x < <span class="code-number">10</span> &&
+                                    (x/<span class="code-number">0</span>) > <span class="code-number">10</span>) {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span
+                                        class="code-string">"Hello"</span>);<br>
+                                    } <span class="code-keyword">else</span> {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span
+                                        class="code-string">"Hi"</span>);<br>
+                                    }<br>
+                                    <span class="code-comment">// Output: Hi (no ArithmeticException because (x/0) not
+                                        evaluated)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="note">
+                        <div class="note-header">🎯 Performance Example:</div>
+                        <div class="code-block">
+                            <span class="code-comment">// With & and | (ALWAYS evaluate both):</span><br>
+                            <span class="code-keyword">if</span> (method1() & method2()) { ... } <span
+                                class="code-comment">// Both methods called</span><br><br>
+
+                            <span class="code-comment">// With && and || (CONDITIONALLY evaluate second):</span><br>
+                            <span class="code-keyword">if</span> (method1() && method2()) { ... } <span
+                                class="code-comment">// method2 called only if method1 true</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. Type Cast Operators -->
+            <div id="typecast" class="theory-section">
+                <div class="theory-header">
+                    <div class="theory-number">9</div>
+                    <div>
+                        <h2 class="theory-title">Type Cast Operators</h2>
+                        <p class="theory-subtitle">Implicit and explicit type casting</p>
+                    </div>
+                </div>
+
+                <div class="theory-content">
+                    <div class="theory-point">
+                        <div class="point-title">Implicit Type Casting (Widening)</div>
+                        <div class="point-content">
+                            <ul>
+                                <li>Compiler performs automatically</li>
+                                <li>Lower datatype → Higher datatype</li>
+                                <li>No loss of information</li>
+                                <li>Also called Upcasting</li>
+                            </ul>
+
+                            <div class="code-block">
+                                <span class="code-keyword">int</span> x = <span class="code-string">'a'</span>; <span
+                                    class="code-comment">// char to int (97)</span><br>
+                                System.out.println(x); <span class="code-comment">// Output: 97</span><br><br>
+
+                                <span class="code-keyword">double</span> d = <span class="code-number">10</span>; <span
+                                    class="code-comment">// int to double</span><br>
+                                System.out.println(d); <span class="code-comment">// Output: 10.0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Explicit Type Casting (Narrowing)</div>
+                        <div class="point-content">
+                            <ul>
+                                <li>Programmer must specify</li>
+                                <li>Higher datatype → Lower datatype</li>
+                                <li>May lose information</li>
+                                <li>Also called Downcasting</li>
+                            </ul>
+
+                            <div class="code-block">
+                                <span class="code-keyword">int</span> x = <span class="code-number">130</span>;<br>
+                                <span class="code-keyword">byte</span> b = (<span class="code-keyword">byte</span>)x;
+                                <span class="code-comment">// Explicit cast required</span><br>
+                                System.out.println(b); <span class="code-comment">// Output: -126</span><br><br>
+
+                                <span class="code-keyword">byte</span> b = x; <span class="code-comment">// Compile
+                                    Error!</span><br>
+                                <span class="code-comment">// C.E: possible loss of precision</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Type Casting Rules</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-comment">// Most significant bits lost when casting to smaller
+                                    type</span><br>
+                                <span class="code-keyword">int</span> x = <span class="code-number">150</span>;<br>
+                                <span class="code-keyword">short</span> s = (<span
+                                    class="code-keyword">short</span>)x;<br>
+                                <span class="code-keyword">byte</span> b = (<span
+                                    class="code-keyword">byte</span>)x;<br>
+                                System.out.println(s); <span class="code-comment">// 150</span><br>
+                                System.out.println(b); <span class="code-comment">// -106</span><br><br>
+
+                                <span class="code-comment">// Decimal points lost when casting floating to
+                                    integral</span><br>
+                                <span class="code-keyword">double</span> d = <span
+                                    class="code-number">130.456</span>;<br>
+                                <span class="code-keyword">int</span> i = (<span class="code-keyword">int</span>)d;<br>
+                                System.out.println(i); <span class="code-comment">// 130</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="note">
+                        <div class="note-header">📋 Type Casting Hierarchy:</div>
+                        <p><strong>Implicit (no cast needed):</strong> byte → short → int → long → float → double</p>
+                        <p><strong>Explicit (cast required):</strong> double → float → long → int → short → byte</p>
+                        <p><strong>char:</strong> Can implicitly cast to int/long/float/double, but requires explicit
+                            cast from other types</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10. Assignment Operators -->
+            <div id="assignment" class="theory-section">
+                <div class="theory-header">
+                    <div class="theory-number">10</div>
+                    <div>
+                        <h2 class="theory-title">Assignment Operators</h2>
+                        <p class="theory-subtitle">=, +=, -=, *=, /=, %= operators</p>
+                    </div>
+                </div>
+
+                <div class="theory-content">
+                    <div class="theory-point">
+                        <div class="point-title">1. Simple Assignment</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-keyword">int</span> x = <span class="code-number">10</span>; <span
+                                    class="code-comment">// Simple assignment</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">2. Chained Assignment</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-keyword">int</span> a, b, c, d;<br>
+                                a = b = c = d = <span class="code-number">20</span>; <span class="code-comment">// Valid
+                                    chained assignment</span><br>
+                                System.out.println(a + <span class="code-string">"---"</span> + b + <span
+                                    class="code-string">"---"</span> + c + <span class="code-string">"---"</span> +
+                                d);<br>
+                                <span class="code-comment">// Output: 20---20---20---20</span>
+                            </div>
+
+                            <div class="note warning">
+                                <div class="note-header">⚠️ Cannot Chain at Declaration:</div>
+                                <div class="code-block">
+                                    <span class="code-keyword">int</span> a = b = c = d = <span
+                                        class="code-number">30</span>; <span class="code-comment">// Compile
+                                        Error!</span><br>
+                                    <span class="code-comment">// C.E: cannot find symbol (variables b, c, d not
+                                        declared)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">3. Compound Assignment Operators</div>
+                        <div class="point-content">
+                            <p>Mix assignment with other operators:</p>
+                            <table class="theory-table">
+                                <thead>
+                                    <tr>
+                                        <th>Operator</th>
+                                        <th>Example</th>
+                                        <th>Equivalent To</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>+=</code></td>
+                                        <td><code>a += 20</code></td>
+                                        <td><code>a = a + 20</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>-=</code></td>
+                                        <td><code>a -= 5</code></td>
+                                        <td><code>a = a - 5</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>*=</code></td>
+                                        <td><code>a *= 3</code></td>
+                                        <td><code>a = a * 3</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>/=</code></td>
+                                        <td><code>a /= 2</code></td>
+                                        <td><code>a = a / 2</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>%=</code></td>
+                                        <td><code>a %= 3</code></td>
+                                        <td><code>a = a % 3</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>&amp;=</code></td>
+                                        <td><code>a &amp;= 2</code></td>
+                                        <td><code>a = a &amp; 2</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>|=</code></td>
+                                        <td><code>a |= 2</code></td>
+                                        <td><code>a = a | 2</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>^=</code></td>
+                                        <td><code>a ^= 2</code></td>
+                                        <td><code>a = a ^ 2</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="note">
+                        <div class="note-header">🎯 Internal Type Casting in Compound Assignment:</div>
+                        <p>Compound assignment operators perform automatic type casting:</p>
+                        <div class="code-block">
+                            <span class="code-keyword">byte</span> b = <span class="code-number">10</span>;<br>
+                            b += <span class="code-number">1</span>; <span class="code-comment">// Valid: b = (byte)(b +
+                                1)</span><br><br>
+
+                            b = b + <span class="code-number">1</span>; <span class="code-comment">// Compile
+                                Error!</span><br>
+                            <span class="code-comment">// C.E: possible loss of precision</span><br>
+                            <span class="code-comment">// b+1 returns int, can't assign to byte without cast</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11. Conditional Operator -->
+            <div id="conditional" class="theory-section">
+                <div class="theory-header">
+                    <div class="theory-number">11</div>
+                    <div>
+                        <h2 class="theory-title">Conditional Operator (? :)</h2>
+                        <p class="theory-subtitle">Java's only ternary operator</p>
+                    </div>
+                </div>
+
+                <div class="theory-content">
+                    <div class="theory-point">
+                        <div class="point-title">Basic Syntax</div>
+                        <div class="point-content">
+                            <p><code>condition ? expression1 : expression2</code></p>
+                            <div class="code-block">
+                                <span class="code-keyword">int</span> x = (<span class="code-number">10</span> > <span
+                                    class="code-number">20</span>) ? <span class="code-number">30</span> : <span
+                                    class="code-number">40</span>;<br>
+                                System.out.println(x); <span class="code-comment">// Output: 40</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Nesting Allowed</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-keyword">int</span> x = (<span class="code-number">10</span> > <span
+                                    class="code-number">20</span>) ? <span class="code-number">30</span> : ((<span
+                                    class="code-number">40</span> > <span class="code-number">50</span>) ? <span
+                                    class="code-number">60</span> : <span class="code-number">70</span>);<br>
+                                System.out.println(x); <span class="code-comment">// Output: 70</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Type Compatibility Issue</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-keyword">int</span> a = <span class="code-number">10</span>, b = <span
+                                    class="code-number">20</span>;<br>
+                                <span class="code-keyword">byte</span> c1 = (a > b) ? <span
+                                    class="code-number">30</span> : <span class="code-number">40</span>; <span
+                                    class="code-comment">// Compile Error!</span><br>
+                                <span class="code-comment">// C.E: possible loss of precision</span><br>
+                                <span class="code-comment">// 30 and 40 are int literals, result is int</span>
+                            </div>
+
+                            <div class="note">
+                                <div class="note-header">📌 Solution:</div>
+                                <div class="code-block">
+                                    <span class="code-keyword">byte</span> c1 = (a > b) ? (<span
+                                        class="code-keyword">byte</span>)<span class="code-number">30</span> : (<span
+                                        class="code-keyword">byte</span>)<span class="code-number">40</span>; <span
+                                        class="code-comment">// Valid</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 12. new Operator and Related Concepts -->
+            <div id="new-operator" class="theory-section">
+                <div class="theory-header">
+                    <div class="theory-number">12</div>
+                    <div>
+                        <h2 class="theory-title">new Operator & Related Concepts</h2>
+                        <p class="theory-subtitle">Object creation, arrays, and runtime type checking</p>
+                    </div>
+                </div>
+
+                <div class="theory-content">
+                    <div class="theory-point">
+                        <div class="point-title">new Operator</div>
+                        <div class="point-content">
+                            <p>Used to create objects:</p>
+                            <div class="code-block">
+                                <span class="code-keyword">String</span> s = <span class="code-keyword">new</span>
+                                String(<span class="code-string">"Java"</span>);<br>
+                                <span class="code-keyword">Thread</span> t = <span class="code-keyword">new</span>
+                                Thread();
+                            </div>
+                            <p>Note: There is NO <code>delete</code> operator in Java (garbage collector handles
+                                cleanup).</p>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">[ ] Operator (Arrays)</div>
+                        <div class="point-content">
+                            <p>Used to declare/create arrays:</p>
+                            <div class="code-block">
+                                <span class="code-keyword">int</span>[] arr = <span class="code-keyword">new</span>
+                                <span class="code-keyword">int</span>[<span class="code-number">5</span>]; <span
+                                    class="code-comment">// Array creation</span><br>
+                                arr[<span class="code-number">0</span>] = <span class="code-number">10</span>; <span
+                                    class="code-comment">// Array element access</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Java Operator Precedence</div>
+                        <div class="point-content">
+                            <ol>
+                                <li><strong>Unary operators:</strong> [], x++, x--, ++x, --x, +x, -x, ~, !, new, (type)
+                                </li>
+                                <li><strong>Arithmetic:</strong> *, /, %, +, -</li>
+                                <li><strong>Shift:</strong> >>, >>>, <<< /li>
+                                <li><strong>Comparison:</strong>
+                                    <, <=,>, >=, instanceof
+                                </li>
+                                <li><strong>Equality:</strong> ==, !=</li>
+                                <li><strong>Bitwise:</strong> &, ^, |</li>
+                                <li><strong>Short circuit:</strong> &&, ||</li>
+                                <li><strong>Conditional:</strong> ? :</li>
+                                <li><strong>Assignment:</strong> =, +=, -=, *=, /=, %=, etc.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Evaluation Order of Operands</div>
+                        <div class="point-content">
+                            <p>Operands are evaluated from left to right before applying any operator:</p>
+                            <div class="code-block">
+                                <span class="code-keyword">class</span> Test {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">public static void</span>
+                                main(String[] args) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(m1(<span
+                                    class="code-number">1</span>) + m1(<span class="code-number">2</span>) * m1(<span
+                                    class="code-number">3</span>) / m1(<span class="code-number">4</span>) + m1(<span
+                                    class="code-number">5</span>) * m1(<span class="code-number">6</span>));<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">public static int</span> m1(<span
+                                    class="code-keyword">int</span> i) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(i);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span>
+                                i;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }<br>
+                                <span class="code-comment">// Output: 1 2 3 4 5 6 (all operands evaluated left to right
+                                    first)</span><br>
+                                <span class="code-comment">// Then: 1 + (2*3)/4 + (5*6) = 1 + 1 + 30 = 32</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">new vs newInstance()</div>
+                        <div class="point-content">
+                            <table class="theory-table">
+                                <thead>
+                                    <tr>
+                                        <th>Aspect</th>
+                                        <th>new Operator</th>
+                                        <th>newInstance() Method</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Type</strong></td>
+                                        <td>Operator</td>
+                                        <td>Method in Class class</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>When to Use</strong></td>
+                                        <td>Class known at compile time</td>
+                                        <td>Class known dynamically at runtime</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Example</strong></td>
+                                        <td><code>Test t = new Test();</code></td>
+                                        <td><code>Object o = Class.forName(args[0]).newInstance();</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Error if class not found</strong></td>
+                                        <td>NoClassDefFoundError (unchecked)</td>
+                                        <td>ClassNotFoundException (checked)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Constructor requirement</strong></td>
+                                        <td>Any constructor</td>
+                                        <td>Must have no-arg constructor</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">instanceof vs isInstance()</div>
+                        <div class="point-content">
+                            <table class="theory-table">
+                                <thead>
+                                    <tr>
+                                        <th>Aspect</th>
+                                        <th>instanceof Operator</th>
+                                        <th>isInstance() Method</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Type</strong></td>
+                                        <td>Operator</td>
+                                        <td>Method in Class class</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>When to Use</strong></td>
+                                        <td>Type known at compile time</td>
+                                        <td>Type known dynamically at runtime</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Example</strong></td>
+                                        <td><code>s instanceof String</code></td>
+                                        <td><code>Class.forName("java.lang.String").isInstance(s)</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">ClassNotFoundException vs NoClassDefFoundError</div>
+                        <div class="point-content">
+                            <table class="theory-table">
+                                <thead>
+                                    <tr>
+                                        <th>Aspect</th>
+                                        <th>ClassNotFoundException</th>
+                                        <th>NoClassDefFoundError</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Type</strong></td>
+                                        <td>Checked Exception</td>
+                                        <td>Unchecked Error</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>When occurs</strong></td>
+                                        <td>Dynamic class loading fails</td>
+                                        <td>Static class reference fails</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Example</strong></td>
+                                        <td><code>Class.forName("Test")</code> when Test.class missing</td>
+                                        <td><code>Test t = new Test();</code> when Test.class missing</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Complex Examples Section -->
+            <div class="theory-section">
+                <div class="theory-header">
+                    <div class="theory-number">💡</div>
+                    <div>
+                        <h2 class="theory-title">Complex Examples</h2>
+                        <p class="theory-subtitle">Tricky operator combinations and evaluations</p>
+                    </div>
+                </div>
+
+                <div class="theory-content">
+                    <div class="theory-point">
+                        <div class="point-title">Example 1: x = x++ evaluation</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-keyword">int</span> x = <span class="code-number">10</span>;<br>
+                                x = x++;<br>
+                                System.out.println(x); <span class="code-comment">// Output: 10</span><br><br>
+
+                                <span class="code-comment">// Evaluation steps:</span><br>
+                                <span class="code-comment">// 1. Consider old value of x for assignment: x =
+                                    10</span><br>
+                                <span class="code-comment">// 2. Increment x: x becomes 11</span><br>
+                                <span class="code-comment">// 3. Perform assignment with old considered value: x =
+                                    10</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Example 2: Compound assignment with multiple increments</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-keyword">int</span> i = <span class="code-number">1</span>;<br>
+                                i += ++i + i++ + ++i + i++;<br>
+                                System.out.println(i); <span class="code-comment">// Output: 13</span><br><br>
+
+                                <span class="code-comment">// Evaluation:</span><br>
+                                <span class="code-comment">// i = i + ++i + i++ + ++i + i++</span><br>
+                                <span class="code-comment">// i = 1 + 2 + 2 + 4 + 4</span><br>
+                                <span class="code-comment">// i = 13</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="cta-section">
+                <h2 class="cta-title">Ready to Test Your Knowledge?</h2>
+                <p class="cta-description">Take the comprehensive quiz on Java Operators & Assignments to validate your
+                    understanding and earn a certificate!</p>
+                <a href="operators-quiz.html" class="btn btn-primary"
+                    style="background: white; color: #059669; font-size: 1.125rem; padding: 1rem 2.5rem;">
+                    Take Operators Quiz Now 🚀
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <img src="assets/logo.svg" alt="NamastAI.shiksha Logo" width="40" height="40">
+                        </div>
+                        <span class="logo-text">
+                            <span class="text-brand-blue">Namast</span>
+                            <span class="text-brand-orange">Ai</span>
+                            <span class="accent">.shiksha</span>
+                        </span>
+                    </div>
+                    <p class="footer-tagline">Empowering the next generation of software developers with industry-ready
+                        skills.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <a href="index.html"
+                        style="color: rgba(255, 255, 255, 0.7); text-decoration: none; display: block; margin-top: 0.5rem;">Home
+                        Page</a>
+                    <a href="/curriculum.html"
+                        style="color: rgba(255, 255, 255, 0.7); text-decoration: none; display: block; margin-top: 0.5rem;">Curriculum</a>
+                    <a href="/enroll.html"
+                        style="color: rgba(255, 255, 255, 0.7); text-decoration: none; display: block; margin-top: 0.5rem;">Enroll
+                        Now</a>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <p style="color: rgba(255, 255, 255, 0.7); margin-top: 0.5rem;">📧 info@namastai.shiksha</p>
+                    <p style="color: rgba(255, 255, 255, 0.7); margin-top: 0.5rem;">📞 +91 9246212143, 8096969696</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 NamastAI.shiksha. All rights reserved.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.875rem;">Professional Java Learning Platform - Interactive
+                    Assessments</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for topic cards
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Add syntax highlighting to code blocks
+        document.addEventListener('DOMContentLoaded', function () {
+            // This would be enhanced with a proper syntax highlighter in production
+            // For now, we'll just ensure code blocks are visible
+            const codeBlocks = document.querySelectorAll('.code-block');
+            codeBlocks.forEach(block => {
+                block.style.fontFamily = "'Fira Code', 'Courier New', monospace";
+            });
+        });
+    </script>
+</body>
+
+</html>
