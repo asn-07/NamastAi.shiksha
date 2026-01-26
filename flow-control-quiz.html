@@ -1,0 +1,2201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Flow Control Quiz - NamastAI.shiksha</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <!-- PDF Generation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        :root {
+            --color-primary: #0056D2;
+            --color-primary-dark: #003c94;
+            --color-primary-light: #3d7ce5;
+            --color-accent: #10b981;
+            --color-accent-light: #6ee7b7;
+            --color-success: #059669;
+            --color-error: #dc2626;
+            --color-warning: #d97706;
+            --color-certificate: #fef3c7;
+            --color-bg: #ffffff;
+            --color-bg-secondary: #f9fafb;
+            --color-bg-tertiary: #f3f4f6;
+            --color-text: #111827;
+            --color-text-secondary: #6b7280;
+            --color-text-muted: #9ca3af;
+            --color-border: #e5e7eb;
+            --gradient-primary: linear-gradient(135deg, #0056D2 0%, #7c3aed 100%);
+            --gradient-accent: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--color-bg-secondary);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--color-text);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .text-brand-blue {
+            color: #0056D2;
+        }
+
+        .text-brand-orange {
+            color: #FF8C00;
+        }
+
+        .accent {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 1rem;
+            padding: 3rem;
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-xl);
+            animation: slideInDown 0.6s ease;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 0.625rem;
+            transition: var(--transition-base);
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--color-primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--color-border);
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .quiz-subtitle {
+            color: var(--color-text-secondary);
+            font-size: 1.125rem;
+        }
+
+        /* Quiz Registration */
+        .quiz-registration {
+            background: var(--color-bg-secondary);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .registration-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--color-border);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition-base);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .btn-accent {
+            background: var(--gradient-accent);
+            color: white;
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Quiz Content */
+        .student-info {
+            background: var(--color-bg-secondary);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .student-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+
+        .quiz-progress {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: var(--color-bg-secondary);
+            border-radius: 0.75rem;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 8px;
+            background: var(--color-border);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-accent);
+            width: 0%;
+            transition: width 0.6s ease;
+        }
+
+        .question-card {
+            background: var(--color-bg-secondary);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--color-border);
+            animation: scaleIn 0.4s ease;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .question-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: var(--color-primary);
+            color: white;
+            border-radius: 50%;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .question-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+
+        @media (min-width: 768px) {
+            .options-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            background: white;
+            border: 2px solid var(--color-border);
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition-base);
+        }
+
+        .option-label:hover {
+            border-color: var(--color-primary-light);
+            background: var(--color-bg-tertiary);
+        }
+
+        .option-label.selected {
+            border-color: var(--color-primary);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .option-label.correct {
+            border-color: var(--color-success);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .option-label.incorrect {
+            border-color: var(--color-error);
+            background: rgba(220, 38, 38, 0.1);
+        }
+
+        .option-input {
+            display: none;
+        }
+
+        .quiz-controls {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* Result Animation */
+        .result-container {
+            display: none;
+            text-align: center;
+            padding: 3rem;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .result-icon {
+            font-size: 6rem;
+            margin-bottom: 1.5rem;
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .result-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .result-pass {
+            color: var(--color-success);
+        }
+
+        .result-fail {
+            color: var(--color-error);
+        }
+
+        .result-score {
+            font-size: 4rem;
+            font-weight: 900;
+            margin: 1rem 0;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .result-message {
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Certificate Styles */
+        .certificate-container {
+            display: none;
+            background: var(--color-certificate);
+            border: 20px solid #d4af37;
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem auto;
+            max-width: 800px;
+            position: relative;
+            box-shadow: var(--shadow-xl);
+            animation: certificateAppear 1s ease;
+        }
+
+        @keyframes certificateAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.8) rotate(-5deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0);
+            }
+        }
+
+        .certificate-border {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px solid #d4af37;
+            border-radius: 10px;
+            pointer-events: none;
+        }
+
+        .certificate-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .certificate-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .certificate-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #d4af37;
+            margin-bottom: 0.5rem;
+        }
+
+        .certificate-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .certificate-body {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .certificate-text {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: var(--color-text);
+        }
+
+        .student-name {
+            font-size: 3rem;
+            font-family: 'Dancing Script', cursive;
+            color: var(--color-primary);
+            margin: 1.5rem 0;
+            padding: 1rem;
+            border-bottom: 2px solid #d4af37;
+            border-top: 2px solid #d4af37;
+        }
+
+        .certificate-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .certificate-date,
+        .certificate-score {
+            text-align: center;
+        }
+
+        .certificate-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            background: var(--gradient-primary);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Print & PDF Download Optimization */
+        @media print {
+            .certificate-container {
+                box-shadow: none;
+                page-break-inside: avoid;
+            }
+
+            .certificate-actions {
+                display: none;
+            }
+
+            body {
+                background: white;
+            }
+        }
+
+        /* Ensure certificate fonts load properly */
+        .certificate-title,
+        .student-name {
+            font-display: block;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--color-text);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-brand .logo {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-tagline {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .quiz-section {
+                padding: 1.5rem;
+            }
+
+            .certificate-container {
+                padding: 2rem;
+                margin: 2rem 1rem;
+            }
+
+            .certificate-title {
+                font-size: 2.5rem;
+            }
+
+            .student-name {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .quiz-title {
+                font-size: 1.75rem;
+            }
+
+            .result-title {
+                font-size: 2rem;
+            }
+
+            .quiz-controls {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .certificate-details {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .certificate-title {
+                font-size: 2rem;
+            }
+
+            .student-name {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .quiz-title {
+                font-size: 1.5rem;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <img src="assets/logo.svg" alt="NamastAI.shiksha Logo" width="40" height="40">
+                    </div>
+                    <span class="logo-text">
+                        <span class="text-brand-blue">Namast</span>
+                        <span class="text-brand-orange">Ai</span>
+                        <span class="accent">.shiksha</span>
+                    </span>
+                </a>
+                <div class="nav-actions">
+                    <a href="flow-control-theory.html" class="btn btn-primary">Back to Theory</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Quiz Section -->
+        <section class="quiz-section">
+            <div class="quiz-header">
+                <h2 class="quiz-title">🎯 Java Flow Control Quiz</h2>
+                <p class="quiz-subtitle">Test your knowledge of Java flow control - if-else, switch, loops, break, continue, and transfer statements. Score 50% or more to earn your certificate!</p>
+            </div>
+
+            <!-- Quiz Registration -->
+            <div id="quiz-registration" class="quiz-registration">
+                <h3 style="margin-bottom: 1.5rem;">Enter Your Details to Start Quiz</h3>
+                <div class="registration-form">
+                    <div class="form-group">
+                        <label for="student-name">Full Name</label>
+                        <input type="text" id="student-name" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="student-email">Email Address</label>
+                        <input type="email" id="student-email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="student-id">Student ID (Optional)</label>
+                        <input type="text" id="student-id" placeholder="Enter student ID if any">
+                    </div>
+                    <button id="start-quiz-btn" class="btn btn-accent" style="width: 100%;">
+                        Start Quiz Now 🚀
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Content -->
+            <div id="quiz-content" style="display: none;">
+                <div id="student-info" class="student-info">
+                    <div class="student-avatar" id="student-avatar">JS</div>
+                    <div>
+                        <h4 id="display-student-name">John Smith</h4>
+                        <p id="display-student-email" style="color: var(--color-text-secondary); font-size: 0.875rem;">
+                            john@example.com</p>
+                    </div>
+                </div>
+
+                <div class="quiz-progress">
+                    <span id="current-question">Question 1</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <span id="score">Score: 0/0</span>
+                </div>
+
+                <div id="question-container">
+                    <!-- Questions will be loaded here dynamically -->
+                </div>
+
+                <div class="quiz-controls">
+                    <button id="prev-btn" class="btn btn-primary" disabled>
+                        ← Previous
+                    </button>
+                    <button id="next-btn" class="btn btn-accent">
+                        Next Question →
+                    </button>
+                    <button id="submit-btn" class="btn btn-accent" style="display: none;">
+                        Submit Quiz 🚀
+                    </button>
+                </div>
+
+                <div id="result-container" class="result-container">
+                    <!-- Result will be shown here -->
+                </div>
+
+                <div id="certificate-container" class="certificate-container">
+                    <!-- Certificate will be shown here -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <img src="assets/logo.svg" alt="NamastAI.shiksha Logo" width="40" height="40">
+                        </div>
+                        <span class="logo-text">
+                            <span class="text-brand-blue">Namast</span>
+                            <span class="text-brand-orange">Ai</span>
+                            <span class="accent">.shiksha</span>
+                        </span>
+                    </div>
+                    <p class="footer-tagline">Empowering the next generation of software developers with industry-ready
+                        skills.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <a href="flow-control-theory.html"
+                        style="color: rgba(255, 255, 255, 0.7); text-decoration: none; display: block; margin-top: 0.5rem;">Theory
+                        Page</a>
+                    <a href="/curriculum.html"
+                        style="color: rgba(255, 255, 255, 0.7); text-decoration: none; display: block; margin-top: 0.5rem;">Curriculum</a>
+                    <a href="/enroll.html"
+                        style="color: rgba(255, 255, 255, 0.7); text-decoration: none; display: block; margin-top: 0.5rem;">Enroll
+                        Now</a>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <p style="color: rgba(255, 255, 255, 0.7); margin-top: 0.5rem;">📧 info@namastai.shiksha</p>
+                    <p style="color: rgba(255, 255, 255, 0.7); margin-top: 0.5rem;">📞 +91 9246212143, 8096969696</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 NamastAI.shiksha. All rights reserved.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.875rem;">Professional Java Learning Platform - Interactive
+                    Assessments</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Comprehensive Quiz Questions for Flow Control
+        const quizQuestions = [
+            // if-else Statements
+            {
+                category: "if-else",
+                question: "What is the output of: int x=10; if(x) System.out.println('Hello'); else System.out.println('Hi');",
+                options: [
+                    "Hello",
+                    "Hi",
+                    "Compile error",
+                    "Runtime error",
+                    "No output"
+                ],
+                correct: 2,
+                explanation: "if condition requires boolean type, x is int - compile error: incompatible types."
+            },
+            {
+                category: "if-else",
+                question: "What is the output of: if(true); System.out.println('Hello');",
+                options: [
+                    "Hello",
+                    "No output",
+                    "Compile error",
+                    "Runtime error",
+                    "Infinite loop"
+                ],
+                correct: 0,
+                explanation: "Semicolon is empty statement, println executes independently - prints Hello."
+            },
+            {
+                category: "if-else",
+                question: "What is the output of: if(true) int x=10;",
+                options: [
+                    "No output",
+                    "Compile error",
+                    "Runtime error",
+                    "x becomes 10",
+                    "None of the above"
+                ],
+                correct: 1,
+                explanation: "Declarative statement without curly braces - compile error: 'class' expected."
+            },
+            {
+                category: "if-else",
+                question: "Which if statement is valid?",
+                options: [
+                    "if(1) {}",
+                    "if(true) {}",
+                    "if(10.5) {}",
+                    "if('a') {}",
+                    "if(null) {}"
+                ],
+                correct: 1,
+                explanation: "if requires boolean argument - only true/false are valid boolean values."
+            },
+
+            // Switch Statement
+            {
+                category: "Switch",
+                question: "Until Java 1.4, which types were allowed in switch?",
+                options: [
+                    "byte, short, char, int",
+                    "byte, short, int, String",
+                    "byte, short, int, boolean",
+                    "All primitive types",
+                    "All wrapper classes"
+                ],
+                correct: 0,
+                explanation: "Until 1.4: byte, short, char, int. From 1.5: wrapper classes and enum added."
+            },
+            {
+                category: "Switch",
+                question: "What is the output: int x=10; switch(x) { System.out.println('Hello'); }",
+                options: [
+                    "Hello",
+                    "No output",
+                    "Compile error",
+                    "Runtime error",
+                    "Infinite loop"
+                ],
+                correct: 2,
+                explanation: "Independent statements not allowed in switch - must be under case/default."
+            },
+            {
+                category: "Switch",
+                question: "What happens: int x=10; int y=20; switch(x) { case 10:... case y:... }",
+                options: [
+                    "Compiles fine",
+                    "Runtime error",
+                    "Compile error: y not constant",
+                    "Executes both cases",
+                    "None of the above"
+                ],
+                correct: 2,
+                explanation: "Case labels must be compile-time constants. y is not final."
+            },
+            {
+                category: "Switch",
+                question: "What is fall-through in switch?",
+                options: [
+                    "Breaking switch execution",
+                    "Executing all cases after matched case until break",
+                    "Default case execution",
+                    "Switch argument evaluation",
+                    "None of the above"
+                ],
+                correct: 1,
+                explanation: "Fall-through: from matched case, all subsequent cases execute until break or end."
+            },
+            {
+                category: "Switch",
+                question: "Where can default case be placed?",
+                options: [
+                    "Only at beginning",
+                    "Only at end",
+                    "Anywhere but convention is end",
+                    "Cannot have default",
+                    "Multiple defaults allowed"
+                ],
+                correct: 2,
+                explanation: "Default can be anywhere, executes if no case matches, but convention is last."
+            },
+
+            // While Loop
+            {
+                category: "While Loop",
+                question: "What is the output: while(1) { System.out.println('Hello'); }",
+                options: [
+                    "Hello infinite times",
+                    "No output",
+                    "Compile error",
+                    "Runtime error",
+                    "Hello once"
+                ],
+                correct: 2,
+                explanation: "while requires boolean, 1 is int - compile error: incompatible types."
+            },
+            {
+                category: "While Loop",
+                question: "What is the output: while(true) System.out.println('Hello'); System.out.println('Hi');",
+                options: [
+                    "Hello infinite times",
+                    "Hello, then Hi",
+                    "Compile error",
+                    "Runtime error",
+                    "No output"
+                ],
+                correct: 2,
+                explanation: "Unreachable statement after infinite while - compile error."
+            },
+            {
+                category: "While Loop",
+                question: "What is the output: final int a=10,b=20; while(a<b) { System.out.println('Hello'); } System.out.println('Hi');",
+                options: [
+                    "Hello infinite times",
+                    "Hello, then Hi",
+                    "Compile error",
+                    "Runtime error",
+                    "No output"
+                ],
+                correct: 2,
+                explanation: "Compiler knows a<b is always true (10<20), so Hi is unreachable - compile error."
+            },
+            {
+                category: "While Loop",
+                question: "When is while loop best suitable?",
+                options: [
+                    "Known iterations",
+                    "Unknown iterations",
+                    "Always",
+                    "Never",
+                    "Only for arrays"
+                ],
+                correct: 1,
+                explanation: "while is best when number of iterations not known in advance (e.g., reading from stream)."
+            },
+
+            // Do-While Loop
+            {
+                category: "Do-While",
+                question: "What is the key difference between while and do-while?",
+                options: [
+                    "do-while checks condition first",
+                    "while executes at least once",
+                    "do-while executes at least once",
+                    "No difference",
+                    "do-while is faster"
+                ],
+                correct: 2,
+                explanation: "do-while executes body first, then checks condition - guaranteed at least one execution."
+            },
+            {
+                category: "Do-While",
+                question: "What is the output: do; while(true);",
+                options: [
+                    "Compile error",
+                    "Runtime error",
+                    "Infinite loop",
+                    "No output, compiles fine",
+                    "Syntax error"
+                ],
+                correct: 3,
+                explanation: "Empty statement (;) is valid, compiles fine, no output."
+            },
+            {
+                category: "Do-While",
+                question: "What is the most dangerous combination mentioned?",
+                options: [
+                    "do-while with break",
+                    "do-while with continue",
+                    "while with break",
+                    "for with continue",
+                    "switch with break"
+                ],
+                correct: 1,
+                explanation: "do-while with continue can create tricky infinite loops or unexpected behavior."
+            },
+
+            // For Loop
+            {
+                category: "For Loop",
+                question: "What is the output: for(int i=0;true;i++) { System.out.println('Hello'); } System.out.println('Hi');",
+                options: [
+                    "Hello infinite times",
+                    "Hello, then Hi",
+                    "Compile error",
+                    "Runtime error",
+                    "No output"
+                ],
+                correct: 2,
+                explanation: "Unreachable statement after infinite for - compile error."
+            },
+            {
+                category: "For Loop",
+                question: "What is valid in for loop initialization?",
+                options: [
+                    "int i=0,j=0;",
+                    "int i=0,boolean b=true;",
+                    "int i=0,int j=0;",
+                    "All of above",
+                    "None of above"
+                ],
+                correct: 0,
+                explanation: "Can declare multiple variables but must be same type. Different types not allowed."
+            },
+            {
+                category: "For Loop",
+                question: "What happens: for(System.out.println('Hello'); i<3; System.out.println('Hi')) i++;",
+                options: [
+                    "Hello, then Hi 3 times",
+                    "Compile error",
+                    "Hello infinite times",
+                    "Runtime error",
+                    "Hello, Hi once"
+                ],
+                correct: 0,
+                explanation: "All three sections independent - initialization prints Hello once, increment prints Hi each iteration."
+            },
+            {
+                category: "For Loop",
+                question: "What is the output: for(;;) System.out.println('Hello');",
+                options: [
+                    "Hello once",
+                    "Hello twice",
+                    "Hello infinite times",
+                    "Compile error",
+                    "No output"
+                ],
+                correct: 2,
+                explanation: "Empty initialization, condition, increment - infinite loop, all parts optional."
+            },
+
+            // Enhanced For Loop
+            {
+                category: "For-Each",
+                question: "When was enhanced for loop introduced?",
+                options: [
+                    "Java 1.0",
+                    "Java 1.2",
+                    "Java 1.5",
+                    "Java 1.7",
+                    "Java 8"
+                ],
+                correct: 2,
+                explanation: "Enhanced for loop (for-each) introduced in Java 1.5."
+            },
+            {
+                category: "For-Each",
+                question: "What is required for for-each target?",
+                options: [
+                    "Must be array",
+                    "Must be Iterable",
+                    "Must be Collection",
+                    "Must be List",
+                    "Any object"
+                ],
+                correct: 1,
+                explanation: "Target must implement Iterable interface (arrays and collections do)."
+            },
+            {
+                category: "For-Each",
+                question: "What is main limitation of for-each?",
+                options: [
+                    "Cannot use with arrays",
+                    "Cannot use with collections",
+                    "Not general purpose, only forward iteration",
+                    "Too slow",
+                    "No limitations"
+                ],
+                correct: 2,
+                explanation: "For-each can only iterate forward (left to right), not a general purpose loop."
+            },
+            {
+                category: "For-Each",
+                question: "Which interface is required for for-each?",
+                options: [
+                    "Iterator",
+                    "Iterable",
+                    "Collection",
+                    "List",
+                    "Enumeration"
+                ],
+                correct: 1,
+                explanation: "Iterable interface with iterator() method is required."
+            },
+
+            // Break Statement
+            {
+                category: "Break",
+                question: "Where can break be used?",
+                options: [
+                    "Only in loops",
+                    "Only in switch",
+                    "In loops, switch, and labeled blocks",
+                    "Anywhere",
+                    "Only in for loops"
+                ],
+                correct: 2,
+                explanation: "break can be used in: 1) switch to stop fall-through, 2) loops to exit, 3) labeled blocks."
+            },
+            {
+                category: "Break",
+                question: "What is the output: int x=10; if(x==10) break; System.out.println('Hello');",
+                options: [
+                    "Hello",
+                    "No output",
+                    "Compile error",
+                    "Runtime error",
+                    "Infinite loop"
+                ],
+                correct: 2,
+                explanation: "break outside switch or loop - compile error."
+            },
+            {
+                category: "Break",
+                question: "What does break do in switch?",
+                options: [
+                    "Exits program",
+                    "Stops fall-through",
+                    "Continues to next case",
+                    "Restarts switch",
+                    "None of the above"
+                ],
+                correct: 1,
+                explanation: "In switch, break stops fall-through to subsequent cases."
+            },
+
+            // Continue Statement
+            {
+                category: "Continue",
+                question: "What does continue do?",
+                options: [
+                    "Exits loop",
+                    "Skips current iteration",
+                    "Restarts program",
+                    "Exits method",
+                    "Breaks switch"
+                ],
+                correct: 1,
+                explanation: "continue skips remaining statements in current iteration, continues with next iteration."
+            },
+            {
+                category: "Continue",
+                question: "Where can continue be used?",
+                options: [
+                    "Only in for loops",
+                    "Only in while loops",
+                    "In any loop",
+                    "Anywhere",
+                    "Only in do-while"
+                ],
+                correct: 2,
+                explanation: "continue can be used in any loop (for, while, do-while) but only inside loops."
+            },
+            {
+                category: "Continue",
+                question: "What is the output: int x=10; if(x==10) continue; System.out.println('Hello');",
+                options: [
+                    "Hello",
+                    "No output",
+                    "Compile error",
+                    "Runtime error",
+                    "Infinite loop"
+                ],
+                correct: 2,
+                explanation: "continue outside of loop - compile error."
+            },
+
+            // Labeled Statements
+            {
+                category: "Labeled",
+                question: "What is labeled break used for?",
+                options: [
+                    "Breaking inner loop only",
+                    "Breaking outer loop from inner",
+                    "Continuing loop",
+                    "Restarting loop",
+                    "Exiting method"
+                ],
+                correct: 1,
+                explanation: "Labeled break breaks out of specified (usually outer) loop from inner loop."
+            },
+            {
+                category: "Labeled",
+                question: "What is the output of labeled continue?",
+                options: [
+                    "Exits all loops",
+                    "Continues current iteration",
+                    "Continues specified outer loop iteration",
+                    "Restarts program",
+                    "None of the above"
+                ],
+                correct: 2,
+                explanation: "Labeled continue continues with next iteration of specified (usually outer) loop."
+            },
+
+            // Unreachable Code
+            {
+                category: "Unreachable",
+                question: "When does compiler check unreachable code?",
+                options: [
+                    "Always",
+                    "Only in loops",
+                    "Only in if-else",
+                    "Only in switch",
+                    "Never"
+                ],
+                correct: 1,
+                explanation: "Compiler checks unreachability only in loops, not in if-else (except constant conditions)."
+            },
+            {
+                category: "Unreachable",
+                question: "What is the output: if(true) { System.out.println('Hello'); } else { System.out.println('Hi'); }",
+                options: [
+                    "Hello",
+                    "Hi",
+                    "Compile error",
+                    "Runtime error",
+                    "Both"
+                ],
+                correct: 0,
+                explanation: "No compile error for unreachable else block - compiler doesn't check if-else unreachability."
+            },
+
+            // Complex Examples
+            {
+                category: "Complex",
+                question: "What is the output: int i=0; do { i++; System.out.println(i); if(++i<5) continue; System.out.println(i); } while(++i<10);",
+                options: [
+                    "1,4,6,8,10",
+                    "1,2,3,4,5,6,7,8,9,10",
+                    "Compile error",
+                    "Runtime error",
+                    "Infinite loop"
+                ],
+                correct: 0,
+                explanation: "Complex do-while with continue - outputs: 1,4,6,8,10"
+            },
+            {
+                category: "Complex",
+                question: "What is the output: for(int i=0;i<5;i++) { if(i==2) continue; System.out.println(i); }",
+                options: [
+                    "0,1,3,4",
+                    "0,1,2,3,4",
+                    "2 only",
+                    "Compile error",
+                    "Infinite loop"
+                ],
+                correct: 0,
+                explanation: "Skips i==2 due to continue - prints 0,1,3,4"
+            },
+            {
+                category: "Complex",
+                question: "What is the output: int x=2; switch(x) { case 1: System.out.println('1'); case 2: System.out.println('2'); case 3: System.out.println('3'); break; default: System.out.println('default'); }",
+                options: [
+                    "2",
+                    "2,3",
+                    "2,3,default",
+                    "Compile error",
+                    "Runtime error"
+                ],
+                correct: 1,
+                explanation: "Fall-through from case 2 to case 3, break at case 3 - prints 2,3"
+            }
+        ];
+
+        // Quiz State
+        let currentQuestion = 0;
+        let userAnswers = new Array(quizQuestions.length).fill(null);
+        let score = 0;
+        let studentName = "";
+        let studentEmail = "";
+        let studentInitials = "";
+
+        // DOM Elements
+        const quizRegistration = document.getElementById('quiz-registration');
+        const quizContent = document.getElementById('quiz-content');
+        const startQuizBtn = document.getElementById('start-quiz-btn');
+        const questionContainer = document.getElementById('question-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const currentQuestionSpan = document.getElementById('current-question');
+        const scoreSpan = document.getElementById('score');
+        const progressFill = document.getElementById('progress-fill');
+        const resultContainer = document.getElementById('result-container');
+        const certificateContainer = document.getElementById('certificate-container');
+        const studentInfo = document.getElementById('student-info');
+        const studentAvatar = document.getElementById('student-avatar');
+        const displayStudentName = document.getElementById('display-student-name');
+        const displayStudentEmail = document.getElementById('display-student-email');
+
+        // Get initials from name
+        function getInitials(name) {
+            return name.split(' ').map(word => word[0]).join('').toUpperCase().substring(0, 2);
+        }
+
+        // Start Quiz
+        startQuizBtn.addEventListener('click', () => {
+            const nameInput = document.getElementById('student-name');
+            const emailInput = document.getElementById('student-email');
+
+            if (!nameInput.value.trim()) {
+                alert('Please enter your name');
+                return;
+            }
+
+            if (!emailInput.value.trim()) {
+                alert('Please enter your email');
+                return;
+            }
+
+            studentName = nameInput.value.trim();
+            studentEmail = emailInput.value.trim();
+            studentInitials = getInitials(studentName);
+
+            // Update student info display
+            studentAvatar.textContent = studentInitials;
+            displayStudentName.textContent = studentName;
+            displayStudentEmail.textContent = studentEmail;
+
+            // Hide registration, show quiz content
+            quizRegistration.style.display = 'none';
+            quizContent.style.display = 'block';
+            studentInfo.style.display = 'flex';
+
+            // Initialize quiz
+            initializeQuiz();
+        });
+
+        // ========================================
+        // GOOGLE SHEETS INTEGRATION
+        // ========================================
+
+        // Configuration: Set your Google Apps Script Web App URL here
+        const GOOGLE_SHEETS_CONFIG = {
+            enabled: true,
+            webAppUrl: 'https://script.google.com/macros/s/AKfycbzTIFkOD0wgCGc29Hw8frutPiVu9rhQ81ZaI5b6TbA4Iky4n1I_sJ0uMImZlttIz-O1/exec',
+        };
+
+        // Send quiz completion data to Google Sheets
+        async function sendToGoogleSheets(certData) {
+            if (!GOOGLE_SHEETS_CONFIG.enabled || !GOOGLE_SHEETS_CONFIG.webAppUrl) {
+                console.log('📊 Google Sheets tracking is disabled');
+                return;
+            }
+
+            try {
+                const dataToSend = {
+                    timestamp: new Date().toISOString(),
+                    studentName: certData.studentName,
+                    studentEmail: certData.studentEmail,
+                    score: certData.score,
+                    totalQuestions: certData.totalQuestions,
+                    percentage: certData.percentage,
+                    passed: parseFloat(certData.percentage) >= 50,
+                    completionDate: certData.date,
+                    certificateUUID: certData.uuid,
+                    certificateDownloaded: false,
+                    userAgent: navigator.userAgent,
+                    referrer: document.referrer || 'Direct',
+                    quizType: 'Flow Control'
+                };
+
+                console.log('📤 Sending quiz data to Google Sheets...', dataToSend);
+
+                const response = await fetch(GOOGLE_SHEETS_CONFIG.webAppUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(dataToSend)
+                });
+
+                console.log('✅ Data sent to Google Sheets successfully');
+                localStorage.setItem('sheets_submission_' + certData.uuid, 'true');
+
+            } catch (error) {
+                console.error('❌ Error sending data to Google Sheets:', error);
+            }
+        }
+
+        // Track certificate download
+        async function trackCertificateDownload(certUUID) {
+            if (!GOOGLE_SHEETS_CONFIG.enabled || !GOOGLE_SHEETS_CONFIG.webAppUrl) {
+                return;
+            }
+
+            try {
+                const downloadData = {
+                    action: 'download',
+                    certificateUUID: certUUID,
+                    downloadTimestamp: new Date().toISOString(),
+                    quizType: 'Flow Control'
+                };
+
+                await fetch(GOOGLE_SHEETS_CONFIG.webAppUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(downloadData)
+                });
+
+                console.log('✅ Certificate download tracked');
+            } catch (error) {
+                console.error('❌ Error tracking download:', error);
+            }
+        }
+
+        // ========================================
+
+        // Shuffle questions
+        let shuffledQuestions = [...quizQuestions];
+
+        // Check for saved certificate on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedCert = localStorage.getItem('namastai_flowcontrol_certificate');
+            if (savedCert) {
+                try {
+                    const certData = JSON.parse(savedCert);
+                    showCertificateBanner(certData);
+
+                    if (window.location.hash === '#certificate') {
+                        studentName = certData.studentName;
+                        studentEmail = certData.studentEmail;
+                        score = certData.score;
+                        certificateUUID = certData.uuid;
+                        showSavedCertificate(certData);
+                    }
+                } catch (e) {
+                    console.error('Error loading saved certificate:', e);
+                }
+            }
+        });
+
+        // Show banner for saved certificate
+        function showCertificateBanner(certData) {
+            if (document.getElementById('cert-banner')) return;
+
+            const banner = document.createElement('div');
+            banner.id = 'cert-banner';
+            banner.style.cssText = `
+                position: fixed;
+                top: 80px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 0.75rem;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+                z-index: 9999;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                animation: slideDown 0.5s ease;
+                max-width: 90%;
+            `;
+
+            banner.innerHTML = `
+                <span style="font-size: 1.5rem;">🎓</span>
+                <div>
+                    <strong>Certificate Available!</strong>
+                    <div style="font-size: 0.875rem; opacity: 0.9;">
+                        ${certData.studentName} - ${certData.percentage}% score (Flow Control)
+                    </div>
+                </div>
+                <button onclick="viewSavedCertificate()" style="
+                    background: white;
+                    color: #059669;
+                    border: none;
+                    padding: 0.5rem 1rem;
+                    border-radius: 0.5rem;
+                    font-weight: 600;
+                    cursor: pointer;
+                    margin-left: auto;
+                ">View Certificate</button>
+                <button onclick="this.parentElement.remove()" style="
+                    background: transparent;
+                    color: white;
+                    border: none;
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                    padding: 0 0.5rem;
+                ">&times;</button>
+            `;
+
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideDown {
+                    from {
+                        opacity: 0;
+                        transform: translateX(-50%) translateY(-20px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateX(-50%) translateY(0);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            document.body.appendChild(banner);
+        }
+
+        // View saved certificate from banner
+        window.viewSavedCertificate = function () {
+            const savedCert = localStorage.getItem('namastai_flowcontrol_certificate');
+            if (savedCert) {
+                const certData = JSON.parse(savedCert);
+                studentName = certData.studentName;
+                studentEmail = certData.studentEmail;
+                score = certData.score;
+                certificateUUID = certData.uuid;
+
+                showSavedCertificate(certData);
+                const banner = document.getElementById('cert-banner');
+                if (banner) banner.remove();
+                window.location.hash = 'certificate';
+            }
+        };
+
+        // Show saved certificate
+        function showSavedCertificate(certData) {
+            certificateContainer.innerHTML = `
+                <div class="certificate-border"></div>
+                <div class="certificate-header">
+                    <div class="certificate-logo">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width: 120px; height: 120px;">
+                            <path d="M65 160 L65 100 C65 70 85 40 95 20 L100 20 L100 160 Z" fill="#0056D2" stroke="none"/>
+                            <path d="M135 160 L135 100 C135 70 115 40 105 20 L100 20 L100 160 Z" fill="#FF8C00" stroke="none"/>
+                            <circle cx="80" cy="80" r="4" fill="white"/>
+                            <circle cx="80" cy="120" r="4" fill="white"/>
+                            <circle cx="120" cy="60" r="4" fill="white"/>
+                            <circle cx="120" cy="100" r="4" fill="white"/>
+                            <line x1="80" y1="80" x2="80" y2="120" stroke="white" stroke-width="2"/>
+                            <line x1="80" y1="80" x2="65" y2="70" stroke="white" stroke-width="2"/>
+                            <line x1="120" y1="60" x2="120" y2="100" stroke="white" stroke-width="2"/>
+                            <line x1="120" y1="100" x2="135" y2="110" stroke="white" stroke-width="2"/>
+                            <line x1="100" y1="20" x2="100" y2="160" stroke="white" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h1 class="certificate-title">Certificate of Achievement</h1>
+                    <p class="certificate-subtitle">Java Flow Control</p>
+                </div>
+                
+                <div class="certificate-body">
+                    <p class="certificate-text">This certifies that</p>
+                    <div class="student-name">${certData.studentName}</div>
+                    <p class="certificate-text">
+                        has successfully completed the Java Flow Control Quiz 
+                        with a score of <strong>${certData.percentage}%</strong> 
+                        (${certData.score} out of ${certData.totalQuestions} questions) 
+                        demonstrating proficiency in Java flow control statements.
+                    </p>
+                    
+                    <div class="certificate-details">
+                        <div class="certificate-date">
+                            <h4>Date</h4>
+                            <p>${certData.date}</p>
+                        </div>
+                        <div class="certificate-score">
+                            <h4>Score</h4>
+                            <p>${certData.percentage}%</p>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--color-border);">
+                        <p style="font-size: 0.875rem; color: var(--color-text-secondary);">
+                            <strong>Certificate ID:</strong> ${certData.uuid}
+                        </p>
+                        <p style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.5rem;">
+                            Verify at namastai.shiksha/verify/${certData.uuid}
+                        </p>
+                    </div>
+                    
+                    <div class="certificate-actions">
+                        <button onclick="downloadCertificate()" class="btn btn-accent">Download PDF 📥</button>
+                        <button onclick="shareCertificate()" class="btn btn-primary">Share 🚀</button>
+                        <button onclick="window.location.href='flow-control-quiz.html'" class="btn btn-primary">New Quiz 🔄</button>
+                    </div>
+                </div>
+            `;
+
+            certificateContainer.style.display = 'block';
+            const quizReg = document.getElementById('quiz-registration');
+            const quizCont = document.getElementById('quiz-content');
+            const resultCont = document.getElementById('result-container');
+
+            if (quizReg) quizReg.style.display = 'none';
+            if (quizCont) quizCont.style.display = 'none';
+            if (resultCont) resultCont.style.display = 'none';
+
+            certificateContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Initialize Quiz
+        function initializeQuiz() {
+            // Shuffle questions
+            shuffledQuestions = shuffleArray([...quizQuestions]);
+            loadQuestion(0);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Load Question
+        function loadQuestion(index) {
+            const question = shuffledQuestions[index];
+
+            currentQuestionSpan.textContent = `Question ${index + 1} of ${shuffledQuestions.length}`;
+            progressFill.style.width = `${((index + 1) / shuffledQuestions.length) * 100}%`;
+
+            let optionsHtml = '';
+            question.options.forEach((option, optIndex) => {
+                let optionClass = 'option-label';
+                if (userAnswers[index] === optIndex) {
+                    optionClass += ' selected';
+                }
+
+                optionsHtml += `
+                    <label class="${optionClass}" for="option-${index}-${optIndex}">
+                        <input type="radio" class="option-input" id="option-${index}-${optIndex}" 
+                               name="question-${index}" value="${optIndex}"
+                               ${userAnswers[index] === optIndex ? 'checked' : ''}>
+                        <span class="option-text">${option}</span>
+                    </label>
+                `;
+            });
+
+            questionContainer.innerHTML = `
+                <div class="question-card">
+                    <div class="question-number">${index + 1}</div>
+                    <div style="background: #e0e7ff; color: #3730a3; padding: 0.5rem 1rem; border-radius: 2rem; display: inline-block; margin-bottom: 1rem; font-size: 0.875rem; font-weight: 600;">
+                        ${question.category}
+                    </div>
+                    <h3 class="question-text">${question.question}</h3>
+                    <div class="options-grid">
+                        ${optionsHtml}
+                    </div>
+                </div>
+            `;
+
+            // Add event listeners to options
+            document.querySelectorAll('.option-input').forEach(input => {
+                input.addEventListener('change', (e) => {
+                    const selectedIndex = parseInt(e.target.value);
+                    userAnswers[currentQuestion] = selectedIndex;
+
+                    // Update UI
+                    document.querySelectorAll('.option-label').forEach(label => {
+                        label.classList.remove('selected');
+                    });
+                    e.target.closest('.option-label').classList.add('selected');
+
+                    updateButtons();
+                });
+            });
+
+            updateButtons();
+        }
+
+        // Update Button States
+        function updateButtons() {
+            prevBtn.disabled = currentQuestion === 0;
+
+            if (currentQuestion === shuffledQuestions.length - 1) {
+                nextBtn.style.display = 'none';
+                submitBtn.style.display = 'inline-flex';
+            } else {
+                nextBtn.style.display = 'inline-flex';
+                submitBtn.style.display = 'none';
+            }
+
+            const answeredCount = userAnswers.filter(a => a !== null).length;
+            scoreSpan.textContent = `Progress: ${answeredCount}/${shuffledQuestions.length} answered`;
+        }
+
+        // Calculate final score
+        function calculateFinalScore() {
+            score = 0;
+            userAnswers.forEach((answer, index) => {
+                if (answer !== null && answer === shuffledQuestions[index].correct) {
+                    score++;
+                }
+            });
+            return score;
+        }
+
+        // Navigation
+        prevBtn.addEventListener('click', () => {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion(currentQuestion);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (userAnswers[currentQuestion] === null) {
+                alert('Please select an answer before proceeding!');
+                return;
+            }
+
+            if (currentQuestion < shuffledQuestions.length - 1) {
+                currentQuestion++;
+                loadQuestion(currentQuestion);
+            }
+        });
+
+        // Submit Quiz
+        submitBtn.addEventListener('click', () => {
+            if (userAnswers[currentQuestion] === null) {
+                alert('Please select an answer before submitting!');
+                return;
+            }
+
+            showResults();
+        });
+
+        // Show Results
+        function showResults() {
+            // Calculate final score
+            score = calculateFinalScore();
+            const percentage = (score / shuffledQuestions.length) * 100;
+            const passed = percentage >= 50;
+
+            let resultHtml = '';
+
+            if (passed) {
+                resultHtml = `
+                    <div class="result-icon">🎉</div>
+                    <h2 class="result-title result-pass">Congratulations, ${studentName}!</h2>
+                    <div class="result-score">${percentage.toFixed(1)}%</div>
+                    <p class="result-message">You scored ${score} out of ${shuffledQuestions.length} questions correctly. You've earned a certificate!</p>
+                    <button onclick="showCertificate()" class="btn btn-accent" style="margin: 1rem;">
+                        View Certificate 📜
+                    </button>
+                    <button onclick="restartQuiz()" class="btn btn-primary">
+                        Try Again 🔄
+                    </button>
+                `;
+                createConfetti();
+            } else {
+                resultHtml = `
+                    <div class="result-icon">📚</div>
+                    <h2 class="result-title result-fail">Keep Learning, ${studentName}!</h2>
+                    <div class="result-score">${percentage.toFixed(1)}%</div>
+                    <p class="result-message">You scored ${score} out of ${shuffledQuestions.length}. Review the material and try again!</p>
+                    <div style="margin-top: 2rem;">
+                        <button onclick="restartQuiz()" class="btn btn-primary" style="margin-right: 1rem;">
+                            Try Again 🔄
+                        </button>
+                        <button onclick="window.location.href='flow-control-theory.html'" class="btn btn-primary">
+                            Review Theory 📖
+                        </button>
+                    </div>
+                `;
+            }
+
+            resultHtml += `
+                <div style="margin-top: 3rem; text-align: left;">
+                    <h3 style="margin-bottom: 1rem;">Review Your Answers:</h3>
+            `;
+
+            shuffledQuestions.forEach((q, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === q.correct;
+                const correctAnswer = q.options[q.correct];
+                const userSelected = userAnswer !== null ? q.options[userAnswer] : "Not answered";
+
+                resultHtml += `
+                    <div style="background: ${isCorrect ? '#d1fae5' : '#fee2e2'}; 
+                                padding: 1rem; margin: 0.5rem 0; border-radius: 0.5rem;">
+                        <strong>Q${index + 1} (${q.category}):</strong> ${q.question}<br>
+                        <strong>Your answer:</strong> ${userSelected}<br>
+                        <span style="color: ${isCorrect ? '#059669' : '#dc2626'}; font-weight: 600;">
+                            ${isCorrect ? '✓ Correct' : '✗ Incorrect'}
+                        </span><br>
+                        ${!isCorrect ? `<span><strong>Correct answer:</strong> ${correctAnswer}</span><br>` : ''}
+                        <small style="color: #6b7280;">${q.explanation}</small>
+                    </div>
+                `;
+            });
+
+            resultHtml += `</div>`;
+
+            resultContainer.innerHTML = resultHtml;
+            resultContainer.style.display = 'block';
+            questionContainer.style.display = 'none';
+            document.querySelector('.quiz-controls').style.display = 'none';
+            document.querySelector('.quiz-progress').style.display = 'none';
+
+            resultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Generate UUID for certificate
+        function generateUUID() {
+            if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+                return crypto.randomUUID();
+            }
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                const r = Math.random() * 16 | 0;
+                const v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+
+        // Store certificate UUID
+        let certificateUUID = null;
+
+        // Show Certificate
+        window.showCertificate = function () {
+            const percentage = (score / shuffledQuestions.length) * 100;
+            const today = new Date();
+            const dateStr = today.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            // Generate UUID for this certificate
+            certificateUUID = generateUUID();
+
+            // Save to localStorage for persistence
+            const certificateData = {
+                studentName,
+                studentEmail,
+                score,
+                totalQuestions: shuffledQuestions.length,
+                percentage: percentage.toFixed(1),
+                date: dateStr,
+                uuid: certificateUUID
+            };
+            localStorage.setItem('namastai_flowcontrol_certificate', JSON.stringify(certificateData));
+
+            // Send data to Google Sheets (if configured)
+            sendToGoogleSheets(certificateData);
+
+            certificateContainer.innerHTML = `
+                <div class="certificate-border"></div>
+                <div class="certificate-header">
+                    <div class="certificate-logo">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width: 120px; height: 120px;">
+                            <path d="M65 160 L65 100 C65 70 85 40 95 20 L100 20 L100 160 Z" fill="#0056D2" stroke="none"/>
+                            <path d="M135 160 L135 100 C135 70 115 40 105 20 L100 20 L100 160 Z" fill="#FF8C00" stroke="none"/>
+                            <circle cx="80" cy="80" r="4" fill="white"/>
+                            <circle cx="80" cy="120" r="4" fill="white"/>
+                            <circle cx="120" cy="60" r="4" fill="white"/>
+                            <circle cx="120" cy="100" r="4" fill="white"/>
+                            <line x1="80" y1="80" x2="80" y2="120" stroke="white" stroke-width="2"/>
+                            <line x1="80" y1="80" x2="65" y2="70" stroke="white" stroke-width="2"/>
+                            <line x1="120" y1="60" x2="120" y2="100" stroke="white" stroke-width="2"/>
+                            <line x1="120" y1="100" x2="135" y2="110" stroke="white" stroke-width="2"/>
+                            <line x1="100" y1="20" x2="100" y2="160" stroke="white" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h1 class="certificate-title">Certificate of Achievement</h1>
+                    <p class="certificate-subtitle">Java Flow Control</p>
+                </div>
+                
+                <div class="certificate-body">
+                    <p class="certificate-text">
+                        This certifies that
+                    </p>
+                    
+                    <div class="student-name">${studentName}</div>
+                    
+                    <p class="certificate-text">
+                        has successfully completed the Java Flow Control Quiz 
+                        with a score of <strong>${percentage.toFixed(1)}%</strong> 
+                        (${score} out of ${shuffledQuestions.length} questions) 
+                        demonstrating proficiency in Java flow control statements.
+                    </p>
+                    
+                    <div class="certificate-details">
+                        <div class="certificate-date">
+                            <h4>Date</h4>
+                            <p>${dateStr}</p>
+                        </div>
+                        <div class="certificate-score">
+                            <h4>Score</h4>
+                            <p>${percentage.toFixed(1)}%</p>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--color-border);">
+                        <p style="font-size: 0.875rem; color: var(--color-text-secondary);">
+                            <strong>Certificate ID:</strong> ${certificateUUID}
+                        </p>
+                        <p style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.5rem;">
+                            Verify at namastai.shiksha/verify/${certificateUUID}
+                        </p>
+                    </div>
+                    
+                    <div class="certificate-actions">
+                        <button onclick="downloadCertificate()" class="btn btn-accent">
+                            Download PDF 📥
+                        </button>
+                        <button onclick="shareCertificate()" class="btn btn-primary">
+                            Share 🚀
+                        </button>
+                        <button onclick="restartQuiz()" class="btn btn-primary">
+                            Try Again 🔄
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            certificateContainer.style.display = 'block';
+            resultContainer.style.display = 'none';
+            window.location.hash = 'certificate';
+            certificateContainer.scrollIntoView({ behavior: 'smooth' });
+        };
+
+        // Download Certificate as PDF
+        window.downloadCertificate = async function () {
+            try {
+                const downloadBtn = event.target;
+                const originalText = downloadBtn.innerHTML;
+                downloadBtn.innerHTML = 'Generating PDF... ⏳';
+                downloadBtn.disabled = true;
+
+                const actionButtons = certificateContainer.querySelector('.certificate-actions');
+                if (actionButtons) {
+                    actionButtons.style.display = 'none';
+                }
+
+                await new Promise(resolve => setTimeout(resolve, 300));
+
+                const canvas = await html2canvas(certificateContainer, {
+                    scale: 2,
+                    backgroundColor: '#fef3c7',
+                    logging: false,
+                    useCORS: true,
+                    imageTimeout: 5000,
+                    letterRendering: 1,
+                    onclone: (clonedDoc) => {
+                        const clonedCert = clonedDoc.querySelector('.certificate-container');
+                        if (clonedCert) {
+                            clonedCert.style.animation = 'none';
+                        }
+                    }
+                });
+
+                if (actionButtons) {
+                    actionButtons.style.display = 'flex';
+                }
+
+                const { jsPDF } = window.jspdf;
+                const imgWidth = canvas.width;
+                const imgHeight = canvas.height;
+                const aspectRatio = imgWidth / imgHeight;
+                const pdfWidth = 297;
+                const pdfHeight = 210;
+                let finalWidth = pdfWidth;
+                let finalHeight = pdfWidth / aspectRatio;
+
+                if (finalHeight > pdfHeight) {
+                    finalHeight = pdfHeight;
+                    finalWidth = pdfHeight * aspectRatio;
+                }
+
+                const xOffset = (pdfWidth - finalWidth) / 2;
+                const yOffset = (pdfHeight - finalHeight) / 2;
+
+                const pdf = new jsPDF({
+                    orientation: 'landscape',
+                    unit: 'mm',
+                    format: 'a4',
+                    compress: true
+                });
+
+                const imgData = canvas.toDataURL('image/jpeg', 0.98);
+                pdf.addImage(imgData, 'JPEG', xOffset, yOffset, finalWidth, finalHeight, '', 'FAST');
+
+                const filename = `NamastAI_Java_FlowControl_Certificate_${studentName.replace(/\s+/g, '_')}_${certificateUUID.substring(0, 8)}.pdf`;
+                pdf.save(filename);
+
+                downloadBtn.innerHTML = originalText;
+                downloadBtn.disabled = false;
+                trackCertificateDownload(certificateUUID);
+
+                setTimeout(() => {
+                    alert('✅ Certificate downloaded successfully!\n\nFilename: ' + filename);
+                }, 100);
+
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                alert('❌ Error generating PDF. Please try again or take a screenshot.\n\nError: ' + error.message);
+
+                if (event && event.target) {
+                    event.target.innerHTML = 'Download PDF 📥';
+                    event.target.disabled = false;
+                }
+
+                const actionButtons = certificateContainer.querySelector('.certificate-actions');
+                if (actionButtons) {
+                    actionButtons.style.display = 'flex';
+                }
+            }
+        };
+
+        // Share Certificate
+        window.shareCertificate = function () {
+            const percentage = (score / shuffledQuestions.length) * 100;
+            const text = `I scored ${percentage.toFixed(1)}% on Java Flow Control Quiz at NamastAI.shiksha! 🎯`;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Java Flow Control Certificate',
+                    text: text,
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('Certificate link copied to clipboard!');
+                });
+            }
+        };
+
+        // Confetti Animation
+        function createConfetti() {
+            const colors = ['#0056D2', '#7c3aed', '#10b981', '#ec4899', '#f59e0b'];
+
+            for (let i = 0; i < 200; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-20px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                document.body.appendChild(confetti);
+
+                const animation = confetti.animate([
+                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(${window.innerHeight}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                ], {
+                    duration: 1000 + Math.random() * 2000,
+                    easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
+                });
+
+                animation.onfinish = () => confetti.remove();
+            }
+        }
+
+        // Restart Quiz
+        window.restartQuiz = function () {
+            currentQuestion = 0;
+            userAnswers = new Array(quizQuestions.length).fill(null);
+            score = 0;
+
+            resultContainer.style.display = 'none';
+            certificateContainer.style.display = 'none';
+            questionContainer.style.display = 'block';
+            document.querySelector('.quiz-controls').style.display = 'flex';
+            document.querySelector('.quiz-progress').style.display = 'flex';
+
+            quizRegistration.style.display = 'block';
+            quizContent.style.display = 'none';
+
+            document.getElementById('student-name').value = '';
+            document.getElementById('student-email').value = '';
+            document.getElementById('student-id').value = '';
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+    </script>
+</body>
+
+</html>

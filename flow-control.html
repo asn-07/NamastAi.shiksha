@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Flow Control - NamastAI.shiksha</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #0056D2;
+            --color-primary-dark: #003c94;
+            --color-primary-light: #3d7ce5;
+            --color-accent: #10b981;
+            --color-accent-light: #6ee7b7;
+            --color-success: #059669;
+            --color-error: #dc2626;
+            --color-warning: #d97706;
+            --color-bg: #ffffff;
+            --color-bg-secondary: #f9fafb;
+            --color-bg-tertiary: #f3f4f6;
+            --color-text: #111827;
+            --color-text-secondary: #6b7280;
+            --color-text-muted: #9ca3af;
+            --color-border: #e5e7eb;
+            --color-code-bg: #1e293b;
+            --gradient-primary: linear-gradient(135deg, #0056D2 0%, #7c3aed 100%);
+            --gradient-accent: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--color-bg-secondary);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--color-text);
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .text-brand-blue {
+            color: #0056D2;
+        }
+
+        .text-brand-orange {
+            color: #FF8C00;
+        }
+
+        .accent {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 1rem;
+            padding: 3rem;
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-xl);
+            animation: slideInDown 0.6s ease;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 0.625rem;
+            transition: var(--transition-base);
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--color-primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-accent {
+            background: var(--gradient-accent);
+            color: white;
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Content Section */
+        .content-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--color-border);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            color: var(--color-text-secondary);
+            font-size: 1.125rem;
+        }
+
+        /* Topics */
+        .topics-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .topic-card {
+            background: var(--color-bg-secondary);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: 1px solid var(--color-border);
+            transition: var(--transition-base);
+            cursor: pointer;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--color-primary-light);
+        }
+
+        .topic-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+
+        .topic-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .topic-description {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Theory Content */
+        .theory-section {
+            margin-bottom: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .theory-section:last-child {
+            border-bottom: none;
+        }
+
+        .theory-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .theory-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--color-primary);
+            color: white;
+            border-radius: 50%;
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+
+        .theory-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--color-text);
+        }
+
+        .theory-subtitle {
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .theory-content {
+            margin: 1.5rem 0;
+        }
+
+        .theory-point {
+            background: var(--color-bg-secondary);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--color-primary);
+        }
+
+        .point-title {
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .point-content {
+            color: var(--color-text);
+            line-height: 1.7;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: var(--color-code-bg);
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .code-keyword {
+            color: #f472b6;
+        }
+
+        .code-string {
+            color: #34d399;
+        }
+
+        .code-number {
+            color: #60a5fa;
+        }
+
+        .code-comment {
+            color: #94a3b8;
+        }
+
+        .code-output {
+            background: #f1f5f9;
+            color: var(--color-text);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 0.5rem;
+            border-left: 4px solid var(--color-accent);
+        }
+
+        /* Tables */
+        .theory-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .theory-table th {
+            background: var(--color-primary);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .theory-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .theory-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .theory-table tr:nth-child(even) {
+            background: var(--color-bg-secondary);
+        }
+
+        /* Important Notes */
+        .note {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 1px solid #fbbf24;
+            border-left: 4px solid #d97706;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .note-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: #92400e;
+            font-weight: 600;
+        }
+
+        .warning {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border: 1px solid #f87171;
+            border-left: 4px solid #dc2626;
+        }
+
+        .warning .note-header {
+            color: #991b1b;
+        }
+
+        .success {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border: 1px solid #34d399;
+            border-left: 4px solid #059669;
+        }
+
+        .success .note-header {
+            color: #065f46;
+        }
+
+        /* Flow Diagrams */
+        .flow-diagram {
+            background: white;
+            border: 2px solid var(--color-border);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .flow-box {
+            background: var(--color-primary-light);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            margin: 1rem auto;
+            display: inline-block;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            margin: 0.5rem 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--gradient-accent);
+            color: white;
+            border-radius: 1rem;
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            font-size: 1.125rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--color-text);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-brand .logo {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-tagline {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .content-section {
+                padding: 1.5rem;
+            }
+
+            .topics-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .theory-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <img src="assets/logo.svg" alt="NamastAI.shiksha Logo" width="40" height="40">
+                    </div>
+                    <span class="logo-text">
+                        <span class="text-brand-blue">Namast</span>
+                        <span class="text-brand-orange">Ai</span>
+                        <span class="accent">.shiksha</span>
+                    </span>
+                </a>
+                <div class="nav-actions">
+                    <a href="flow-control-quiz.html" class="btn btn-accent">Take Quiz</a>
+                    <a href="index.html" class="btn btn-primary" style="margin-left: 0.5rem;">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 class="hero-title">Chapter 3: Flow Control in Java</h1>
+            <p class="hero-subtitle">Master Java flow control statements - if-else, switch, loops, break, continue, and transfer statements</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                <a href="#introduction" class="btn btn-primary">Start Learning</a>
+                <a href="flow-control-quiz.html" class="btn btn-accent">Test Your Knowledge</a>
+            </div>
+        </section>
+
+        <!-- Topics Overview -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">🎯 Topics Covered</h2>
+                <p class="section-subtitle">Complete coverage of SCJP/OCJP Flow Control chapter</p>
+            </div>
+
+            <div class="topics-container">
+                <div class="topic-card" onclick="scrollToSection('selection')">
+                    <div class="topic-icon">if-else</div>
+                    <h3 class="topic-title">Selection Statements</h3>
+                    <p class="topic-description">if-else conditions and boolean requirements</p>
+                </div>
+
+                <div class="topic-card" onclick="scrollToSection('switch')">
+                    <div class="topic-icon">switch</div>
+                    <h3 class="topic-title">Switch Statement</h3>
+                    <p class="topic-description">Multi-way branching with fall-through behavior</p>
+                </div>
+
+                <div class="topic-card" onclick="scrollToSection('while-loop')">
+                    <div class="topic-icon">while</div>
+                    <h3 class="topic-title">While Loop</h3>
+                    <p class="topic-description">Pre-test loop with unreachable statements</p>
+                </div>
+
+                <div class="topic-card" onclick="scrollToSection('do-while')">
+                    <div class="topic-icon">do-while</div>
+                    <h3 class="topic-title">Do-While Loop</h3>
+                    <p class="topic-description">Post-test loop executes at least once</p>
+                </div>
+
+                <div class="topic-card" onclick="scrollToSection('for-loop')">
+                    <div class="topic-icon">for</div>
+                    <h3 class="topic-title">For Loop</h3>
+                    <p class="topic-description">Most commonly used iterative statement</p>
+                </div>
+
+                <div class="topic-card" onclick="scrollToSection('for-each')">
+                    <div class="topic-icon">forEach</div>
+                    <h3 class="topic-title">Enhanced For Loop</h3>
+                    <p class="topic-description">For-each loop for arrays and collections</p>
+                </div>
+
+                <div class="topic-card" onclick="scrollToSection('break')">
+                    <div class="topic-icon">break</div>
+                    <h3 class="topic-title">Break Statement</h3>
+                    <p class="topic-description">Exit loops and switch statements</p>
+                </div>
+
+                <div class="topic-card" onclick="scrollToSection('continue')">
+                    <div class="topic-icon">continue</div>
+                    <h3 class="topic-title">Continue Statement</h3>
+                    <p class="topic-description">Skip current iteration in loops</p>
+                </div>
+
+                <div class="topic-card" onclick="scrollToSection('labeled')">
+                    <div class="topic-icon">label:</div>
+                    <h3 class="topic-title">Labeled Statements</h3>
+                    <p class="topic-description">Named break and continue for nested loops</p>
+                </div>
+
+                <div class="topic-card" onclick="scrollToSection('unreachable')">
+                    <div class="topic-icon">❌</div>
+                    <h3 class="topic-title">Unreachable Code</h3>
+                    <p class="topic-description">Compile-time detection of dead code</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Theory Content -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">📚 Detailed Theory</h2>
+                <p class="section-subtitle">Complete SCJP/OCJP study material with examples</p>
+            </div>
+
+            <!-- 1. Introduction -->
+            <div id="introduction" class="theory-section">
+                <div class="theory-header">
+                    <div class="theory-number">1</div>
+                    <div>
+                        <h2 class="theory-title">Introduction to Flow Control</h2>
+                        <p class="theory-subtitle">Order of statement execution at runtime</p>
+                    </div>
+                </div>
+
+                <div class="note">
+                    <div class="note-header">📋 Key Points:</div>
+                    <p><strong>Flow control</strong> describes the order in which statements will be executed at runtime.</p>
+                    <p>Java provides three types of flow control statements:</p>
+                    <ol>
+                        <li><strong>Selection Statements:</strong> if-else, switch</li>
+                        <li><strong>Iterative Statements:</strong> while, do-while, for, for-each</li>
+                        <li><strong>Transfer Statements:</strong> break, continue, return</li>
+                    </ol>
+                </div>
+
+                <div class="flow-diagram">
+                    <h3>Flow Control Hierarchy</h3>
+                    <div class="flow-box">Program Start</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-box">Selection (if/switch)</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-box">Iteration (loops)</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-box">Transfer (break/continue)</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-box">Program End</div>
+                </div>
+            </div>
+
+            <!-- 2. Selection Statements -->
+            <div id="selection" class="theory-section">
+                <div class="theory-header">
+                    <div class="theory-number">2</div>
+                    <div>
+                        <h2 class="theory-title">Selection Statements (if-else)</h2>
+                        <p class="theory-subtitle">Conditional execution based on boolean expressions</p>
+                    </div>
+                </div>
+
+                <div class="theory-content">
+                    <div class="theory-point">
+                        <div class="point-title">Syntax and Basic Rules</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-comment">// Basic if-else syntax</span><br>
+                                <span class="code-keyword">if</span> (boolean_expression) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// executed if true</span><br>
+                                } <span class="code-keyword">else</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// executed if false</span><br>
+                                }
+                            </div>
+                            
+                            <div class="note warning">
+                                <div class="note-header">⚠️ Important Rule:</div>
+                                <p>The argument to the if statement <strong>must be boolean</strong>. Providing any other type results in compile-time error.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Example: Compile Error with Non-boolean</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-keyword">public class</span> ExampleIf {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">public static void</span> main(String[] args) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">int</span> x = <span class="code-number">0</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">if</span>(x) { <span class="code-comment">// COMPILE ERROR!</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="code-string">"hello"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="code-keyword">else</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="code-string">"hi"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }<br>
+                                <span class="code-comment">// Output: Compile time error: incompatible types</span><br>
+                                <span class="code-comment">// found: int, required: boolean</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Curly Braces and Single Statements</div>
+                        <div class="point-content">
+                            <div class="note">
+                                <div class="note-header">📌 Rule:</div>
+                                <p>Curly braces are optional for single statements, but <strong>declarative statements are not allowed</strong> without braces.</p>
+                            </div>
+                            
+                            <div class="code-block">
+                                <span class="code-comment">// Valid - single statement without braces</span><br>
+                                <span class="code-keyword">if</span> (<span class="code-keyword">true</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="code-string">"Hello"</span>);<br><br>
+                                
+                                <span class="code-comment">// Invalid - declarative statement without braces</span><br>
+                                <span class="code-keyword">if</span> (<span class="code-keyword">true</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">int</span> x = <span class="code-number">10</span>; <span class="code-comment">// COMPILE ERROR!</span><br>
+                                <span class="code-comment">// Error: 'class' expected</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Semicolon as Empty Statement</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-keyword">if</span> (<span class="code-keyword">true</span>); <span class="code-comment">// Valid empty statement</span><br>
+                                {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="code-string">"Hello"</span>);<br>
+                                }<br>
+                                <span class="code-comment">// Output: Hello (always executes, not part of if)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Switch Statement -->
+            <div id="switch" class="theory-section">
+                <div class="theory-header">
+                    <div class="theory-number">3</div>
+                    <div>
+                        <h2 class="theory-title">Switch Statement</h2>
+                        <p class="theory-subtitle">Multi-way branching with fall-through behavior</p>
+                    </div>
+                </div>
+
+                <div class="theory-content">
+                    <div class="theory-point">
+                        <div class="point-title">Basic Syntax</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-keyword">switch</span> (expression) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">case</span> value1:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// statements</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">break</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">case</span> value2:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// statements</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">break</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">default</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// statements</span><br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Allowed Switch Argument Types</div>
+                        <div class="point-content">
+                            <table class="theory-table">
+                                <thead>
+                                    <tr>
+                                        <th>Until Java 1.4</th>
+                                        <th>From Java 1.5 Onwards</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>byte, short, char, int</td>
+                                        <td>byte, short, char, int<br>Byte, Short, Character, Integer (wrapper classes)<br>enum types</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <div class="note warning">
+                                <div class="note-header">⚠️ Not Allowed:</div>
+                                <p><strong>NOT allowed:</strong> boolean, long, float, double, String (until Java 1.6)</p>
+                                <p><strong>String allowed from Java 1.7+</strong></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Case Label Rules</div>
+                        <div class="point-content">
+                            <div class="note">
+                                <div class="note-header">📌 Case Label Requirements:</div>
+                                <ol>
+                                    <li>Must be compile-time constant</li>
+                                    <li>Can be expressions but must be constant expressions</li>
+                                    <li>Value must be within range of switch argument type</li>
+                                    <li>Duplicate case labels not allowed</li>
+                                </ol>
+                            </div>
+                            
+                            <div class="code-block">
+                                <span class="code-keyword">int</span> x = <span class="code-number">10</span>;<br>
+                                <span class="code-keyword">final int</span> y = <span class="code-number">20</span>; <span class="code-comment">// final makes it constant</span><br>
+                                <span class="code-keyword">switch</span> (x) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">case</span> <span class="code-number">10</span>: <span class="code-comment">// Valid - constant</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">case</span> y: <span class="code-comment">// Valid - final variable</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">case</span> <span class="code-number">10</span>+<span class="code-number">20</span>: <span class="code-comment">// Valid - constant expression</span><br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Fall-Through Behavior</div>
+                        <div class="point-content">
+                            <div class="note">
+                                <div class="note-header">🎯 Fall-Through Concept:</div>
+                                <p>Within switch statement, if any case is matched, from that case onwards all statements will be executed until end of switch or break statement.</p>
+                                <p><strong>Advantage:</strong> Can define common action for multiple cases.</p>
+                            </div>
+                            
+                            <div class="code-block">
+                                <span class="code-keyword">int</span> x = <span class="code-number">0</span>;<br>
+                                <span class="code-keyword">switch</span> (x) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">case</span> <span class="code-number">0</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="code-string">"0"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">case</span> <span class="code-number">1</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="code-string">"1"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">break</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">case</span> <span class="code-number">2</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="code-string">"2"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">default</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="code-string">"default"</span>);<br>
+                                }<br>
+                                <span class="code-comment">// Output when x=0: 0, 1 (falls through to case 1, breaks)</span><br>
+                                <span class="code-comment">// Output when x=2: 2, default (falls through to default)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Default Case</div>
+                        <div class="point-content">
+                            <div class="note">
+                                <div class="note-header">📌 Default Case Rules:</div>
+                                <ul>
+                                    <li>Can be taken only once within a switch</li>
+                                    <li>Executed only if no other case matches</li>
+                                    <li>Can be placed anywhere, but convention is last</li>
+                                    <li>Still participates in fall-through</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. While Loop -->
+            <div id="while-loop" class="theory-section">
+                <div class="theory-header">
+                    <div class="theory-number">4</div>
+                    <div>
+                        <h2 class="theory-title">While Loop</h2>
+                        <p class="theory-subtitle">Pre-test loop - condition checked before execution</p>
+                    </div>
+                </div>
+
+                <div class="theory-content">
+                    <div class="theory-point">
+                        <div class="point-title">Syntax and Basic Usage</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-comment">// Basic while loop syntax</span><br>
+                                <span class="code-keyword">while</span> (boolean_expression) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// loop body</span><br>
+                                }<br><br>
+                                
+                                <span class="code-comment">// Best for unknown iterations in advance</span><br>
+                                <span class="code-keyword">while</span> (rs.next()) { ... }<br>
+                                <span class="code-keyword">while</span> (e.hasMoreElements()) { ... }<br>
+                                <span class="code-keyword">while</span> (itr.hasNext()) { ... }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Boolean Requirement</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-keyword">while</span> (<span class="code-number">1</span>) { <span class="code-comment">// COMPILE ERROR!</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="code-string">"hello"</span>);<br>
+                                }<br>
+                                <span class="code-comment">// Error: incompatible types: int cannot be converted to boolean</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Unreachable Statements in While</div>
+                        <div class="point-content">
+                            <div class="note warning">
+                                <div class="note-header">⚠️ Unreachable Code:</div>
+                                <p>Compiler detects unreachable statements in loops:</p>
+                                <ul>
+                                    <li><code>while(true) { ... }</code> - statements after are unreachable</li>
+                                    <li><code>while(false) { ... }</code> - loop body is unreachable</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="code-block">
+                                <span class="code-keyword">while</span> (<span class="code-keyword">true</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="code-string">"hello"</span>);<br>
+                                }<br>
+                                System.out.println(<span class="code-string">"hi"</span>); <span class="code-comment">// COMPILE ERROR!</span><br>
+                                <span class="code-comment">// Error: unreachable statement</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Final Variables and Compiler Optimization</div>
+                        <div class="point-content">
+                            <div class="note">
+                                <div class="note-header">📌 Compiler Behavior with Final Variables:</div>
+                                <ul>
+                                    <li>Final variables replaced with values at compile time</li>
+                                    <li>Operations with only constants performed by compiler</li>
+                                    <li>Operations with variables performed at runtime by JVM</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="code-block">
+                                <span class="code-keyword">final int</span> a = <span class="code-number">10</span>, b = <span class="code-number">20</span>;<br>
+                                <span class="code-keyword">while</span> (a < b) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="code-string">"hello"</span>);<br>
+                                }<br>
+                                System.out.println(<span class="code-string">"hi"</span>); <span class="code-comment">// COMPILE ERROR!</span><br>
+                                <span class="code-comment">// Compiler knows a<b is always true (10<20)</span><br>
+                                <span class="code-comment">// So statements after loop are unreachable</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Do-While Loop -->
+            <div id="do-while" class="theory-section">
+                <div class="theory-header">
+                    <div class="theory-number">5</div>
+                    <div>
+                        <h2 class="theory-title">Do-While Loop</h2>
+                        <p class="theory-subtitle">Post-test loop - executes at least once</p>
+                    </div>
+                </div>
+
+                <div class="theory-content">
+                    <div class="theory-point">
+                        <div class="point-title">Syntax and Basic Usage</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-comment">// Basic do-while syntax</span><br>
+                                <span class="code-keyword">do</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// loop body</span><br>
+                                } <span class="code-keyword">while</span> (boolean_expression);<br><br>
+                                
+                                <span class="code-comment">// Executes at least once</span><br>
+                                <span class="code-keyword">int</span> x = <span class="code-number">10</span>;<br>
+                                <span class="code-keyword">do</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="code-string">"Hello"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;x++;<br>
+                                } <span class="code-keyword">while</span> (x < <span class="code-number">15</span>);
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Unreachable Statements in Do-While</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-keyword">do</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="code-string">"hello"</span>);<br>
+                                } <span class="code-keyword">while</span> (<span class="code-keyword">true</span>);<br>
+                                System.out.println(<span class="code-string">"hi"</span>); <span class="code-comment">// COMPILE ERROR!</span><br>
+                                <span class="code-comment">// Error: unreachable statement</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Do-While vs Continue (Dangerous Combination)</div>
+                        <div class="point-content">
+                            <div class="note warning">
+                                <div class="note-header">⚠️ Most Dangerous Combination:</div>
+                                <p>Using continue in do-while can create infinite loops or unexpected behavior.</p>
+                            </div>
+                            
+                            <div class="code-block">
+                                <span class="code-keyword">int</span> x = <span class="code-number">0</span>;<br>
+                                <span class="code-keyword">do</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;x++;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(x);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">if</span> (++x < <span class="code-number">5</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">continue</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(x);<br>
+                                } <span class="code-keyword">while</span> (++x < <span class="code-number">10</span>);<br>
+                                <span class="code-comment">// Output: 1, 4, 6, 8, 10</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. For Loop -->
+            <div id="for-loop" class="theory-section">
+                <div class="theory-header">
+                    <div class="theory-number">6</div>
+                    <div>
+                        <h2 class="theory-title">For Loop</h2>
+                        <p class="theory-subtitle">Most commonly used loop when iterations are known</p>
+                    </div>
+                </div>
+
+                <div class="theory-content">
+                    <div class="theory-point">
+                        <div class="point-title">Syntax and Structure</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-comment">// Basic for loop syntax</span><br>
+                                <span class="code-keyword">for</span> (initialization; condition; increment/decrement) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// loop body</span><br>
+                                }<br><br>
+                                
+                                <span class="code-comment">// All three parts are independent and optional</span><br>
+                                <span class="code-keyword">for</span> (;;) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="code-string">"infinite loop"</span>);<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Initialization Section</div>
+                        <div class="point-content">
+                            <div class="note">
+                                <div class="note-header">📌 Initialization Rules:</div>
+                                <ul>
+                                    <li>Executed only once</li>
+                                    <li>Can declare multiple variables of same type</li>
+                                    <li>Can take any valid Java statement including System.out.println()</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="code-block">
+                                <span class="code-keyword">int</span> i = <span class="code-number">0</span>;<br>
+                                <span class="code-keyword">for</span> (System.out.println(<span class="code-string">"hello u r sleeping"</span>); i < <span class="code-number">3</span>; i++) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="code-string">"no boss, u only sleeping"</span>);<br>
+                                }<br>
+                                <span class="code-comment">// Output: hello u r sleeping (once)</span><br>
+                                <span class="code-comment">//         no boss, u only sleeping (3 times)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Condition and Increment Sections</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-comment">// Conditional expression optional (defaults to true)</span><br>
+                                <span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = <span class="code-number">0</span>; ; i++) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// infinite loop</span><br>
+                                }<br><br>
+                                
+                                <span class="code-comment">// Can use any statement in increment section</span><br>
+                                <span class="code-keyword">int</span> i = <span class="code-number">0</span>;<br>
+                                <span class="code-keyword">for</span> (System.out.println(<span class="code-string">"hello"</span>); i < <span class="code-number">3</span>; System.out.println(<span class="code-string">"hi"</span>)) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;i++;<br>
+                                }<br>
+                                <span class="code-comment">// Output: hello, hi, hi, hi</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Unreachable Statements in For Loop</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = <span class="code-number">0</span>; <span class="code-keyword">true</span>; i++) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="code-string">"hello"</span>);<br>
+                                }<br>
+                                System.out.println(<span class="code-string">"hi"</span>); <span class="code-comment">// COMPILE ERROR!</span><br>
+                                <span class="code-comment">// Error: unreachable statement</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. Enhanced For Loop -->
+            <div id="for-each" class="theory-section">
+                <div class="theory-header">
+                    <div class="theory-number">7</div>
+                    <div>
+                        <h2 class="theory-title">Enhanced For Loop (For-Each)</h2>
+                        <p class="theory-subtitle">Introduced in Java 1.5 for arrays and collections</p>
+                    </div>
+                </div>
+
+                <div class="theory-content">
+                    <div class="theory-point">
+                        <div class="point-title">Syntax and Basic Usage</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-comment">// For-each syntax</span><br>
+                                <span class="code-keyword">for</span> (type variable : collection_or_array) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// process variable</span><br>
+                                }<br><br>
+                                
+                                <span class="code-comment">// Example with array</span><br>
+                                <span class="code-keyword">int</span>[] arr = {<span class="code-number">10</span>, <span class="code-number">20</span>, <span class="code-number">30</span>, <span class="code-number">40</span>, <span class="code-number">50</span>};<br>
+                                <span class="code-keyword">for</span> (<span class="code-keyword">int</span> value : arr) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(value);<br>
+                                }<br>
+                                <span class="code-comment">// Output: 10 20 30 40 50</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Iterable Requirement</div>
+                        <div class="point-content">
+                            <div class="note">
+                                <div class="note-header">📌 Target Requirement:</div>
+                                <p>The target element in for-each loop should be an <strong>Iterable object</strong>.</p>
+                                <p>An object is iterable if its class implements <code>java.lang.Iterable</code> interface.</p>
+                            </div>
+                            
+                            <div class="code-block">
+                                <span class="code-comment">// Iterable interface (Java 1.5+)</span><br>
+                                <span class="code-keyword">public interface</span> Iterable<T> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;Iterator<T> iterator();<br>
+                                }<br><br>
+                                
+                                <span class="code-comment">// Every array and Collection implements Iterable</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Limitations of For-Each</div>
+                        <div class="point-content">
+                            <div class="note warning">
+                                <div class="note-header">⚠️ Limitations:</div>
+                                <ul>
+                                    <li>Not a general-purpose loop</li>
+                                    <li>Can only iterate forward (left to right)</li>
+                                    <li>Cannot modify collection during iteration (ConcurrentModificationException)</li>
+                                    <li>No access to index</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="code-block">
+                                <span class="code-comment">// Normal for loop - can go both directions</span><br>
+                                <span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = <span class="code-number">0</span>; i < arr.length; i++) { ... } <span class="code-comment">// forward</span><br>
+                                <span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = arr.length-<span class="code-number">1</span>; i >= <span class="code-number">0</span>; i--) { ... } <span class="code-comment">// backward</span><br><br>
+                                
+                                <span class="code-comment">// For-each - only forward</span><br>
+                                <span class="code-keyword">for</span> (<span class="code-keyword">int</span> value : arr) { ... } <span class="code-comment">// only left to right</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. Break Statement -->
+            <div id="break" class="theory-section">
+                <div class="theory-header">
+                    <div class="theory-number">8</div>
+                    <div>
+                        <h2 class="theory-title">Break Statement</h2>
+                        <p class="theory-subtitle">Transfer control out of loops and switch</p>
+                    </div>
+                </div>
+
+                <div class="theory-content">
+                    <div class="theory-point">
+                        <div class="point-title">Three Uses of Break</div>
+                        <div class="point-content">
+                            <table class="theory-table">
+                                <thead>
+                                    <tr>
+                                        <th>Use Case</th>
+                                        <th>Example</th>
+                                        <th>Purpose</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Inside switch</td>
+                                        <td><code>case 1: ... break;</code></td>
+                                        <td>Stop fall-through</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Inside loops</td>
+                                        <td><code>while(true) { if(cond) break; }</code></td>
+                                        <td>Exit loop early</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Inside labeled blocks</td>
+                                        <td><code>l1: { ... break l1; }</code></td>
+                                        <td>Exit labeled block</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Examples of Break Usage</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-comment">// 1. Inside switch to stop fall-through</span><br>
+                                <span class="code-keyword">int</span> x = <span class="code-number">0</span>;<br>
+                                <span class="code-keyword">switch</span> (x) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">case</span> <span class="code-number">0</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="code-string">"Hello"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">break</span>; <span class="code-comment">// stops fall-through</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">case</span> <span class="code-number">1</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="code-string">"Hi"</span>);<br>
+                                }<br><br>
+                                
+                                <span class="code-comment">// 2. Inside loop to exit based on condition</span><br>
+                                <span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = <span class="code-number">0</span>; i < <span class="code-number">10</span>; i++) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">if</span> (i == <span class="code-number">5</span>) <span class="code-keyword">break</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(i);<br>
+                                }<br>
+                                <span class="code-comment">// Output: 0 1 2 3 4 (stops at 5)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Break with Labels</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                l1: {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="code-string">"begin"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">int</span> x = <span class="code-number">10</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">if</span> (x == <span class="code-number">10</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">break</span> l1;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="code-string">"end"</span>); <span class="code-comment">// never executed</span><br>
+                                }<br>
+                                System.out.println(<span class="code-string">"hello"</span>);<br>
+                                <span class="code-comment">// Output: begin, hello</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Break Restrictions</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-keyword">int</span> x = <span class="code-number">10</span>;<br>
+                                <span class="code-keyword">if</span> (x == <span class="code-number">10</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">break</span>; <span class="code-comment">// COMPILE ERROR!</span><br>
+                                System.out.println(<span class="code-string">"hello"</span>);<br>
+                                <span class="code-comment">// Error: break outside switch or loop</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. Continue Statement -->
+            <div id="continue" class="theory-section">
+                <div class="theory-header">
+                    <div class="theory-number">9</div>
+                    <div>
+                        <h2 class="theory-title">Continue Statement</h2>
+                        <p class="theory-subtitle">Skip current iteration and continue with next</p>
+                    </div>
+                </div>
+
+                <div class="theory-content">
+                    <div class="theory-point">
+                        <div class="point-title">Basic Usage</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-comment">// Print odd numbers from 0 to 9</span><br>
+                                <span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = <span class="code-number">0</span>; i < <span class="code-number">10</span>; i++) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">if</span> (i % <span class="code-number">2</span> == <span class="code-number">0</span>) <span class="code-comment">// if even</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">continue</span>; <span class="code-comment">// skip even numbers</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(i);<br>
+                                }<br>
+                                <span class="code-comment">// Output: 1 3 5 7 9</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Continue Restrictions</div>
+                        <div class="point-content">
+                            <div class="note warning">
+                                <div class="note-header">⚠️ Important Rule:</div>
+                                <p>Continue can only be used inside loops. Using it anywhere else causes compile error.</p>
+                            </div>
+                            
+                            <div class="code-block">
+                                <span class="code-keyword">int</span> x = <span class="code-number">10</span>;<br>
+                                <span class="code-keyword">if</span> (x == <span class="code-number">10</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">continue</span>; <span class="code-comment">// COMPILE ERROR!</span><br>
+                                System.out.println(<span class="code-string">"hello"</span>);<br>
+                                <span class="code-comment">// Error: continue outside of loop</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10. Labeled Break and Continue -->
+            <div id="labeled" class="theory-section">
+                <div class="theory-header">
+                    <div class="theory-number">10</div>
+                    <div>
+                        <h2 class="theory-title">Labeled Break and Continue</h2>
+                        <p class="theory-subtitle">Control nested loops with labels</p>
+                    </div>
+                </div>
+
+                <div class="theory-content">
+                    <div class="theory-point">
+                        <div class="point-title">Labeled Break Example</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                l1: <span class="code-comment">// Label for outer loop</span><br>
+                                <span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = <span class="code-number">0</span>; i < <span class="code-number">3</span>; i++) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">for</span> (<span class="code-keyword">int</span> j = <span class="code-number">0</span>; j < <span class="code-number">3</span>; j++) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">if</span> (i == j)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">break</span> l1; <span class="code-comment">// breaks outer loop</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(i + <span class="code-string">"......."</span> + j);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }<br>
+                                <span class="code-comment">// When i=0, j=0: break l1 executes, no output</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Labeled Continue Example</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                l1: <span class="code-comment">// Label for outer loop</span><br>
+                                <span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = <span class="code-number">0</span>; i < <span class="code-number">3</span>; i++) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">for</span> (<span class="code-keyword">int</span> j = <span class="code-number">0</span>; j < <span class="code-number">3</span>; j++) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">if</span> (i == j)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">continue</span> l1; <span class="code-comment">// continues outer loop</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(i + <span class="code-string">"......."</span> + j);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }<br>
+                                <span class="code-comment">// Output: 0.......1, 0.......2, 1.......0, 1.......2, 2.......0, 2.......1</span><br>
+                                <span class="code-comment">// Skips when i == j (diagonal elements)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11. Unreachable Code -->
+            <div id="unreachable" class="theory-section">
+                <div class="theory-header">
+                    <div class="theory-number">11</div>
+                    <div>
+                        <h2 class="theory-title">Unreachable Code Detection</h2>
+                        <p class="theory-subtitle">Compiler checks for dead code in loops</p>
+                    </div>
+                </div>
+
+                <div class="theory-content">
+                    <div class="theory-point">
+                        <div class="point-title">Compiler Behavior</div>
+                        <div class="point-content">
+                            <div class="note">
+                                <div class="note-header">📌 Important Note:</div>
+                                <p>Compiler won't check unreachability for if-else statements (except for constant conditions). It only checks unreachability in loops.</p>
+                            </div>
+                            
+                            <div class="code-block">
+                                <span class="code-comment">// Unreachable in loop - Compile Error</span><br>
+                                <span class="code-keyword">while</span> (<span class="code-keyword">true</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="code-string">"hello"</span>);<br>
+                                }<br>
+                                System.out.println(<span class="code-string">"hi"</span>); <span class="code-comment">// COMPILE ERROR!</span><br><br>
+                                
+                                <span class="code-comment">// Unreachable in if-else - No Error</span><br>
+                                <span class="code-keyword">if</span> (<span class="code-keyword">true</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="code-string">"hello"</span>);<br>
+                                } <span class="code-keyword">else</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="code-string">"hi"</span>); <span class="code-comment">// Unreachable but no error</span><br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theory-point">
+                        <div class="point-title">Final Variables and Unreachable Code</div>
+                        <div class="point-content">
+                            <div class="code-block">
+                                <span class="code-keyword">final int</span> a = <span class="code-number">10</span>, b = <span class="code-number">20</span>;<br>
+                                <span class="code-keyword">while</span> (a < b) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="code-string">"hello"</span>);<br>
+                                }<br>
+                                System.out.println(<span class="code-string">"hi"</span>); <span class="code-comment">// COMPILE ERROR!</span><br>
+                                <span class="code-comment">// Compiler replaces final variables with values</span><br>
+                                <span class="code-comment">// Knows 10 < 20 is always true</span><br>
+                                <span class="code-comment">// So statement after loop is unreachable</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="cta-section">
+                <h2 class="cta-title">Ready to Test Your Flow Control Knowledge?</h2>
+                <p class="cta-description">Take the comprehensive quiz on Java Flow Control to validate your understanding of if-else, switch, loops, break, continue, and earn a certificate!</p>
+                <a href="flow-control-quiz.html" class="btn btn-primary"
+                    style="background: white; color: #059669; font-size: 1.125rem; padding: 1rem 2.5rem;">
+                    Take Flow Control Quiz Now 🚀
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <img src="assets/logo.svg" alt="NamastAI.shiksha Logo" width="40" height="40">
+                        </div>
+                        <span class="logo-text">
+                            <span class="text-brand-blue">Namast</span>
+                            <span class="text-brand-orange">Ai</span>
+                            <span class="accent">.shiksha</span>
+                        </span>
+                    </div>
+                    <p class="footer-tagline">Empowering the next generation of software developers with industry-ready skills.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <a href="index.html"
+                        style="color: rgba(255, 255, 255, 0.7); text-decoration: none; display: block; margin-top: 0.5rem;">Home Page</a>
+                    <a href="/curriculum.html"
+                        style="color: rgba(255, 255, 255, 0.7); text-decoration: none; display: block; margin-top: 0.5rem;">Curriculum</a>
+                    <a href="/enroll.html"
+                        style="color: rgba(255, 255, 255, 0.7); text-decoration: none; display: block; margin-top: 0.5rem;">Enroll Now</a>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <p style="color: rgba(255, 255, 255, 0.7); margin-top: 0.5rem;">📧 info@namastai.shiksha</p>
+                    <p style="color: rgba(255, 255, 255, 0.7); margin-top: 0.5rem;">📞 +91 9246212143, 8096969696</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 NamastAI.shiksha. All rights reserved.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.875rem;">Professional Java Learning Platform - Interactive Assessments</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for topic cards
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Add syntax highlighting to code blocks
+        document.addEventListener('DOMContentLoaded', function () {
+            const codeBlocks = document.querySelectorAll('.code-block');
+            codeBlocks.forEach(block => {
+                block.style.fontFamily = "'Fira Code', 'Courier New', monospace";
+            });
+        });
+    </script>
+</body>
+
+</html>
